@@ -114,8 +114,11 @@
   nav{
     position:fixed;top:0;left:0;right:0;z-index:80;
     display:flex;justify-content:space-between;align-items:center;
-    padding:1.25rem 2rem;
-    background:linear-gradient(rgba(28,28,31,.85),rgba(28,28,31,0));
+    padding:1rem 1.5rem;
+    background:rgba(28,28,31,.92);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(240,237,229,.06);
   }
   nav .wordmark{font-family:'Fraunces',serif;font-weight:420;font-size:1.15rem;text-decoration:none;color:var(--texto-claro);display:flex;align-items:center;gap:.5rem}
   nav .wordmark img{height:34px;display:block}
@@ -125,6 +128,29 @@
   nav ul{display:flex;gap:2rem;list-style:none}
   nav ul a{color:var(--texto-soft);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .3s var(--ease)}
   nav ul a:hover{color:var(--texto-claro)}
+  /* botão flutuante de WhatsApp */
+  .wa-float{
+    position:fixed;bottom:1.5rem;right:1.5rem;z-index:75;
+    width:56px;height:56px;border-radius:50%;
+    background:var(--agua-saturada);color:#1c1c1f;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 20px rgba(0,0,0,.35), 0 0 0 rgba(73,198,188,.5);
+    transition:transform .3s var(--ease), box-shadow .3s var(--ease);
+    text-decoration:none;
+    animation:waPulse 2.4s var(--ease) infinite;
+  }
+  .wa-float:hover{transform:scale(1.08)}
+  @keyframes waPulse{
+    0%,100%{box-shadow:0 6px 20px rgba(0,0,0,.35), 0 0 0 0 rgba(73,198,188,.5)}
+    50%{box-shadow:0 6px 20px rgba(0,0,0,.35), 0 0 0 12px rgba(73,198,188,0)}
+  }
+  @media (prefers-reduced-motion:reduce){.wa-float{animation:none}}
+
+  /* prova social (quando ativada) */
+  .depoimento{background:var(--chumbo-elevado);padding:2rem;border-radius:8px;border-left:3px solid var(--agua-saturada)}
+  .quote-social{font-family:'Fraunces',serif;font-size:1.3rem;font-style:italic;line-height:1.5;margin-bottom:1rem;color:var(--texto-claro)}
+  .autor{color:var(--texto-soft);font-size:.95rem}
+
   /* menu hambúrguer mobile */
   .menu-btn{
     display:none;background:none;border:none;cursor:pointer;padding:.4rem;
@@ -143,11 +169,13 @@
     .menu-btn{display:block}
     nav ul.mobile-open{
       display:flex;position:fixed;top:0;left:0;right:0;bottom:0;
-      background:rgba(28,28,31,.97);
+      background:var(--chumbo-profundo);
       flex-direction:column;justify-content:center;align-items:center;
-      gap:2.5rem;z-index:81;
+      gap:2.5rem;z-index:99;
     }
-    nav ul.mobile-open a{font-family:'Fraunces',serif;font-size:1.8rem;color:var(--texto-claro)}
+    nav ul.mobile-open a{font-family:'Fraunces',serif;font-size:1.8rem;color:var(--texto-claro);text-decoration:none}
+    /* botão hambúrguer precisa ficar por cima do próprio menu quando aberto */
+    .menu-btn{z-index:100}
   }
 
   section{position:relative;padding:8rem 0;z-index:1}
@@ -291,6 +319,8 @@
     margin:1rem 0 1rem;
   }
   .sec-comment{margin-bottom:3.5rem}
+  .mono.marker{display:block;margin-bottom:1.5rem}
+  h2{margin-top:0}
 
   /* ---------- TRABALHO ---------- */
   .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;perspective:1200px}
@@ -473,13 +503,26 @@
     background:var(--chumbo-elevado);
     display:flex;align-items:center;justify-content:center;
     box-shadow:0 12px 40px rgba(0,0,0,.35);
+    max-width:420px;margin:0 auto;width:100%;
   }
   .foto-placeholder span{color:var(--texto-dim);font-family:'JetBrains Mono',monospace;font-size:.8rem;align-items:center;justify-content:center;width:100%;height:100%}
   .foto-placeholder img{width:100%;height:100%;object-fit:cover;border-radius:8px;display:block;filter:grayscale(1)}
 
   /* ---------- FAQ ---------- */
   #faq .wrap{max-width:820px}
-  details{border-bottom:1px solid var(--chumbo-carvao);padding:1.5rem 0;background:rgba(28,28,31,.6)}
+  details{
+    border:1px solid var(--chumbo-carvao);
+    border-radius:8px;
+    padding:1.25rem 1.5rem;
+    background:var(--chumbo-elevado);
+    margin-bottom:.75rem;
+    transition:border-color .3s var(--ease);
+  }
+  details[open]{border-color:var(--agua-saturada)}
+  details summary::before{
+    content:"› ";color:var(--agua-saturada);
+    font-family:'JetBrains Mono',monospace;margin-right:.25rem;
+  }
   summary{
     cursor:pointer;list-style:none;
     font-weight:500;font-size:1.1rem;
@@ -533,7 +576,10 @@
     .step-num{transform:none!important}
   }
   @media (max-width:640px){
-    section{padding:5rem 0}
+    section{padding:4.5rem 1rem}
+    .wrap{padding:0 .25rem}
+    h1{max-width:none}
+    h2{margin-bottom:1.5rem}
     .hero-marker{top:4.5rem;right:1.25rem}
     .cta.ghost{margin-left:0;margin-top:1rem}
   }
@@ -783,6 +829,19 @@
   </div>
 </section>
 
+<!-- 006B // PROVA SOCIAL (ative quando tiver depoimentos, remova o <!-- e --> ao redor)
+<section id="prova">
+  <div class="wrap" style="max-width:820px">
+    <div class="mono marker">006B // QUEM JÁ SENTIU</div>
+    <h2 class="reveal-mask">O que dizem por aí</h2>
+    <div class="depoimento">
+      <p class="quote-social">"[cole aqui o depoimento do cliente]"</p>
+      <p class="autor">— [Nome], [cargo/empresa]</p>
+    </div>
+  </div>
+</section>
+-->
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -803,8 +862,8 @@
     <div class="mono marker" style="margin-bottom:1rem">007 // CONVERSAR</div>
     <h2 class="reveal-mask">Me conta onde seu tempo tá indo</h2>
     <p class="sub reveal-blur">Sem formulário de 12 campos. Uma conversa de WhatsApp, você descreve o processo, eu te digo com honestidade o que vale automatizar e o que não vale.</p>
-    <a class="cta reveal-blur" data-magnet style="animation-delay:.2s" href="https://wa.me/5554981135272?text=Oi%20Fabiana!%20Quero%20conversar%20sobre%20automa%C3%A7%C3%A3o." rel="noopener">Chamar no WhatsApp</a>
-    <p class="comment reveal-blur" style="margin-top:2rem;animation-delay:.35s">// Vamos conversar?</p>
+    <a class="cta verde reveal-blur" data-magnet style="animation-delay:.2s" href="https://wa.me/5554981135272?text=Oi%20Fabiana!%20Quero%20conversar%20sobre%20automa%C3%A7%C3%A3o." rel="noopener">Chamar no WhatsApp</a>
+    <p class="comment reveal-blur" style="margin-top:2rem;animation-delay:.35s">// resposta humana, da própria fabiana</p>
   </div>
 </section>
 
@@ -983,8 +1042,31 @@ addEventListener('scroll', ()=>{
 
   let t = 0, morphS = 0;
   const draws = [];
-
+  let frameId = 0;
+  let visible = true;
+  const heroEl = document.getElementById('hero');
+  function startFrame(){
+    if(!reduced && !frameId && visible) frameId = requestAnimationFrame(frame);
+  }
+  function stopFrame(){
+    if(frameId){ cancelAnimationFrame(frameId); frameId = 0; }
+  }
+  if(heroEl){
+    const vis = new IntersectionObserver(es=>{
+      es.forEach(e=>{
+        visible = e.isIntersecting;
+        if(visible) startFrame(); else stopFrame();
+      });
+    }, {threshold: 0});
+    vis.observe(heroEl);
+  }
+  document.addEventListener('visibilitychange', ()=>{
+    visible = !document.hidden && (!heroEl || heroEl.getBoundingClientRect().bottom > 0);
+    if(visible) startFrame(); else stopFrame();
+  });
   function frame(){
+    frameId = 0;
+    if(!visible) return;
     t += .004;
     mx += (tx-mx)*.05; my += (ty-my)*.05;
 
@@ -1064,7 +1146,7 @@ addEventListener('scroll', ()=>{
     ctx.font = (15*ss)+'px "JetBrains Mono", monospace';
     ctx.fillText('\u2726', CX + sp[0]*unit*ss, CYp - sp[1]*unit*ss);
 
-    if(!reduced) requestAnimationFrame(frame);
+    startFrame();
   }
   frame();
 })();
@@ -1329,6 +1411,11 @@ if(!reduced){
   }
 }
 </script>
+<a class="wa-float" href="https://wa.me/5554981135272?text=Oi%20Fabiana!%20Vim%20pelo%20site." rel="noopener" aria-label="Chamar no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+    <path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4a7.94 7.94 0 0 0-6.9 11.9L4 20l4.2-1.1a7.93 7.93 0 0 0 3.85.98h.01a7.94 7.94 0 0 0 5.54-13.56zM12.05 18.53h-.01a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.5.65.67-2.43-.16-.25a6.59 6.59 0 1 1 5.6 3.09zm3.62-4.94c-.2-.1-1.17-.58-1.36-.64-.18-.07-.31-.1-.45.1-.13.2-.5.64-.62.77-.11.13-.23.15-.43.05-.2-.1-.84-.31-1.6-.99-.59-.53-.99-1.18-1.1-1.38-.12-.2-.02-.31.09-.4.09-.09.2-.24.3-.36.1-.12.13-.2.2-.34.06-.13.03-.25-.02-.35-.05-.1-.45-1.09-.62-1.49-.16-.39-.33-.34-.45-.34l-.38-.01c-.13 0-.35.05-.53.25-.18.2-.7.68-.7 1.66 0 .98.71 1.92.82 2.06.1.13 1.4 2.13 3.39 2.99.47.2.85.33 1.14.42.48.15.92.13 1.26.08.39-.06 1.17-.48 1.34-.94.16-.46.16-.85.11-.94-.05-.08-.18-.13-.38-.23z" fill="currentColor"/>
+  </svg>
+</a>
 <script>
 /* menu hambúrguer */
 (function(){
