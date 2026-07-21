@@ -16,9 +16,9 @@
 <meta property="og:url" content="https://fabianamoratelli.com.br/">
 <meta name="twitter:card" content="summary_large_image">
 <!-- Favicon otimizado para navegadores e dispositivos móveis -->
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png.png?v=2">
-<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon.png.png?v=2">
-<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon.png.png?v=2">
+<link rel="icon" type="image/webp" href="assets/favicon.webp?v=3">
+<link rel="icon" type="image/png" href="assets/favicon.png?v=3">
+<link rel="apple-touch-icon" href="assets/favicon.png?v=3">
 
 <script type="application/ld+json">
 {
@@ -74,7 +74,7 @@
 
   /* cena 3D contínua, fixa atrás de tudo */
   #scene{position:fixed;inset:0;z-index:0;pointer-events:none}
-  @media (max-width:899px){#scene{opacity:.28}}
+  @media (max-width:899px){#scene{opacity:.7}}
 
   .mono{font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
   .comment{
@@ -125,7 +125,30 @@
   nav ul{display:flex;gap:2rem;list-style:none}
   nav ul a{color:var(--texto-soft);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .3s var(--ease)}
   nav ul a:hover{color:var(--texto-claro)}
-  @media (max-width:720px){nav ul{display:none}}
+  /* menu hambúrguer mobile */
+  .menu-btn{
+    display:none;background:none;border:none;cursor:pointer;padding:.4rem;
+    width:38px;height:38px;position:relative;z-index:82;
+  }
+  .menu-btn i{
+    display:block;height:2px;background:var(--texto-claro);margin:6px 0;
+    transition:transform .3s var(--ease), opacity .3s var(--ease);
+    border-radius:2px;
+  }
+  .menu-btn.open i:nth-child(1){transform:translateY(8px) rotate(45deg)}
+  .menu-btn.open i:nth-child(2){opacity:0}
+  .menu-btn.open i:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+  @media (max-width:720px){
+    nav ul{display:none}
+    .menu-btn{display:block}
+    nav ul.mobile-open{
+      display:flex;position:fixed;top:0;left:0;right:0;bottom:0;
+      background:rgba(28,28,31,.97);
+      flex-direction:column;justify-content:center;align-items:center;
+      gap:2.5rem;z-index:81;
+    }
+    nav ul.mobile-open a{font-family:'Fraunces',serif;font-size:1.8rem;color:var(--texto-claro)}
+  }
 
   section{position:relative;padding:8rem 0;z-index:1}
   .wrap{max-width:1180px;margin:0 auto;padding:0 2rem}
@@ -527,7 +550,7 @@
 <div id="boot"><pre id="bootText"></pre></div>
 
 <nav aria-label="Navegação principal">
-  <a class="wordmark" href="#hero"><img src="assets/wordmark.png" alt="fab[IA]na" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="wm-fallback" style="display:none">fab<span>[IA]</span>na</span></a>
+  <a class="wordmark" href="#hero"><picture><source srcset="assets/wordmark.webp" type="image/webp"><img src="assets/wordmark.png" alt="fab[IA]na" onerror="this.style.display='none';this.parentElement.nextElementSibling.style.display='inline'"></picture><span class="wm-fallback" style="display:none">fab<span>[IA]</span>na</span></a>
   <ul>
     <li><a href="#trabalho">Trabalho</a></li>
     <li><a href="#demo">Demo</a></li>
@@ -535,6 +558,7 @@
     <li><a href="#sobre">Sobre</a></li>
     <li><a href="#conversar">Conversar</a></li>
   </ul>
+  <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
 </nav>
 
 <!-- trilho vertical -->
@@ -725,7 +749,7 @@
       <p class="comment reveal-blur" style="animation-delay:.45s">// ponte entre o mundo dos boletos e da consciência</p>
     </div>
     <figure class="foto-placeholder reveal-blur" style="animation-delay:.2s">
-      <img src="assets/fabiana-luna.jpg" alt="Fabiana e sua beagle Luna" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <picture><source srcset="assets/fabiana-luna.webp" type="image/webp"><img src="assets/fabiana-luna.webp" alt="Fabiana e sua beagle Luna" loading="lazy" onerror="this.style.display='none';this.parentElement.nextElementSibling.style.display='flex'"></picture>
       <span style="display:none">[ foto: fabiana + luna ✦ ]</span>
     </figure>
   </div>
@@ -786,7 +810,7 @@
 
 <footer>
   <div class="wrap">
-    <div class="wordmark"><img src="assets/wordmark.png" alt="fab[IA]na" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="wm-fallback" style="display:none">fab<span>[IA]</span>na</span> <button class="star" id="starBtnFooter" aria-label="Estrela da Luna">✦</button></div>
+    <div class="wordmark"><picture><source srcset="assets/wordmark.webp" type="image/webp"><img src="assets/wordmark.png" alt="fab[IA]na" onerror="this.style.display='none';this.parentElement.nextElementSibling.style.display='inline'"></picture><span class="wm-fallback" style="display:none">fab<span>[IA]</span>na</span> <button class="star" id="starBtnFooter" aria-label="Estrela da Luna">✦</button></div>
     <div class="mono">// alma antiga, ferramenta nova · Caxias do Sul, Brasil</div>
   </div>
 </footer>
@@ -869,14 +893,21 @@ addEventListener('scroll', ()=>{
 
   let W, H, DPR;
   function resize(){
-    DPR = Math.min(devicePixelRatio, 2);
+    DPR = Math.min(devicePixelRatio, innerWidth < 900 ? 1.25 : 2);
     W = innerWidth; H = innerHeight;
     canvas.width = W*DPR; canvas.height = H*DPR;
     canvas.style.width = W+'px'; canvas.style.height = H+'px';
     ctx.setTransform(DPR,0,0,DPR,0,0);
   }
   resize();
-  addEventListener('resize', resize);
+  /* fix mobile: ignora resize disparado por barra do navegador subir/descer */
+  let lastW = innerWidth, rzT;
+  addEventListener('resize', ()=>{
+    if(innerWidth === lastW) return; /* só altura mudou (barra do browser): ignora */
+    lastW = innerWidth;
+    clearTimeout(rzT);
+    rzT = setTimeout(resize, 150);
+  });
 
   /* --- geometria: icosaedro e octaedro subdivididos, vértices na esfera --- */
   function norm(v){
@@ -919,8 +950,9 @@ addEventListener('scroll', ()=>{
       disp: [(Math.random()-.5)*spread, (Math.random()-.5)*spread*1.4, (Math.random()-.5)*spread*.6 - 1]
     }));
   }
-  const shell = withDispersed(icosphere(6, 1.7), 14);
-  const core  = withDispersed(octasphere(4, .8), 10);
+  const MOBILE_LIGHT = innerWidth < 900;
+  const shell = withDispersed(icosphere(MOBILE_LIGHT ? 4 : 6, 1.7), 14);
+  const core  = withDispersed(octasphere(MOBILE_LIGHT ? 3 : 4, .8), 10);
 
   const N_DUST = isMobile ? 90 : 200;
   const dust = [];
@@ -1296,6 +1328,20 @@ if(!reduced){
     io2.observe(document.getElementById('espelho'));
   }
 }
+</script>
+<script>
+/* menu hambúrguer */
+(function(){
+  const btn = document.getElementById('menuBtn');
+  const list = document.querySelector('nav ul');
+  if(!btn || !list) return;
+  function close(){ btn.classList.remove('open'); list.classList.remove('mobile-open'); btn.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+  function open(){ btn.classList.add('open'); list.classList.add('mobile-open'); btn.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+  btn.addEventListener('click', ()=>{
+    if(btn.classList.contains('open')) close(); else open();
+  });
+  list.querySelectorAll('a').forEach(a=>a.addEventListener('click', close));
+})();
 </script>
 </body>
 </html>
