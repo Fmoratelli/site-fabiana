@@ -75,6 +75,47 @@
   /* cena 3D contínua, fixa atrás de tudo */
   #scene{position:fixed;inset:0;z-index:0;pointer-events:none}
   @media (max-width:899px){#scene{opacity:.7}}
+  /* fundo mobile: sem canvas, CSS puro */
+  #scene-mobile{
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    display:none;
+  }
+  #scene-mobile::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse 70% 60% at 75% 30%, rgba(100,43,160,.28), transparent 65%),
+      linear-gradient(160deg, rgba(73,198,188,.14) 0%, rgba(28,28,31,0) 45%, rgba(100,43,160,.18) 100%);
+  }
+  #scene-mobile .p{
+    position:absolute;font-family:'JetBrains Mono',monospace;
+    user-select:none;pointer-events:none;
+    animation:mFloat 8s ease-in-out infinite;
+    will-change:transform;
+  }
+  #scene-mobile .luna-m{
+    position:absolute;color:var(--amarelo);font-size:14px;
+    top:35%;left:70%;
+    animation:mOrbit 14s linear infinite;
+    filter:drop-shadow(0 0 8px rgba(244,213,74,.6));
+  }
+  @keyframes mFloat{
+    0%,100%{transform:translate(0,0)}
+    50%{transform:translate(-6px,-10px)}
+  }
+  @keyframes mOrbit{
+    0%{transform:translate(0,0)}
+    25%{transform:translate(-40px,20px)}
+    50%{transform:translate(-20px,60px)}
+    75%{transform:translate(30px,30px)}
+    100%{transform:translate(0,0)}
+  }
+  @media (max-width:900px){
+    #scene{display:none !important}
+    #scene-mobile{display:block}
+  }
+  @media (prefers-reduced-motion:reduce){
+    #scene-mobile .p, #scene-mobile .luna-m{animation:none}
+  }
 
   .mono{font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
   .comment{
@@ -167,6 +208,9 @@
   @media (max-width:720px){
     nav ul{display:none}
     .menu-btn{display:block}
+    /* backdrop-filter no nav cria containing block pra descendentes fixed,
+       prendendo o menu na altura da barra em vez da tela inteira */
+    nav:has(ul.mobile-open){backdrop-filter:none;-webkit-backdrop-filter:none}
     nav ul.mobile-open{
       display:flex;position:fixed;top:0;left:0;right:0;bottom:0;
       background:var(--chumbo-profundo);
@@ -591,6 +635,7 @@
 <div id="shooting">✦</div>
 <div id="starline">a Luna era lua e virou <b>estrela</b> ✦</div>
 <div id="scene" aria-hidden="true"></div>
+<div id="scene-mobile" aria-hidden="true"><span class="luna-m">✦</span></div>
 
 <!-- BOOT SEQUENCE -->
 <div id="boot"><pre id="bootText"></pre></div>
@@ -861,7 +906,7 @@
     <h2 class="reveal-mask">Me conta onde seu tempo tá indo</h2>
     <p class="sub reveal-blur">Sem formulário de 12 campos. Uma conversa de WhatsApp, você descreve o processo, eu te digo com honestidade o que vale automatizar e o que não vale.</p>
     <a class="cta verde reveal-blur" data-magnet style="animation-delay:.2s" href="https://wa.me/5554981135272?text=Oi%20Fabiana!%20Quero%20conversar%20sobre%20automa%C3%A7%C3%A3o." rel="noopener">Chamar no WhatsApp</a>
-    <p class="comment reveal-blur" style="margin-top:2rem;animation-delay:.35s">// resposta humana, da própria fabiana</p>
+    <p class="comment reveal-blur" style="margin-top:2rem;animation-delay:.35s">// Vamos conversar?</p>
   </div>
 </section>
 
@@ -1406,6 +1451,28 @@ if(!reduced){
     if(btn.classList.contains('open')) close(); else open();
   });
   list.querySelectorAll('a').forEach(a=>a.addEventListener('click', close));
+})();
+</script>
+<script>
+/* gera pontos flutuantes só se o fundo mobile estiver visível (economiza CPU em desktop) */
+(function(){
+  const el = document.getElementById('scene-mobile');
+  if(!el || getComputedStyle(el).display === 'none') return;
+  const chars = ['+','+','+','*','*','+','·','+'];
+  const colors = ['#ae30f2','#ae30f2','#49c6bc','#49c6bc'];
+  for(let i=0;i<32;i++){
+    const s = document.createElement('span');
+    s.className='p';
+    s.textContent = chars[Math.floor(Math.random()*chars.length)];
+    s.style.color = colors[Math.floor(Math.random()*colors.length)];
+    s.style.left = Math.random()*100+'%';
+    s.style.top = Math.random()*100+'%';
+    s.style.fontSize = (10 + Math.random()*8)+'px';
+    s.style.opacity = 0.3 + Math.random()*0.4;
+    s.style.animationDelay = (Math.random()*8)+'s';
+    s.style.animationDuration = (6 + Math.random()*6)+'s';
+    el.appendChild(s);
+  }
 })();
 </script>
 </body>
