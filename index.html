@@ -73,7 +73,8 @@
   }
 
   /* cena 3D contínua, fixa atrás de tudo */
-  #scene{position:fixed;inset:0;z-index:0;pointer-events:none}
+  #scene{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:1;transition:opacity .4s ease}
+  body.past-hero #scene{opacity:.4}
   @media (max-width:899px){#scene{opacity:.7}}
   /* fundo mobile: sem canvas, CSS puro */
   #scene-mobile{
@@ -307,8 +308,24 @@
   }
   @media (max-width:640px){.scroll-hint{display:none}}
 
+  /* ---------- FAIXA DE CREDENCIAIS ---------- */
+  .credenciais{
+    padding:2.5rem 0;
+    background:rgba(38,38,42,.4);
+    border-top:1px solid var(--chumbo-carvao);
+    border-bottom:1px solid var(--chumbo-carvao);
+  }
+  .credenciais p{
+    text-align:center;
+    font-family:'JetBrains Mono',monospace;font-size:.85rem;
+    color:var(--agua-saturada);opacity:.75;
+  }
+  @media (max-width:640px){
+    .credenciais p{display:flex;flex-direction:column;align-items:center;gap:.5rem}
+    .credenciais .sep{display:none}
+  }
+
   /* ---------- TERMINAL INTERATIVO ---------- */
-  #dados{padding:4rem 0}
   .term{
     background:var(--chumbo-elevado);
     border-radius:8px;
@@ -392,41 +409,45 @@
   }
   .card-body p{color:var(--texto-soft);font-size:1rem}
   .card-body .ganho{margin-top:1rem;color:var(--texto-claro);font-size:.95rem}
-  .card-status{margin-top:1.25rem;color:var(--agua-saturada)}
 
-  /* lista-terminal de serviços */
-  .services{
-    background:var(--chumbo-elevado);
-    border-radius:8px;
-    box-shadow:0 12px 40px rgba(0,0,0,.35);
-    overflow:hidden;
-    margin-bottom:4.5rem;
+  /* grade 2 colunas pros cards "sob medida" */
+  .cards-2{grid-template-columns:1fr 1fr}
+  @media (max-width:820px){.cards-2{grid-template-columns:1fr}}
+
+  /* respiro entre sub-blocos da seção trabalho */
+  .svc-block{margin-top:5rem}
+
+  /* blocos problema/solução/tags dentro do card grande */
+  .card-block + .card-block{margin-top:1.1rem}
+  .card-label{
+    display:block;font-family:'JetBrains Mono',monospace;font-size:.75rem;
+    letter-spacing:.02em;color:var(--agua-saturada);margin-bottom:.3rem;
   }
-  .svc-group{padding:1.5rem 1.75rem}
-  .svc-group + .svc-group{border-top:1px solid var(--chumbo-carvao)}
-  .svc-label{
-    font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.02em;
-    color:var(--agua-saturada);margin-bottom:1.1rem;
+  .card-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.25rem}
+  .card-tags span{
+    font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--agua-saturada);
+    border:1px solid var(--chumbo-carvao);padding:.3rem .7rem;border-radius:20px;
   }
-  .svc-row{
-    display:grid;grid-template-columns:minmax(160px,230px) 1fr;gap:1.5rem;
-    padding:.65rem 0;align-items:baseline;
-    border-bottom:1px dashed rgba(240,237,229,.06);
-    transition:padding-left .25s var(--ease);
-  }
-  .svc-row:last-child{border-bottom:none}
-  .svc-row:hover{padding-left:.6rem}
-  .svc-name{font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--texto-claro)}
-  .svc-name::before{content:"› ";color:var(--agua-saturada)}
-  .svc-desc{color:var(--texto-soft);font-size:.95rem}
+
   .svc-heading{
     font-family:'Fraunces',serif;font-variation-settings:'SOFT' 55;
     font-weight:420;font-size:1.9rem;margin-bottom:.4rem;
   }
-  @media (max-width:640px){
-    .svc-row{grid-template-columns:1fr;gap:.15rem}
-    .svc-row:hover{padding-left:0}
+  .svc-heading.svc-heading-sm{font-size:1.5rem}
+
+  /* mini-cards dos adicionais */
+  .mini-card{
+    background:var(--chumbo-elevado);
+    border-radius:6px;
+    padding:1.5rem;
+    box-shadow:0 12px 40px rgba(0,0,0,.35);
   }
+  .mini-card h4{
+    font-family:'Fraunces',serif;font-variation-settings:'SOFT' 55;
+    font-weight:420;font-size:1.2rem;margin-bottom:.5rem;
+  }
+  .mini-card h4::before{content:"▸ ";color:var(--agua-saturada)}
+  .mini-card p{color:var(--texto-soft);font-size:.95rem}
 
   /* ---------- DEMO CHAT ---------- */
   #demo .wrap{max-width:920px}
@@ -656,6 +677,7 @@
 <div id="rail" aria-hidden="true">
   <a href="#hero" data-sec="hero"><span>início</span><i></i></a>
   <a href="#trabalho" data-sec="trabalho"><span>trabalho</span><i></i></a>
+  <a href="#dados" data-sec="dados"><span>o que já roda</span><i></i></a>
   <a href="#demo" data-sec="demo"><span>demo</span><i></i></a>
   <a href="#espelho" data-sec="espelho"><span>espelho</span><i></i></a>
   <a href="#processo" data-sec="processo"><span>processo</span><i></i></a>
@@ -681,10 +703,133 @@
   <div class="scroll-hint" aria-hidden="true"><span class="mono">role</span><span class="line"></span></div>
 </section>
 
-<!-- TERMINAL INTERATIVO -->
+<!-- FAIXA DE CREDENCIAIS -->
+<div class="credenciais">
+  <div class="wrap">
+    <p><span>12 anos entre criação e negócio</span><span class="sep"> · </span><span>4 anos em programação, LLMs e automação</span><span class="sep"> · </span><span>Feito no Brasil</span></p>
+  </div>
+</div>
+
+<!-- 002 TRABALHO -->
+<section id="trabalho">
+  <div class="wrap">
+    <div class="mono marker">002 // TRABALHO</div>
+    <h2 class="reveal-mask">Começa simples. Cresce com você.</h2>
+
+    <p class="term-intro reveal-blur">Antes do bot, organizo a sua base: contatos, histórico, planilha. Bot só é tão bom quanto a informação que ele tem. Se não existe nada organizado, eu crio. Se já existe, eu ajusto. Isso vem incluso.</p>
+
+    <div class="svc-block">
+      <h3 class="svc-heading reveal-mask">Por onde começar</h3>
+      <p class="comment sec-comment">// escolha o nível pelo que seu negócio precisa hoje. dá pra subir depois.</p>
+      <div class="cards">
+        <article class="card" data-tilt>
+          <div class="card-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="mono">~/fabiana/essencial.flow</span></div>
+          <div class="card-body">
+            <h3>Essencial</h3>
+            <p>Responde dúvidas comuns e envia informações na hora.</p>
+            <p class="ganho">pra quem responde a mesma coisa o dia todo</p>
+          </div>
+        </article>
+        <article class="card" data-tilt>
+          <div class="card-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="mono">~/fabiana/com-agenda.flow</span></div>
+          <div class="card-body">
+            <h3>Com Agenda</h3>
+            <p>Marca, remarca e confirma horário sozinho, direto no seu calendário.</p>
+            <p class="ganho">pra clínica, salão, consultório</p>
+          </div>
+        </article>
+        <article class="card" data-tilt>
+          <div class="card-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="mono">~/fabiana/comercial.flow</span></div>
+          <div class="card-body">
+            <h3>Comercial</h3>
+            <p>Aborda leads, qualifica e conduz até a reunião marcada.</p>
+            <p class="ganho">pra quem vende e não quer perder cliente</p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="svc-block">
+      <h3 class="svc-heading reveal-mask">Sob medida</h3>
+      <p class="comment sec-comment">// esses já trabalham todos os dias, em negócios reais</p>
+      <div class="cards cards-2">
+        <article class="card" data-tilt>
+          <div class="card-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="mono">~/fabiana/sdr-whatsapp.flow</span></div>
+          <div class="card-body">
+            <h3>SDR de WhatsApp</h3>
+            <div class="card-block">
+              <span class="card-label">Problema</span>
+              <p>Lead esfria em minutos. Ninguém responde na hora o dia todo.</p>
+            </div>
+            <div class="card-block">
+              <span class="card-label">Solução</span>
+              <p>Bot que aborda, qualifica e agenda com memória por contato. Sem inventar preço.</p>
+            </div>
+            <div class="card-block">
+              <span class="card-label">Rodando há</span>
+              <p>90+ dias sem parar</p>
+            </div>
+            <div class="card-tags">
+              <span>WhatsApp</span><span>n8n</span><span>memória por contato</span>
+            </div>
+          </div>
+        </article>
+        <article class="card" data-tilt>
+          <div class="card-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="mono">~/fabiana/agenda-clinica.flow</span></div>
+          <div class="card-body">
+            <h3>Atendimento de Clínica</h3>
+            <div class="card-block">
+              <span class="card-label">Problema</span>
+              <p>Agenda engolida pelo WhatsApp. Faltas por falta de confirmação.</p>
+            </div>
+            <div class="card-block">
+              <span class="card-label">Solução</span>
+              <p>Assistente que agenda no Google Calendar e passa pra humano quando o assunto precisa.</p>
+            </div>
+            <div class="card-block">
+              <span class="card-label">Status</span>
+              <p>piloto ativo em clínica</p>
+            </div>
+            <div class="card-tags">
+              <span>WhatsApp</span><span>Google Calendar</span><span>agendamento</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="svc-block">
+      <h3 class="svc-heading svc-heading-sm reveal-mask">Adicionais</h3>
+      <p class="comment sec-comment">// somam a qualquer nível</p>
+      <div class="cards cards-2">
+        <div class="mini-card">
+          <h4>Automação interna</h4>
+          <p>Rotinas fora do WhatsApp: triagem de email, nota virando planilha, relatórios prontos toda semana.</p>
+        </div>
+        <div class="mini-card">
+          <h4>Painel de métricas</h4>
+          <p>Os números do seu atendimento em tempo real, num lugar só. Você vê o que tá funcionando.</p>
+        </div>
+        <div class="mini-card">
+          <h4>Segunda língua</h4>
+          <p>Seu bot atendendo cliente estrangeiro sem perder tom nem contexto.</p>
+        </div>
+        <div class="mini-card">
+          <h4>Treinamento</h4>
+          <p>Sua equipe aprendendo a usar, ajustar e cuidar do que foi montado.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 003 O QUE JÁ RODA -->
 <section id="dados" aria-label="Terminal interativo com dados reais dos projetos">
   <div class="wrap">
+    <div class="mono marker">003 // O QUE JÁ RODA</div>
+    <h2 class="svc-heading reveal-mask">Raio-x do que trabalha todos os dias</h2>
     <p class="term-intro reveal-blur">Antes de vender qualquer coisa, um raio-x do que já roda de verdade. Clica num botão ou digita pra explorar.</p>
+    <!-- TERMINAL INTERATIVO -->
     <div class="term reveal-mask">
       <div class="term-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="mono">~/fabiana/status.log</span></div>
       <div class="term-body" id="termOut">
@@ -709,70 +854,10 @@
   </div>
 </section>
 
-<!-- 002 TRABALHO -->
-<section id="trabalho">
-  <div class="wrap">
-    <div class="mono marker">002 // TRABALHO</div>
-    <h2 class="reveal-mask">Começa simples. Cresce com você.</h2>
-    <p class="comment sec-comment">// você escolhe pelo que o negócio precisa hoje. dá pra subir de nível depois.</p>
-
-    <p class="term-intro reveal-blur">Antes do bot, organizo a sua base: contatos, histórico, planilha. Bot só é tão bom quanto a informação que ele tem. Se não existe nada organizado, eu crio. Se já existe, eu ajusto. Isso vem incluso.</p>
-    <div class="services reveal-mask">
-      <div class="term-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="mono">~/fabiana/niveis.list</span></div>
-      <div class="svc-group">
-        <p class="svc-label">// os níveis · do simples ao completo</p>
-        <div class="svc-row"><span class="svc-name">essencial</span><span class="svc-desc">Responde as dúvidas comuns e manda na hora o que o cliente pede: endereço, valores, horário, links. Pra quem quer parar de responder a mesma coisa o dia todo.</span></div>
-        <div class="svc-row"><span class="svc-name">com-agenda</span><span class="svc-desc">Tudo do Essencial, e ainda marca, remarca e cancela horário direto na sua agenda. Com opção de lembrar o cliente e confirmar presença, pra reduzir falta.</span></div>
-        <div class="svc-row"><span class="svc-name">comercial</span><span class="svc-desc">Atende quem chega e vai atrás de quem interessa: qualifica e agenda a reunião. Pra quem vende e não quer perder cliente.</span></div>
-        <div class="svc-row"><span class="svc-name">integrado</span><span class="svc-desc">O Comercial conectado ao seu sistema (CRM, estoque, reservas), consultando e confirmando em tempo real. Pra operação maior, com mais fluxo.</span></div>
-      </div>
-      <div class="svc-group">
-        <p class="svc-label">// adicionais · somam a qualquer nível</p>
-        <div class="svc-row"><span class="svc-name">automacao-interna</span><span class="svc-desc">Rotinas sem WhatsApp: triagem de email, nota fiscal virando planilha, relatórios.</span></div>
-        <div class="svc-row"><span class="svc-name">painel-de-metricas</span><span class="svc-desc">Os números do seu atendimento num painel simples, em tempo real.</span></div>
-        <div class="svc-row"><span class="svc-name">segunda-lingua</span><span class="svc-desc">Seu bot atendendo em mais de um idioma.</span></div>
-        <div class="svc-row"><span class="svc-name">treinamento</span><span class="svc-desc">Sua equipe aprendendo a usar e cuidar do que foi montado.</span></div>
-      </div>
-    </div>
-
-    <h3 class="svc-heading reveal-mask">Sob medida, já trabalhando</h3>
-    <p class="comment sec-comment">// esses já trabalham todos os dias, em negócios reais</p>
-    <div class="cards">
-      <article class="card" data-tilt>
-        <div class="card-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="mono">~/fabiana/sdr-whatsapp.flow</span></div>
-        <div class="card-body">
-          <h3>SDR de WhatsApp que qualifica e agenda</h3>
-          <p>Bot comercial que aborda leads, conversa com memória por contato e conduz até a reunião marcada. Sem inventar preço, sem prometer milagre.</p>
-          <p class="ganho">Pra quem: negócio B2B que perde lead por demora na resposta.</p>
-          <p class="mono card-status">● trabalhando agora</p>
-        </div>
-      </article>
-      <article class="card" data-tilt>
-        <div class="card-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="mono">~/fabiana/agenda-clinica.flow</span></div>
-        <div class="card-body">
-          <h3>Atendimento automático para clínicas</h3>
-          <p>Assistente que agenda, reagenda e confirma sessões direto no calendário, tira dúvidas e passa pra um humano quando o assunto pede.</p>
-          <p class="ganho">Pra quem: clínica ou consultório onde o WhatsApp engole a agenda.</p>
-          <p class="mono card-status">● em construção com um cliente</p>
-        </div>
-      </article>
-      <article class="card" data-tilt>
-        <div class="card-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="mono">~/fabiana/agente-tools.flow</span></div>
-        <div class="card-body">
-          <h3>Agentes de IA com ferramentas</h3>
-          <p>Agentes que consultam agenda e CRM, criam eventos e disparam confirmações sozinhos. Travas defensivas em cada ponta: checam antes de criar, confirmam antes de cancelar.</p>
-          <p class="ganho">Pra quem: operação que precisa de mais que resposta pronta.</p>
-          <p class="mono card-status">● base dos meus projetos</p>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- 003 DEMO -->
+<!-- 004 DEMO -->
 <section id="demo">
   <div class="wrap">
-    <div class="mono marker">003 // DEMO</div>
+    <div class="mono marker">004 // DEMO</div>
     <h2 class="reveal-mask">Converse com uma amostra do bot</h2>
     <p class="comment sec-comment">// versão de mostruário. a completa lembra das conversas e mexe na agenda de verdade.</p>
     <div class="chat reveal-mask">
@@ -797,10 +882,10 @@
   </div>
 </section>
 
-<!-- 004 PROCESSO -->
+<!-- 005 PROCESSO -->
 <section id="processo">
   <div class="wrap">
-    <div class="mono marker">004 // PROCESSO</div>
+    <div class="mono marker">005 // PROCESSO</div>
     <h2 class="reveal-mask">Como uma automação nasce aqui</h2>
     <p class="comment sec-comment">// design thinking aplicado, não ferramenta pela ferramenta</p>
     <div class="steps">
@@ -828,11 +913,11 @@
   </div>
 </section>
 
-<!-- 005 SOBRE -->
+<!-- 006 SOBRE -->
 <section id="sobre">
   <div class="wrap">
     <div>
-      <div class="mono marker">005 // SOBRE</div>
+      <div class="mono marker">006 // SOBRE</div>
       <h2 class="reveal-mask">Alma antiga, ferramenta nova</h2>
       <p class="reveal-blur">Sou a Fabiana. <strong>12 anos em fotografia, design e branding</strong>, mais 5 de mundo corporativo entre banco e indústria, e desde 2024 construindo soluções inteligentes para o dia a dia real do negócio, não em slide.</p>
       <p class="reveal-blur" style="animation-delay:.15s">Trabalho com tecnologia pra <strong>tirar humanos de tarefa de robô</strong>. Não pra acelerar você infinitamente: pra devolver o espaço de pensar, criar e respirar que o operacional engoliu.</p>
@@ -846,10 +931,10 @@
   </div>
 </section>
 
-<!-- 006 FAQ -->
+<!-- 007 FAQ -->
 <section id="faq">
   <div class="wrap">
-    <div class="mono marker">006 // PERGUNTAS</div>
+    <div class="mono marker">007 // PERGUNTAS</div>
     <h2 class="reveal-mask">O que todo mundo pergunta</h2>
     <details>
       <summary>Quanto custa uma automação de WhatsApp?</summary>
@@ -899,10 +984,10 @@
 }
 </script>
 
-<!-- 007 CONVERSAR -->
+<!-- 008 CONVERSAR -->
 <section id="conversar">
   <div class="wrap">
-    <div class="mono marker" style="margin-bottom:1rem">007 // CONVERSAR</div>
+    <div class="mono marker" style="margin-bottom:1rem">008 // CONVERSAR</div>
     <h2 class="reveal-mask">Me conta onde seu tempo tá indo</h2>
     <p class="sub reveal-blur">Sem formulário de 12 campos. Uma conversa de WhatsApp, você descreve o processo, eu te digo com honestidade o que vale automatizar e o que não vale.</p>
     <a class="cta verde reveal-blur" data-magnet style="animation-delay:.2s" href="https://wa.me/5554981135272?text=Oi%20Fabiana!%20Quero%20conversar%20sobre%20automa%C3%A7%C3%A3o." rel="noopener">Chamar no WhatsApp</a>
@@ -1188,10 +1273,23 @@ addEventListener('scroll', ()=>{
       }
     });
   },{threshold:.4});
-  ['hero','trabalho','demo','espelho','processo','sobre','conversar'].forEach(id=>{
+  ['hero','trabalho','dados','demo','espelho','processo','sobre','conversar'].forEach(id=>{
     const el = document.getElementById(id);
     if(el) io.observe(el);
   });
+})();
+
+/* ---------- 3D pleno no hero, discreto no resto do site ---------- */
+(function(){
+  const heroEl = document.getElementById('hero');
+  if(heroEl){
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        document.body.classList.toggle('past-hero', !e.isIntersecting);
+      });
+    },{threshold:.1});
+    io.observe(heroEl);
+  }
 })();
 
 /* ---------- Números do processo ligados ao scroll ---------- */
@@ -1225,7 +1323,7 @@ addEventListener('scroll', ()=>{
     'servicos': '<span class="v">&gt; sdr-whatsapp.flow ....... bot comercial com memória</span><br><span class="v">&gt; agenda-clinica.flow ..... atendimento que agenda sozinho</span><br><span class="v">&gt; agente-tools.flow ....... agentes com calendário e CRM</span> <span class="c">// tudo sob medida</span>',
     'serviços': '<span class="v">&gt; sdr-whatsapp.flow ....... bot comercial com memória</span><br><span class="v">&gt; agenda-clinica.flow ..... atendimento que agenda sozinho</span><br><span class="v">&gt; agente-tools.flow ....... agentes com calendário e CRM</span> <span class="c">// tudo sob medida</span>',
     'processo': '<span class="v">&gt; 01 escutar &gt; 02 desenhar &gt; 03 construir &gt; 04 devolver tempo</span> <span class="c">// diagnóstico antes de ferramenta</span>',
-    'stack': '<span class="v">&gt; n8n · evolution api · gemini · google calendar · sheets</span> <span class="c">// e backup antes de tudo</span>',
+    'stack': '<span class="v">&gt; <span class="k">ia:</span> gemini, openai, claude, prompt engineering</span><br><span class="v">&gt; <span class="k">programação:</span> node.js, python, javascript, apis</span><br><span class="v">&gt; <span class="k">orquestração:</span> n8n, webhooks, integrações event-driven</span><br><span class="v">&gt; <span class="k">whatsapp:</span> evolution api oficial</span><br><span class="v">&gt; <span class="k">dados:</span> postgresql, sheets, google workspace</span><br><span class="v">&gt; <span class="k">deploy:</span> vps próprio com monitoramento e backup</span><br><span class="c">// não vendo ferramenta. vendo problema resolvido.</span>',
     'whoami': '<span class="v">&gt; humana. com pensamento crítico. e você?</span>',
     'contato': '<span class="v">&gt; whatsapp: <a href="#conversar" style="color:#49c6bc">clique aqui</a> · email: fab.ia.moratelli@gmail.com</span>',
     'luna': '<span class="gold">&gt; luna.star ✦ localizada. a Luna era lua e virou estrela.</span> <span class="c">// quem sabe, sabe</span>',
