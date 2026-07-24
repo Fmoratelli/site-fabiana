@@ -114,6 +114,10 @@
     #scene{display:none !important}
     #scene-mobile{display:block}
   }
+  @media (max-width:720px){
+    #scene{opacity:.35}
+    #scene-mobile,body.past-hero #scene-mobile{opacity:.35}
+  }
   @media (prefers-reduced-motion:reduce){
     #scene-mobile .p, #scene-mobile .luna-m{animation:none}
   }
@@ -251,6 +255,7 @@
   }
   #hero .wrap{position:relative;z-index:2;width:100%}
   .hero-marker{position:absolute;top:5.5rem;right:2rem;z-index:3}
+  @media (max-width:720px){.hero-marker{display:none}}
   h1{
     font-family:'Fraunces',serif;
     font-variation-settings:'opsz' 120,'SOFT' 60;
@@ -287,6 +292,14 @@
   .cta.verde:hover{background:#5ad4c9;border-color:#5ad4c9;color:#1c1c1f}
   .cta.ghost{background:transparent;border-color:var(--chumbo-carvao);margin-left:1rem;color:var(--texto-claro)}
   .cta.ghost:hover{border-color:var(--roxo-vibrante);background:transparent}
+  @media (max-width:720px){
+    .cta.ghost{
+      opacity:1;background:transparent;
+      border:1px solid var(--chumbo-carvao);
+      color:var(--texto-claro);
+      padding:1.05rem 2.4rem;
+    }
+  }
 
   .hero-eyebrow{
     font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.14em;
