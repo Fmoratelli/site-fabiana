@@ -240,6 +240,9 @@
 
   /* ---------- HERO ---------- */
   #hero{min-height:100vh;display:flex;align-items:center;padding:0}
+  @media (max-width:720px){
+    #hero{min-height:auto;align-items:flex-start;padding:6rem 0 3rem}
+  }
   #hero::before{
     content:"";position:absolute;inset:0;z-index:0;
     background:
@@ -329,6 +332,7 @@
   }
   @media (max-width:720px){
     .hero-credenciais{flex-direction:column}
+    .cred-card{width:100%}
     .cred-card p{font-size:.8rem}
   }
 
