@@ -1203,8 +1203,11 @@ addEventListener('scroll', ()=>{
 
   let paused = false;
   document.addEventListener('visibilitychange', ()=>{ paused = document.hidden; });
+  const mobileMQ = matchMedia('(max-width: 900px)');
+  let mobileHidden = mobileMQ.matches;
+  mobileMQ.addEventListener('change', e => { mobileHidden = e.matches; });
   function frame(){
-    if(paused){ requestAnimationFrame(frame); return; } /* só pausa se a aba não está visível */
+    if(paused || mobileHidden){ requestAnimationFrame(frame); return; } /* pausa se a aba está oculta OU #scene está display:none no mobile (900px, mesmo breakpoint do CSS) */
     t += .004;
     mx += (tx-mx)*.05; my += (ty-my)*.05;
 
