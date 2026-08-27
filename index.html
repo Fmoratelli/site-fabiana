@@ -442,6 +442,12 @@
   /* grade 2 colunas pros cards "sob medida" */
   .cards-2{grid-template-columns:1fr 1fr}
   @media (max-width:820px){.cards-2{grid-template-columns:1fr}}
+  /* os quatro adicionais em linha: os textos são de uma frase, e em duas colunas
+     largas sobrava ar entre eles e a seção esticava à toa. Classe própria porque
+     o outro .cards-2 da seção é o dos dois cards de terminal, que não muda. */
+  .cards-mini{grid-template-columns:repeat(4,1fr);gap:1.5rem}
+  @media (max-width:1099px){.cards-mini{grid-template-columns:1fr 1fr;gap:1.5rem 2rem}}
+  @media (max-width:699px){.cards-mini{grid-template-columns:1fr;gap:1.5rem}}
 
   /* respiro entre sub-blocos da seção trabalho */
   .svc-block{margin-top:5rem}
@@ -464,18 +470,25 @@
   }
   .svc-heading.svc-heading-sm{font-size:1.5rem}
 
-  /* mini-cards dos adicionais */
+  /* mini-cards dos adicionais: mesma linguagem da trajetória do Sobre, barra vertical
+     à esquerda e texto, sem caixa nem sombra. A cor repetida fica nas posições 1 e 4,
+     que são as pontas quando é linha e a diagonal quando é 2x2, então as duas iguais
+     não encostam em nenhum dos tamanhos. */
   .mini-card{
-    background:var(--chumbo-elevado);
-    border-radius:6px;
-    padding:1.5rem;
-    box-shadow:0 12px 40px rgba(0,0,0,.35);
+    border-left:2px solid var(--chumbo-carvao);
+    padding-left:1.25rem;
   }
+  .mini-card:nth-child(1),.mini-card:nth-child(4){border-left-color:var(--agua-saturada)}
+  .mini-card:nth-child(2){border-left-color:var(--roxo-vibrante)}
+  .mini-card:nth-child(3){border-left-color:var(--amarelo)}
   .mini-card h4{
     font-family:'Fraunces',serif;font-variation-settings:'SOFT' 55;
     font-weight:420;font-size:1.2rem;margin-bottom:.5rem;
   }
+  /* a seta acompanha a cor da barra, como o título acompanha na trajetória */
   .mini-card h4::before{content:"▸ ";color:var(--agua-saturada)}
+  .mini-card:nth-child(2) h4::before{color:var(--roxo-vibrante)}
+  .mini-card:nth-child(3) h4::before{color:var(--amarelo)}
   .mini-card p{color:var(--texto-soft);font-size:.95rem}
 
   /* ---------- DEMO CHAT ---------- */
@@ -917,20 +930,20 @@
     <div class="svc-block">
       <h3 class="svc-heading svc-heading-sm reveal-mask">Adicionais</h3>
       <p class="comment sec-comment reveal-blur">// somam a qualquer nível</p>
-      <div class="cards cards-2">
-        <div class="mini-card">
+      <div class="cards cards-mini">
+        <div class="mini-card reveal-blur">
           <h4>Automação interna</h4>
           <p>Rotinas fora do WhatsApp: triagem de email, nota virando planilha, relatórios prontos toda semana.</p>
         </div>
-        <div class="mini-card">
+        <div class="mini-card reveal-blur">
           <h4>Painel de métricas</h4>
           <p>Os números do seu atendimento em tempo real, num lugar só. Você vê o que tá funcionando.</p>
         </div>
-        <div class="mini-card">
+        <div class="mini-card reveal-blur">
           <h4>Segunda língua</h4>
           <p>Seu bot atendendo cliente estrangeiro sem perder tom nem contexto.</p>
         </div>
-        <div class="mini-card">
+        <div class="mini-card reveal-blur">
           <h4>Treinamento</h4>
           <p>Sua equipe aprendendo a usar, ajustar e cuidar do que foi montado.</p>
         </div>
