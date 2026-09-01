@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>{{TITULO}} | fab[IA]na</title>
+<meta name="description" content="{{DEK}}">
+<link rel="canonical" href="https://fabianamoratelli.com.br/textos/{{SLUG}}.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="{{TITULO}}">
+<meta property="og:description" content="{{DEK}}">
+<meta property="og:url" content="https://fabianamoratelli.com.br/textos/{{SLUG}}.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,0..100;1,9..144,300..600,0..100&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --chumbo-profundo:#1c1c1f;--chumbo-elevado:#26262a;--chumbo-carvao:#2f2f33;
+    --roxo-profundo:#642ba0;--roxo-vibrante:#ae30f2;
+    --agua-saturada:#49c6bc;--agua-suave:#9bd6d1;--amarelo:#f4d54a;
+    --texto-claro:#f0ede5;--texto-soft:rgba(240,237,229,.55);--texto-dim:rgba(240,237,229,.32);
+    --ease:cubic-bezier(.65,0,.35,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--chumbo-profundo);color:var(--texto-claro);font-family:'Inter',sans-serif;font-size:1.125rem;line-height:1.72;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--roxo-profundo);color:var(--texto-claro)}
+  .grain{position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E")}
+  #progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:90;background:linear-gradient(90deg,#642ba0,#ae30f2)}
+  .mono{font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
+  /* nav igual a do site: mesmo fundo, mesmo hamburguer, mesmo breakpoint de 720px.
+     Sem isso o menu estoura em 360 e 390, com o logo colando no primeiro item. */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:80;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:1rem 1.5rem;
+    background:rgba(28,28,31,.92);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(240,237,229,.06);
+  }
+  nav .wordmark{font-family:'Fraunces',serif;font-weight:420;font-size:1.15rem;text-decoration:none;color:var(--texto-claro);display:flex;align-items:center;gap:.5rem}
+  nav .wordmark img{height:34px;display:block}
+  nav .wordmark span{color:var(--agua-saturada)}
+  nav ul{display:flex;gap:2rem;list-style:none}
+  nav ul a{color:var(--texto-soft);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .3s var(--ease)}
+  nav ul a:hover,nav ul a.here{color:var(--texto-claro)}
+  .menu-btn{
+    display:none;background:none;border:none;cursor:pointer;padding:.4rem;
+    width:38px;height:38px;position:relative;z-index:82;
+  }
+  .menu-btn i{
+    display:block;height:2px;background:var(--texto-claro);margin:6px 0;
+    transition:transform .3s var(--ease), opacity .3s var(--ease);
+    border-radius:2px;
+  }
+  .menu-btn.open i:nth-child(1){transform:translateY(8px) rotate(45deg)}
+  .menu-btn.open i:nth-child(2){opacity:0}
+  .menu-btn.open i:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+  @media (max-width:720px){
+    nav ul{display:none}
+    .menu-btn{display:block}
+    /* backdrop-filter no nav cria containing block pra descendentes fixed,
+       prendendo o menu na altura da barra em vez da tela inteira */
+    nav:has(ul.mobile-open){backdrop-filter:none;-webkit-backdrop-filter:none}
+    nav ul.mobile-open{
+      display:flex;position:fixed;top:0;left:0;right:0;bottom:0;
+      background:var(--chumbo-profundo);
+      flex-direction:column;justify-content:center;align-items:center;
+      gap:2.5rem;z-index:99;
+    }
+    nav ul.mobile-open a{font-family:'Fraunces',serif;font-size:1.8rem;color:var(--texto-claro);text-decoration:none}
+    /* botao hamburguer precisa ficar por cima do proprio menu quando aberto */
+    .menu-btn{z-index:100}
+  }
+
+  article{max-width:680px;margin:0 auto;padding:8rem 2rem 0}
+  .back{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--texto-dim);text-decoration:none;letter-spacing:.04em}
+  .back:hover{color:var(--agua-saturada)}
+  .marker{color:var(--texto-dim);margin:1.6rem 0 .8rem}
+  h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,5vw,2.9rem);line-height:1.1;font-variation-settings:'opsz' 120,'SOFT' 40;letter-spacing:-.01em;margin-bottom:1rem}
+  .dek{color:var(--texto-soft);font-size:1.2rem;line-height:1.55;margin-bottom:1.2rem}
+  .meta{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--texto-dim);letter-spacing:.04em;padding-bottom:2rem;border-bottom:1px solid var(--chumbo-carvao)}
+
+  .body{padding:2.4rem 0}
+  .body h2{font-family:'Fraunces',serif;font-weight:420;font-size:1.6rem;font-variation-settings:'SOFT' 30;margin:2.4rem 0 .9rem}
+  .body h3{font-family:'Fraunces',serif;font-weight:420;font-size:1.25rem;margin:1.8rem 0 .7rem}
+  .body p{margin-bottom:1.3rem}
+  .body ul,.body ol{margin:0 0 1.3rem 1.3rem}
+  .body li{margin-bottom:.5rem}
+  .body a{color:var(--agua-suave);text-decoration:none;border-bottom:1px solid var(--chumbo-carvao)}
+  .body a:hover{border-color:var(--agua-suave)}
+  .body blockquote{border-left:2px solid var(--roxo-vibrante);padding-left:1.2rem;margin:1.6rem 0;color:var(--texto-soft);font-style:italic}
+  .body code{font-family:'JetBrains Mono',monospace;font-size:.85em;background:var(--chumbo-elevado);padding:.1rem .35rem;border-radius:2px}
+  .body .comment{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--texto-dim)}
+
+  .stepnav{display:flex;justify-content:space-between;gap:1rem;border-top:1px solid var(--chumbo-carvao);padding:1.6rem 0;font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.04em}
+  .stepnav a{color:var(--texto-soft);text-decoration:none}
+  .stepnav a:hover{color:var(--agua-saturada)}
+  .stepnav .disabled{color:var(--texto-dim);opacity:.4;pointer-events:none}
+
+  footer{max-width:680px;margin:3rem auto 0;padding:3rem 2rem 4rem;text-align:center;border-top:1px solid var(--chumbo-carvao)}
+  footer .star{color:var(--amarelo);font-size:1.1rem;display:block;margin-bottom:.8rem}
+  footer .comment{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--texto-dim)}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div id="progress"></div>
+<nav aria-label="Navegação principal">
+  <a class="wordmark" href="/"><picture><source srcset="/assets/wordmark.webp" type="image/webp"><img src="/assets/wordmark.png" alt="fab[IA]na" onerror="this.style.display='none';this.parentElement.nextElementSibling.style.display='inline'"></picture><span class="wm-fallback" style="display:none">fab<span>[IA]</span>na</span></a>
+  <ul>
+    <li><a href="/#trabalho">Trabalho</a></li>
+    <li><a href="/#demo">Demo</a></li>
+    <li><a href="/#processo">Processo</a></li>
+    <li><a href="/#sobre">Sobre</a></li>
+    <li><a class="here" href="/textos/">Textos</a></li>
+    <li><a href="/#conversar">Conversar</a></li>
+  </ul>
+  <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
+</nav>
+
+<article>
+  <a class="back" href="/textos/">‹ voltar pra Textos</a>
+  <div class="marker mono">// {{CONTEXTO}}</div>  <!-- ex: trilha · módulo 01 · etapa 04 -->
+  <h1>{{TITULO}}</h1>
+  <p class="dek">{{DEK}}</p>
+  <div class="meta">{{TEMPO}} · {{DATA}} · nível {{NIVEL}} · {{TAG}}</div>
+
+  <div class="body">
+    {{CONTEUDO_HTML}}
+  </div>
+
+  <!-- só na trilha; em Reflexões/Estudos, remover o bloco -->
+  <nav class="stepnav">
+    <a href="{{PREV_URL}}">‹ etapa anterior</a>
+    <a href="{{NEXT_URL}}">próxima etapa ›</a>
+  </nav>
+</article>
+
+<footer>
+  <span class="star">✦</span>
+  <span class="comment">// entregar ao robô o que é do robô, devolver ao humano o tempo de pensar.</span>
+</footer>
+
+<script>
+  const bar=document.getElementById('progress');
+  addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+</script>
+<script>
+/* menu hamburguer, portado do index.html */
+(function(){
+  const btn = document.getElementById('menuBtn');
+  const list = document.querySelector('nav ul');
+  if(!btn || !list) return;
+  function close(){ btn.classList.remove('open'); list.classList.remove('mobile-open'); btn.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+  function open(){ btn.classList.add('open'); list.classList.add('mobile-open'); btn.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+  btn.addEventListener('click', ()=>{
+    if(btn.classList.contains('open')) close(); else open();
+  });
+  list.querySelectorAll('a').forEach(a=>a.addEventListener('click', close));
+})();
+</script>
+</body>
+</html>
