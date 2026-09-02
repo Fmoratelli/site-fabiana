@@ -1,0 +1,178 @@
+/* ============================================================
+   sala.css  ·  peças das salas interativas da trilha
+   Vanilla, zero dependência. Extraído de sala-01-prototipo.html
+   e demo-ache-o-golpe.html.
+
+   Usado por /textos/_sala.html e por cada sala gerada a partir dele.
+   Reflexões e Estudos NÃO usam este arquivo: aqueles são artigos e
+   saem do _template.html. Os dois modelos convivem.
+   ============================================================ */
+
+:root{
+  --chumbo-profundo:#1c1c1f;--chumbo-elevado:#26262a;--chumbo-carvao:#2f2f33;
+  --roxo-profundo:#642ba0;--roxo-vibrante:#ae30f2;
+  --agua-saturada:#49c6bc;--agua-suave:#9bd6d1;--amarelo:#f4d54a;
+  --texto-claro:#f0ede5;--texto-soft:rgba(240,237,229,.55);--texto-dim:rgba(240,237,229,.32);
+  --ease:cubic-bezier(.65,0,.35,1);
+  /* só existem nas salas: estado de acerto e de erro nas interações */
+  --erro:#e8734a;--ok:#49c6bc;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--chumbo-profundo);color:var(--texto-claro);
+  font-family:'Inter',sans-serif;font-size:1.075rem;line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--roxo-profundo);color:var(--texto-claro)}
+a{color:inherit}
+
+/* ---------- barra de leitura ---------- */
+#progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:90;background:linear-gradient(90deg,#642ba0,#ae30f2)}
+
+/* ---------- nav ----------
+   igual à do site e à da HUB. Fica aqui, e não embutida em cada sala,
+   pra não repetir o mesmo bloco em toda página nova da trilha. */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:80;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1rem 1.5rem;
+  background:rgba(28,28,31,.92);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(240,237,229,.06);
+}
+nav .wordmark{font-family:'Fraunces',serif;font-weight:420;font-size:1.15rem;text-decoration:none;color:var(--texto-claro);display:flex;align-items:center;gap:.5rem}
+nav .wordmark img{height:34px;display:block}
+nav .wordmark span{color:var(--agua-saturada)}
+nav ul{display:flex;gap:2rem;list-style:none}
+nav ul a{color:var(--texto-soft);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .3s var(--ease)}
+nav ul a:hover,nav ul a.here{color:var(--texto-claro)}
+.menu-btn{
+  display:none;background:none;border:none;cursor:pointer;padding:.4rem;
+  width:38px;height:38px;position:relative;z-index:82;
+}
+.menu-btn i{
+  display:block;height:2px;background:var(--texto-claro);margin:6px 0;
+  transition:transform .3s var(--ease), opacity .3s var(--ease);
+  border-radius:2px;
+}
+.menu-btn.open i:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.menu-btn.open i:nth-child(2){opacity:0}
+.menu-btn.open i:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+@media (max-width:720px){
+  nav ul{display:none}
+  .menu-btn{display:block}
+  /* backdrop-filter no nav cria containing block pra descendentes fixed,
+     prendendo o menu na altura da barra em vez da tela inteira */
+  nav:has(ul.mobile-open){backdrop-filter:none;-webkit-backdrop-filter:none}
+  nav ul.mobile-open{
+    display:flex;position:fixed;top:0;left:0;right:0;bottom:0;
+    background:var(--chumbo-profundo);
+    flex-direction:column;justify-content:center;align-items:center;
+    gap:2.5rem;z-index:99;
+  }
+  nav ul.mobile-open a{font-family:'Fraunces',serif;font-size:1.8rem;color:var(--texto-claro);text-decoration:none}
+  /* botão hambúrguer precisa ficar por cima do próprio menu quando aberto */
+  .menu-btn{z-index:100}
+}
+
+/* ---------- corpo da sala ---------- */
+.wrap{max-width:620px;margin:0 auto;padding:7rem 1.2rem 4rem}
+.back{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--texto-dim);text-decoration:none;letter-spacing:.04em}
+.back:hover{color:var(--agua-saturada)}
+.mono{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--texto-dim)}
+h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(1.9rem,5vw,2.6rem);line-height:1.1;font-variation-settings:'opsz' 120,'SOFT' 40;margin:.5rem 0 .8rem}
+.dek{color:var(--texto-soft);font-size:1.15rem;line-height:1.5;margin-bottom:1rem}
+.meta{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--texto-dim);letter-spacing:.04em;padding-bottom:.4rem}
+p{margin-bottom:1.1rem}
+.src{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--texto-dim);letter-spacing:.03em;border-left:2px solid var(--chumbo-carvao);padding-left:.7rem;margin:.4rem 0 1.2rem}
+.src b{color:var(--amarelo);opacity:.8;font-weight:500}
+
+/* ---------- seclabel: marcador de bloco da anatomia ---------- */
+.seclabel{display:block;font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--texto-dim);margin:2.6rem 0 .9rem;padding-top:1.4rem;border-top:1px solid var(--chumbo-carvao)}
+.seclabel.first{border-top:none;padding-top:0;margin-top:1.6rem}
+
+/* ---------- revelar ---------- */
+.reveal{border:1px solid var(--chumbo-carvao);border-radius:4px;overflow:hidden;margin:1rem 0 1.3rem}
+.reveal button[data-reveal]{width:100%;text-align:left;background:var(--chumbo-elevado);border:none;color:var(--agua-suave);font-family:'JetBrains Mono',monospace;font-size:.74rem;letter-spacing:.04em;padding:.7rem .9rem;cursor:pointer}
+.reveal button[data-reveal]:focus-visible{outline:2px solid var(--agua-suave);outline-offset:-2px}
+/* a altura de abertura é medida no sala.js a partir do próprio conteúdo.
+   O protótipo usava max-height fixo de 220px, que cortava texto mais longo. */
+.reveal .body{max-height:0;overflow:hidden;transition:max-height .35s var(--ease);font-size:.98rem;color:var(--texto-soft)}
+.reveal .body p{padding:.9rem;margin:0}
+
+/* ---------- decisão (e aí, o que você faz?) ---------- */
+.choice{display:flex;flex-direction:column;gap:.6rem;margin:1rem 0 .4rem}
+.choice button{text-align:left;background:var(--chumbo-elevado);border:1px solid var(--chumbo-carvao);border-radius:4px;color:var(--texto-claro);font:inherit;font-size:.98rem;padding:.8rem .9rem;cursor:pointer;transition:border-color .2s var(--ease)}
+.choice button:hover{border-color:var(--agua-suave)}
+.choice button:focus-visible{outline:2px solid var(--agua-suave);outline-offset:2px}
+.choice button.picked{border-color:var(--agua-saturada)}
+.choice button .k{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--texto-dim);margin-right:.5rem}
+.outcome{font-size:.95rem;color:var(--texto-soft);border-left:2px solid var(--chumbo-carvao);padding:.2rem 0 .2rem .9rem;margin:.7rem 0 0;display:none}
+.outcome.show{display:block}
+.outcome.good{border-color:var(--ok)}
+.outcome.bad{border-color:var(--erro)}
+.outcome b{color:var(--texto-claro)}
+
+/* ---------- faça agora ---------- */
+.task{display:flex;gap:.8rem;align-items:flex-start;border:1px solid var(--chumbo-carvao);border-left:2px solid var(--amarelo);border-radius:4px;padding:1rem;background:var(--chumbo-elevado);margin:1rem 0}
+.task .box{flex:none;width:22px;height:22px;border:1.5px solid var(--texto-dim);border-radius:4px;cursor:pointer;margin-top:.15rem;display:flex;align-items:center;justify-content:center;font-size:.8rem;color:transparent;background:none;padding:0;transition:background-color .2s var(--ease),border-color .2s var(--ease)}
+.task .box:focus-visible{outline:2px solid var(--agua-suave);outline-offset:2px}
+.task.done .box{background:var(--agua-saturada);border-color:var(--agua-saturada);color:var(--chumbo-profundo)}
+.task .t{font-size:.98rem;cursor:pointer}
+.task.done .t{color:var(--texto-soft)}
+
+/* ---------- cai a ficha (quiz) ---------- */
+.quiz{border:1px solid var(--chumbo-carvao);border-radius:4px;padding:1rem;margin:1rem 0}
+.quiz .q{font-weight:500;margin-bottom:.8rem}
+.quiz .opt{display:block;width:100%;text-align:left;background:none;border:1px solid var(--chumbo-carvao);border-radius:3px;color:var(--texto-claro);font:inherit;font-size:.95rem;padding:.6rem .8rem;margin-bottom:.5rem;cursor:pointer;transition:border-color .2s var(--ease)}
+.quiz .opt:hover{border-color:var(--agua-suave)}
+.quiz .opt:focus-visible{outline:2px solid var(--agua-suave);outline-offset:2px}
+.quiz .opt.right{border-color:var(--ok);background:rgba(73,198,188,.1)}
+.quiz .opt.wrong{border-color:var(--erro);background:rgba(232,115,74,.1)}
+.quiz .exp{font-size:.92rem;color:var(--texto-soft);margin-top:.4rem;display:none}
+.quiz .exp.show{display:block}
+
+/* ---------- ache o golpe ---------- */
+.golpe{margin:1.2rem 0}
+.golpe .phone{background:var(--chumbo-elevado);border:1px solid var(--chumbo-carvao);border-radius:14px;overflow:hidden}
+.golpe .bar{display:flex;align-items:center;gap:.7rem;padding:.8rem 1rem;border-bottom:1px solid var(--chumbo-carvao);background:#212125}
+.golpe .av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#642ba0,#49c6bc);flex:none}
+.golpe .who{font-size:.9rem;font-weight:600}
+.golpe .num{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--texto-dim)}
+.golpe .chat{padding:1.2rem 1rem 1.4rem}
+.golpe .bubble{background:#2b2b30;border-radius:2px 12px 12px 12px;padding:.8rem .9rem;font-size:.96rem;max-width:92%;line-height:1.55}
+.golpe .time{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--texto-dim);margin:.4rem 0 0 .3rem}
+.golpe .flag{background:none;border:none;color:inherit;font:inherit;cursor:pointer;border-bottom:1.5px dotted var(--texto-dim);padding:0;transition:color .2s var(--ease),border-color .2s var(--ease)}
+.golpe .flag:hover{color:var(--agua-suave);border-color:var(--agua-suave)}
+.golpe .flag:focus-visible{outline:2px solid var(--agua-suave);outline-offset:2px}
+.golpe .flag.got{background:rgba(232,115,74,.16);color:#f2b79a;border-bottom:1.5px solid var(--erro);border-radius:2px;padding:0 2px}
+.golpe .counter{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--texto-dim);margin:1.3rem 0 .6rem;letter-spacing:.05em}
+.golpe .counter b{color:var(--agua-saturada);font-weight:500}
+.golpe .track{height:3px;background:var(--chumbo-carvao);border-radius:3px;overflow:hidden;margin-bottom:1.4rem}
+.golpe .track i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--agua-saturada),var(--roxo-vibrante));transition:width .4s var(--ease)}
+.golpe .finds{display:flex;flex-direction:column;gap:.6rem}
+.golpe .find{border-left:2px solid var(--erro);background:var(--chumbo-elevado);border-radius:3px;padding:.7rem .9rem;font-size:.9rem;opacity:0;transform:translateY(6px);transition:opacity .3s var(--ease),transform .3s var(--ease)}
+.golpe .find.show{opacity:1;transform:none}
+.golpe .find b{color:#f2b79a;font-weight:600}
+.golpe .done{margin-top:1.4rem;border:1px solid var(--agua-saturada);border-radius:4px;padding:1.1rem;background:rgba(73,198,188,.08);font-size:.95rem;display:none}
+.golpe .done.show{display:block}
+.golpe .done .mono{color:var(--agua-saturada)}
+.golpe .reset{margin-top:1.2rem;background:none;border:1px solid var(--chumbo-carvao);color:var(--texto-soft);font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.06em;padding:.5rem .9rem;border-radius:3px;cursor:pointer;text-transform:uppercase}
+.golpe .reset:hover{color:var(--texto-claro);border-color:var(--agua-suave)}
+/* os sinais vivem no HTML como marcação, e não aparecem: o sala.js lê daqui */
+.golpe .sinais{display:none}
+
+/* ---------- fecho ---------- */
+.fecho{border-top:1px solid var(--chumbo-carvao);margin-top:2.6rem;padding-top:1.4rem}
+.fecho .comment{font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--texto-dim);margin-bottom:1.2rem;display:block}
+.next{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--agua-suave);text-decoration:none;border-bottom:1px solid var(--chumbo-carvao);padding-bottom:.15rem}
+.next:hover{border-color:var(--agua-suave)}
+.star{color:var(--amarelo);text-align:center;display:block;margin-top:2.5rem}
+
+/* ---------- quem prefere menos movimento ---------- */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal .body,.golpe .track i,.golpe .find{transition:none}
+}

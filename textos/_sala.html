@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>{{TITULO}} | fab[IA]na</title>
+<meta name="description" content="{{DEK}}">
+<link rel="canonical" href="https://fabianamoratelli.com.br/textos/{{SLUG}}.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="{{TITULO}}">
+<meta property="og:description" content="{{DEK}}">
+<meta property="og:url" content="https://fabianamoratelli.com.br/textos/{{SLUG}}.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,0..100;1,9..144,300..600,0..100&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/textos/sala.css">
+<script src="/textos/sala.js" defer></script>
+</head>
+<!--
+  ESQUELETO DE SALA DA TRILHA.
+
+  Como usar: copie este arquivo pra /textos/<slug>.html, troque os {{MARCADORES}}
+  pelo texto real e ajuste as peças interativas.
+
+  O texto em prosa está como {{MARCADOR}}. As peças interativas estão preenchidas
+  com conteúdo de exemplo, tirado do protótipo, pra você poder abrir e testar que
+  funcionam. Esse conteúdo é rascunho: troque por texto real ao montar a sala.
+
+  Este é o modelo da TRILHA, que tem interação. Reflexões e Estudos são artigos
+  e saem do _template.html. Os dois convivem.
+-->
+<body>
+<div id="progress"></div>
+
+<nav aria-label="Navegação principal">
+  <a class="wordmark" href="/"><picture><source srcset="/assets/wordmark.webp" type="image/webp"><img src="/assets/wordmark.png" alt="fab[IA]na" onerror="this.style.display='none';this.parentElement.nextElementSibling.style.display='inline'"></picture><span class="wm-fallback" style="display:none">fab<span>[IA]</span>na</span></a>
+  <ul>
+    <li><a href="/#trabalho">Trabalho</a></li>
+    <li><a href="/#demo">Demo</a></li>
+    <li><a href="/#processo">Processo</a></li>
+    <li><a href="/#sobre">Sobre</a></li>
+    <li><a class="here" href="/textos/">Textos</a></li>
+    <li><a href="/#conversar">Conversar</a></li>
+  </ul>
+  <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
+</nav>
+
+<div class="wrap">
+
+  <a class="back" href="/textos/">‹ voltar pra Textos</a>
+  <div class="mono">// {{CONTEXTO}}</div>
+  <h1>{{TITULO}}</h1>
+  <p class="dek">{{DEK}}</p>
+  <div class="meta">{{TEMPO}} · nível {{NIVEL}} · {{MODULO}}</div>
+
+  <!-- ============ ABERTURA ============
+       Onde a pessoa se reconhece. Situação concreta, sem teoria ainda. -->
+  <span class="seclabel first">// abertura</span>
+  <p>{{ABERTURA}}</p>
+
+  <!-- ============ SACADA ============
+       A virada de entendimento. Costuma vir com um revelar para a objeção
+       mais comum, e a fonte quando houver. -->
+  <span class="seclabel">// sacada</span>
+  <p>{{SACADA}}</p>
+
+  <!-- PEÇA 1: revelar. Abre e fecha. A altura é medida no conteúdo,
+       então pode ser texto longo, não corta. Conteúdo de exemplo. -->
+  <div class="reveal">
+    <button data-reveal>"Mas eu abri em aba anônima, não conta?" ›</button>
+    <div class="body"><p>Não. A aba anônima esconde do seu navegador e de quem usa o mesmo computador. Não esconde da empresa que recebe o seu texto do outro lado. Anônimo é a cortina da sua janela, não do prédio inteiro.</p></div>
+  </div>
+
+  <!-- opcional: de onde saiu a informação -->
+  <div class="src">fonte: <b>{{FONTE}}</b>. {{FONTE_DETALHE}}</div>
+
+  <!-- ============ NA PRÁTICA ============
+       A pessoa decide. Pode usar a decisão, o ache o golpe, ou os dois. -->
+  <span class="seclabel">// na prática — e aí, o que você faz?</span>
+  <p>{{SITUACAO}}</p>
+
+  <!-- PEÇA 2: decisão. Um bloco [data-decisao] por decisão. Cada botão
+       data-opt casa com o desfecho data-out de mesmo valor. As classes
+       good e bad pintam a barra lateral. Dá pra ter mais de uma decisão
+       na mesma sala: uma não interfere na outra. Conteúdo de exemplo. -->
+  <div data-decisao>
+    <div class="choice">
+      <button data-opt="a"><span class="k">A</span>Colo o contrato inteiro, com nome e CPF, e peço o resumo.</button>
+      <button data-opt="b"><span class="k">B</span>Tiro nome, CPF e valores, colo só as cláusulas, num chat temporário.</button>
+      <button data-opt="c"><span class="k">C</span>Não uso IA pra isso, faço na mão.</button>
+    </div>
+    <div class="outcome bad" data-out="a"><b>Rápido, e arriscado.</b> Você expôs o dado de um terceiro numa base que não é sua.</div>
+    <div class="outcome good" data-out="b"><b>Esse é o caminho.</b> Você tem o resumo e ninguém consegue identificar o cliente.</div>
+    <div class="outcome" data-out="c"><b>Seguro, mas caro.</b> Nada de errado em fazer na mão, mas dá pra usar IA sem ser tudo ou nada.</div>
+  </div>
+
+  <!-- PEÇA 3: ache o golpe. Componente reutilizável.
+       A mensagem fica na bolha e cada trecho suspeito é um
+       <button class="flag" data-sinal="ID">.
+       A explicação de cada sinal fica em .sinais, casada pelo mesmo ID:
+       título no atributo, explicação no texto do elemento.
+       O total do contador sai da contagem dos sinais, não é cravado em
+       lugar nenhum: para ter 3 ou 6 sinais, basta acrescentar ou tirar
+       um par de flag e marcação. Conteúdo de exemplo. -->
+  <div class="golpe" data-golpe>
+    <div class="phone">
+      <div class="bar">
+        <div class="av"></div>
+        <div>
+          <div class="who">Marcelo (chefe?)</div>
+          <div class="num">+55 41 99xxx-xxxx</div>
+        </div>
+      </div>
+      <div class="chat">
+        <div class="bubble">
+          Oi! Tudo bem? <button class="flag" data-sinal="num">Troquei de celular, salva esse número novo aqui.</button> Estou em reunião e não posso atender agora. <button class="flag" data-sinal="urg">Preciso que você pague um boleto urgente ainda hoje pra fechar um contrato.</button> <button class="flag" data-sinal="sig">Não comenta com ninguém por enquanto, é sigiloso.</button> Faz o pagamento por aqui ó: <button class="flag" data-sinal="link">pix-pagamento-seguro.xyz</button>
+          <div class="time">14:52</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="counter">sinais encontrados: <b data-golpe-n>0</b> / <span data-golpe-total>0</span></div>
+    <div class="track"><i></i></div>
+    <div class="finds"></div>
+
+    <div class="sinais">
+      <div data-sinal-id="num" data-sinal-titulo="Número desconhecido">"Troquei de celular" é a desculpa mais usada pra justificar um número que não é o da pessoa.</div>
+      <div data-sinal-id="urg" data-sinal-titulo="Pressa fabricada">"Urgente", "ainda hoje", "agora". A pressa serve pra você agir sem pensar.</div>
+      <div data-sinal-id="sig" data-sinal-titulo="Pedido de sigilo">"Não comenta com ninguém" existe pra te impedir de confirmar com alguém que perceberia o golpe.</div>
+      <div data-sinal-id="link" data-sinal-titulo="Link fora do canal oficial">Domínio estranho que imita pagamento seguro. Pagamento de verdade não chega por link solto no WhatsApp.</div>
+    </div>
+
+    <div class="done">
+      <div class="mono">// achou todos</div>
+      Nenhum sinal sozinho prova golpe. Juntos, gritam. Parou, desconfiou, confirma pela voz num número que você já tinha.
+    </div>
+
+    <button class="reset" data-golpe-reset>recomeçar</button>
+  </div>
+
+  <!-- ============ FAÇA AGORA ============
+       Uma ação pequena, que dá pra fazer sem sair da página. -->
+  <span class="seclabel">// faça agora</span>
+  <p>{{CHAMADA_DA_TAREFA}}</p>
+
+  <!-- PEÇA 4: faça agora. A caixa é um button, então funciona no teclado.
+       O texto ao lado também alterna, pra dar alvo de toque maior no
+       celular. Conteúdo de exemplo. -->
+  <div class="task">
+    <button class="box" aria-label="marcar como feito">✓</button>
+    <div class="t">Abra as configurações da IA que você usa e desligue a opção que deixa suas conversas treinarem o modelo. Toque aqui quando fizer.</div>
+  </div>
+
+  <!-- ============ CAI A FICHA ============
+       Confere se a sacada pegou. Uma pergunta só. -->
+  <span class="seclabel">// cai a ficha</span>
+
+  <!-- PEÇA 5: quiz. data-correct="1" na alternativa certa. Responde uma
+       vez só; se errar, mostra a certa; explica sempre. Cada quiz tem
+       estado próprio, então cabe mais de um por sala. Conteúdo de exemplo. -->
+  <div class="quiz">
+    <div class="q">Você usa uma IA gratuita e cola um dado sensível. O que é mais provável?</div>
+    <button class="opt" data-correct="0">Some quando você fecha a aba.</button>
+    <button class="opt" data-correct="0">Fica só no seu computador.</button>
+    <button class="opt" data-correct="1">Pode ser guardado e usado pela empresa.</button>
+    <div class="exp">O texto viaja pro servidor da empresa no instante em que você envia. Sem mexer na configuração, o padrão costuma jogar a favor dela.</div>
+  </div>
+
+  <!-- ============ FECHO ============
+       A frase que a pessoa leva, e o caminho pra próxima sala. -->
+  <div class="fecho">
+    <span class="comment">// {{FRASE_QUE_FICA}}</span>
+    <a class="next" href="{{PROXIMA_URL}}">próxima sala: {{PROXIMA_TITULO}} ›</a>
+    <span class="star">✦</span>
+  </div>
+
+</div>
+</body>
+</html>
