@@ -2,7 +2,7 @@
 
 > *"Recomeçar NÃO é começar do zero. É começar com EXPERIÊNCIA."*
 
-Este repositório contém o código-fonte do site oficial de **Fabiana Moratelli** (`fabianamoratelli.com.br`) — um ecossistema que une **Alma Antiga e Ferramenta Nova**.
+Este repositório contém o código-fonte do site oficial de **Fabiana Moratelli** (`www.fabianamoratelli.com.br`) — um ecossistema que une **Alma Antiga e Ferramenta Nova**.
 
 ---
 
@@ -26,4 +26,4 @@ Este repositório contém o código-fonte do site oficial de **Fabiana Moratelli
 ---
 
 ## 🔗 Live Site
-Acesse o laboratório online em: [fabianamoratelli.com.br](https://fabianamoratelli.com.br)
+Acesse o laboratório online em: [www.fabianamoratelli.com.br](https://www.fabianamoratelli.com.br/)
