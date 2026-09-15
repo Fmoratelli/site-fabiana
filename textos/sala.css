@@ -174,10 +174,18 @@ p{margin-bottom:1.1rem}
 .concluir:disabled{opacity:.4;cursor:default}
 .next{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--agua-suave);text-decoration:none;border-bottom:1px solid var(--chumbo-carvao);padding-bottom:.15rem}
 .next:hover{border-color:var(--agua-suave)}
-.star{color:var(--amarelo);text-align:center;display:block;margin-top:2.5rem}
+/* a estrela do fecho: apagada até concluir, dourada e com brilho depois */
+.star{color:var(--amarelo);text-align:center;display:block;margin-top:2.5rem;opacity:.45;transform-origin:center;transition:opacity .4s var(--ease),text-shadow .4s var(--ease)}
+body.concluida .star{opacity:1;text-shadow:0 0 10px rgba(244,213,74,.7),0 0 26px rgba(244,213,74,.35)}
+/* microfeedback de conclusão: só no clique, não ao abrir uma sala já concluída */
+.star.ignite{animation:acende .7s var(--ease)}
+.concluir.ignite{animation:pulsa .55s var(--ease)}
+@keyframes acende{0%{transform:scale(1)}40%{transform:scale(1.9)}100%{transform:scale(1)}}
+@keyframes pulsa{0%{box-shadow:0 0 0 0 rgba(244,213,74,.55)}100%{box-shadow:0 0 0 16px rgba(244,213,74,0)}}
 
 /* ---------- quem prefere menos movimento ---------- */
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .reveal .body,.golpe .track i,.golpe .find{transition:none}
+  .reveal .body,.golpe .track i,.golpe .find,.star{transition:none}
+  .star.ignite,.concluir.ignite{animation:none}
 }

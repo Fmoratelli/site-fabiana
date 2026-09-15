@@ -99,6 +99,8 @@
   .tabs button.on::after{transform:scaleX(1)}
   .counter{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--texto-dim);letter-spacing:.05em}
   .counter b{color:var(--agua-saturada);font-weight:500}
+  .counter .cs{color:var(--chumbo-carvao);margin-right:.35rem;transition:color .3s var(--ease),text-shadow .3s var(--ease)}
+  .counter.lit .cs{color:var(--amarelo);text-shadow:0 0 6px rgba(244,213,74,.5)}
 
   .pane{padding-top:2.4rem}
   .hidden{display:none !important}
@@ -118,12 +120,39 @@
   .mhead h3{font-family:'Fraunces',serif;font-weight:420;font-size:1.25rem;font-variation-settings:'SOFT' 30}
   .out{color:var(--texto-soft);font-size:.9rem;margin-bottom:.9rem;max-width:62ch}
   .modbar{height:2px;background:var(--chumbo-carvao);border-radius:2px;overflow:hidden;margin-bottom:1rem}
-  .modbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--agua-saturada),var(--roxo-vibrante));transition:width .4s var(--ease)}
+  /* a barra enche com a cor da marca, o mesmo gradiente da barra de leitura */
+  .modbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--roxo-profundo),var(--roxo-vibrante));transition:width .4s var(--ease)}
+
+  /* continuar: leva pra primeira sala ainda não concluída, na ordem.
+     Some quando as 9 acendem; no lugar entra a constelação. */
+  .go{margin:-.6rem 0 2.2rem}
+  .continuar{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap;text-decoration:none;color:inherit;border:1px solid var(--chumbo-carvao);border-left:2px solid var(--roxo-vibrante);border-radius:3px;padding:.8rem 1rem;background:var(--chumbo-elevado);transition:border-color .25s var(--ease)}
+  .continuar:hover{border-color:var(--roxo-vibrante)}
+  .continuar:focus-visible{outline:2px solid var(--agua-suave);outline-offset:2px}
+  .continuar .mono{color:var(--roxo-vibrante)}
+  .continuar b{font-family:'Fraunces',serif;font-weight:420;font-size:1.05rem;font-variation-settings:'SOFT' 30}
+  .continuar.soon{pointer-events:none;border-left-color:var(--chumbo-carvao);background:none}
+  .continuar.soon .mono{color:var(--texto-dim)}
+  .continuar.soon b{color:var(--texto-soft)}
+
+  /* bloco completo: as 9 estrelas formam uma constelação */
+  .constel{border:1px solid var(--chumbo-carvao);border-left:2px solid var(--amarelo);border-radius:3px;padding:1.2rem 1.4rem 1rem;background:var(--chumbo-elevado)}
+  .constel svg{display:block;width:100%;max-width:340px;height:auto;margin:.2rem 0 .9rem;overflow:visible}
+  .constel .cs{fill:var(--amarelo);opacity:0;transform-origin:center;transform-box:fill-box;animation:nasce .5s var(--ease) forwards;animation-delay:calc(var(--i) * .13s)}
+  .constel .cl{fill:none;stroke:var(--amarelo);stroke-opacity:.35;stroke-width:1;stroke-dasharray:800;stroke-dashoffset:800;animation:traca 1.6s var(--ease) 1.3s forwards}
+  .constel .mono{color:var(--amarelo);display:block;margin-bottom:.3rem}
+  .constel p{color:var(--texto-soft);font-size:.95rem;max-width:56ch}
+  @keyframes nasce{0%{opacity:0;transform:scale(.2)}60%{opacity:1;transform:scale(1.6)}100%{opacity:1;transform:scale(1)}}
+  @keyframes traca{to{stroke-dashoffset:0}}
 
   .room{position:relative;padding:.95rem 0 .95rem 2rem;border-bottom:1px solid rgba(47,47,51,.55)}
   .room:last-child{border-bottom:none}
-  .room .dot{position:absolute;left:0;top:1.25rem;width:9px;height:9px;border-radius:50%;background:var(--chumbo-profundo);border:1px solid var(--chumbo-carvao);transition:background .3s var(--ease),border-color .3s var(--ease)}
-  .room.done .dot{background:var(--agua-saturada);border-color:var(--agua-saturada)}
+  /* o ponto de cada sala é uma estrela: apagada por padrão, dourada quando concluída */
+  .room .dot{position:absolute;left:0;top:1.1rem;font-size:.85rem;line-height:1;color:var(--chumbo-carvao);transform-origin:center;transition:color .3s var(--ease),text-shadow .3s var(--ease)}
+  .room .dot::before{content:"✦"}
+  .room.done .dot{color:var(--amarelo);text-shadow:0 0 8px rgba(244,213,74,.55)}
+  .room .dot.ignite{animation:acende .6s var(--ease)}
+  @keyframes acende{0%{transform:scale(1)}40%{transform:scale(1.8)}100%{transform:scale(1)}}
   .room a.card{display:block;text-decoration:none;color:inherit}
   .room .top{display:flex;align-items:center;gap:.7rem;margin-bottom:.25rem}
   .room .rn{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--texto-dim);letter-spacing:.08em}
@@ -141,7 +170,7 @@
   .room.soon .card{pointer-events:none;cursor:default}
   .room.soon h4{color:var(--texto-soft)}
   .room.soon .dek{color:var(--texto-dim)}
-  .room.soon .dot{border-style:dashed}
+  .room.soon .dot{opacity:.5}
   .soon-tag{display:none;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--texto-dim);border:1px dashed var(--chumbo-carvao);border-radius:2px;padding:.12rem .45rem}
   .room.soon .soon-tag{display:inline-block}
   .room.soon .mark{display:none}
@@ -169,6 +198,15 @@
   footer{margin-top:5rem;border-top:1px solid var(--chumbo-carvao);padding:3rem 0 4rem;text-align:center}
   footer .star{color:var(--amarelo);font-size:1.1rem;display:block;margin-bottom:.8rem}
   footer .comment{max-width:48ch;margin:0 auto}
+
+  /* quem prefere menos movimento: tudo aparece, nada anima */
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .room .dot.ignite{animation:none}
+    .constel .cs{animation:none;opacity:1}
+    .constel .cl{animation:none;stroke-dashoffset:0}
+    .modbar i{transition:none}
+  }
 </style>
 </head>
 <body>
@@ -202,7 +240,7 @@
       <button data-tab="reflexoes">Reflexões</button>
       <button data-tab="estudos">Estudos</button>
     </div>
-    <div class="counter" id="trilhacount">trilha: <b>0</b>/<span>9</span></div>
+    <div class="counter" id="trilhacount"><span class="cs" aria-hidden="true">✦</span><b>0</b> de <span>9</span> luzes acesas</div>
   </div>
 
   <!-- ============ TRILHA ============ -->
@@ -217,6 +255,28 @@
       <span>pré-requisito: <b>nenhum</b></span>
       <span>tempo total: <b>~45 min</b></span>
       <span>como fazer: <b>na ordem</b></span>
+    </div>
+
+    <!-- continuar / bloco completo. O sala.js da HUB (script no fim da página)
+         decide qual dos dois aparece e pra onde o continuar aponta. -->
+    <div class="go">
+      <a class="continuar" id="continuar" href="#"><span class="mono">continuar ›</span><b></b></a>
+      <div class="constel hidden" id="constel" aria-live="polite">
+        <svg viewBox="0 0 320 110" role="img" aria-label="Nove estrelas acesas, ligadas numa constelação">
+          <polyline class="cl" points="20,88 56,58 94,74 130,38 166,54 202,28 238,50 272,70 302,42"/>
+          <g transform="translate(20 88)"><path class="cs" style="--i:0" d="M0,-6 L1.6,-1.6 L6,0 L1.6,1.6 L0,6 L-1.6,1.6 L-6,0 L-1.6,-1.6 Z"/></g>
+          <g transform="translate(56 58)"><path class="cs" style="--i:1" d="M0,-6 L1.6,-1.6 L6,0 L1.6,1.6 L0,6 L-1.6,1.6 L-6,0 L-1.6,-1.6 Z"/></g>
+          <g transform="translate(94 74)"><path class="cs" style="--i:2" d="M0,-6 L1.6,-1.6 L6,0 L1.6,1.6 L0,6 L-1.6,1.6 L-6,0 L-1.6,-1.6 Z"/></g>
+          <g transform="translate(130 38)"><path class="cs" style="--i:3" d="M0,-6 L1.6,-1.6 L6,0 L1.6,1.6 L0,6 L-1.6,1.6 L-6,0 L-1.6,-1.6 Z"/></g>
+          <g transform="translate(166 54)"><path class="cs" style="--i:4" d="M0,-6 L1.6,-1.6 L6,0 L1.6,1.6 L0,6 L-1.6,1.6 L-6,0 L-1.6,-1.6 Z"/></g>
+          <g transform="translate(202 28)"><path class="cs" style="--i:5" d="M0,-6 L1.6,-1.6 L6,0 L1.6,1.6 L0,6 L-1.6,1.6 L-6,0 L-1.6,-1.6 Z"/></g>
+          <g transform="translate(238 50)"><path class="cs" style="--i:6" d="M0,-6 L1.6,-1.6 L6,0 L1.6,1.6 L0,6 L-1.6,1.6 L-6,0 L-1.6,-1.6 Z"/></g>
+          <g transform="translate(272 70)"><path class="cs" style="--i:7" d="M0,-6 L1.6,-1.6 L6,0 L1.6,1.6 L0,6 L-1.6,1.6 L-6,0 L-1.6,-1.6 Z"/></g>
+          <g transform="translate(302 42)"><path class="cs" style="--i:8" d="M0,-6 L1.6,-1.6 L6,0 L1.6,1.6 L0,6 L-1.6,1.6 L-6,0 L-1.6,-1.6 Z"/></g>
+        </svg>
+        <span class="mono">// bloco 01 completo · 9 de 9 luzes acesas</span>
+        <p>O terreno está mapeado.</p>
+      </div>
     </div>
 
     <!-- bloco 1: o terreno.
@@ -391,9 +451,27 @@
   /* progresso da trilha. A chave e o formato ({s1:true,...}) são os mesmos
      que a página da sala usa pra se marcar concluída: um booleano por data-id. */
   const KEY='textos.trilha.v1';
+
+  /* atalho de teste: /textos/?recomecar apaga o progresso e limpa a URL */
+  if(new URLSearchParams(location.search).has('recomecar')){
+    try{localStorage.removeItem(KEY)}catch(e){}
+    history.replaceState(null,'',location.pathname+location.hash);
+  }
+
   let lidos={};try{lidos=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){lidos={}}
   const rooms=[...document.querySelectorAll('.room')];
   const modules=[...document.querySelectorAll('.module[data-mod]')];
+  const goBtn=document.getElementById('continuar');
+  const constel=document.getElementById('constel');
+
+  /* acende a estrela com um pulso, só quando muda por clique */
+  function acende(el){
+    if(!el)return;
+    el.classList.remove('ignite');void el.offsetWidth;
+    el.classList.add('ignite');
+    el.addEventListener('animationend',()=>el.classList.remove('ignite'),{once:true});
+  }
+
   function render(){
     let tot=0;const m={},mn={};
     rooms.forEach(r=>{
@@ -414,16 +492,35 @@
     const c=document.getElementById('trilhacount');
     c.querySelector('b').textContent=tot;
     c.querySelector('span').textContent=rooms.length;
+    c.classList.toggle('lit',tot>0);
+
+    /* continuar ou bloco completo */
+    const total=rooms.length,completo=total>0&&tot===total;
+    if(goBtn)goBtn.classList.toggle('hidden',completo);
+    if(constel)constel.classList.toggle('hidden',!completo);
+    if(goBtn&&!completo){
+      const next=rooms.find(r=>!lidos[r.dataset.id]);
+      const soon=next.classList.contains('soon');
+      goBtn.href=next.querySelector('.card').getAttribute('href');
+      goBtn.querySelector('b').textContent=next.querySelector('.rn').textContent+' · '+next.querySelector('h4').textContent;
+      goBtn.querySelector('.mono').textContent=soon?'em breve ›':'continuar ›';
+      goBtn.classList.toggle('soon',soon);
+      goBtn.setAttribute('aria-disabled',soon?'true':'false');
+      if(soon)goBtn.tabIndex=-1;else goBtn.removeAttribute('tabindex');
+    }
   }
   rooms.forEach(r=>{
     r.querySelector('.mark').addEventListener('click',ev=>{
       ev.preventDefault();const id=r.dataset.id;lidos[id]=!lidos[id];
-      try{localStorage.setItem(KEY,JSON.stringify(lidos))}catch(e){}render();
+      try{localStorage.setItem(KEY,JSON.stringify(lidos))}catch(e){}
+      render();
+      if(lidos[id])acende(r.querySelector('.dot'));
     });
     r.querySelector('.card').addEventListener('click',ev=>{
       if(r.classList.contains('soon'))ev.preventDefault();
     });
   });
+  if(goBtn)goBtn.addEventListener('click',ev=>{if(goBtn.classList.contains('soon'))ev.preventDefault()});
   render();
 </script>
 <script>

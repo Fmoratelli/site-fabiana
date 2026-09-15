@@ -203,6 +203,15 @@
       btn.setAttribute('aria-pressed', feita ? 'true' : 'false');
       btn.textContent = feita ? '✦ sala concluída' : '✦ concluir sala';
     }
+    /* microfeedback: a estrela do fecho pulsa e o botão emite um anel.
+       Só no clique que conclui; abrir uma sala já concluída não anima. */
+    function acende(el){
+      if(!el) return;
+      el.classList.remove('ignite'); void el.offsetWidth;
+      el.classList.add('ignite');
+      el.addEventListener('animationend', function(){ el.classList.remove('ignite'); }, {once:true});
+    }
+    var star = document.querySelector('.fecho .star');
     pinta(!!le()[id]);
     btn.addEventListener('click', function(){
       var lidos = le();
@@ -210,6 +219,7 @@
       lidos[id] = feita;
       grava(lidos);
       pinta(feita);
+      if(feita){ acende(star); acende(btn); }
     });
   })();
 
