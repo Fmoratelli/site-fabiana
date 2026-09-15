@@ -176,6 +176,43 @@
     pinta();
   });
 
+  /* ---------- concluir sala ----------
+     Grava o progresso na MESMA chave e no MESMO formato que a HUB usa
+     (textos.trilha.v1, {s1:true,...}): um booleano por sala. A identidade
+     vem do data-sala do <body>, que tem que casar com o data-id da HUB.
+     Clicar de novo desmarca, igual ao [ marcar lido ] de lá. */
+  (function(){
+    var id = document.body.getAttribute('data-sala');
+    var btn = document.querySelector('[data-concluir]');
+    if(!btn) return;
+    /* {{ID}} esquecido no molde, ou id fora do padrão: não grava lixo na chave */
+    if(!id || !/^s\d+$/.test(id)){
+      if(window.console) console.warn('sala.js: data-sala do <body> precisa ser s1, s2... (veio "' + id + '"). Progresso desligado nesta página.');
+      btn.disabled = true;
+      return;
+    }
+    var KEY = 'textos.trilha.v1';
+    function le(){
+      try{ return JSON.parse(localStorage.getItem(KEY) || '{}') || {}; }catch(e){ return {}; }
+    }
+    function grava(obj){
+      try{ localStorage.setItem(KEY, JSON.stringify(obj)); }catch(e){}
+    }
+    function pinta(feita){
+      document.body.classList.toggle('concluida', feita);
+      btn.setAttribute('aria-pressed', feita ? 'true' : 'false');
+      btn.textContent = feita ? '✦ sala concluída' : '✦ concluir sala';
+    }
+    pinta(!!le()[id]);
+    btn.addEventListener('click', function(){
+      var lidos = le();
+      var feita = !lidos[id];
+      lidos[id] = feita;
+      grava(lidos);
+      pinta(feita);
+    });
+  })();
+
   /* ---------- menu hambúrguer ----------
      mesmo comportamento do index.html e da HUB */
   (function(){

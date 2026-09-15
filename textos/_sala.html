@@ -24,6 +24,11 @@
   Como usar: copie este arquivo pra /textos/<slug>.html, troque os {{MARCADORES}}
   pelo texto real e ajuste as peças interativas.
 
+  {{ID}} no <body data-sala> é a identidade da sala: s1, s2, ... s9. Tem que ser
+  o MESMO data-id que a sala tem na HUB (/textos/index.html). É por ele que o
+  botão "concluir sala" grava o progresso na mesma chave que a HUB lê. Se ficar
+  como {{ID}}, o sala.js ignora e avisa no console.
+
   O texto em prosa está como {{MARCADOR}}. As peças interativas estão preenchidas
   com conteúdo de exemplo, tirado do protótipo, pra você poder abrir e testar que
   funcionam. Esse conteúdo é rascunho: troque por texto real ao montar a sala.
@@ -31,7 +36,7 @@
   Este é o modelo da TRILHA, que tem interação. Reflexões e Estudos são artigos
   e saem do _template.html. Os dois convivem.
 -->
-<body>
+<body data-sala="{{ID}}">
 <div id="progress"></div>
 
 <nav aria-label="Navegação principal">
@@ -169,9 +174,14 @@
   </div>
 
   <!-- ============ FECHO ============
-       A frase que a pessoa leva, e o caminho pra próxima sala. -->
+       A frase que a pessoa leva, o botão de concluir e o caminho pra próxima sala.
+
+       PEÇA 6: concluir. O botão grava {ID:true} na chave textos.trilha.v1, a
+       mesma que a HUB lê pra pintar a sala. Clicar de novo desmarca. O sala.js
+       cuida disso a partir do data-sala do body; aqui só precisa existir. -->
   <div class="fecho">
     <span class="comment">// {{FRASE_QUE_FICA}}</span>
+    <button class="concluir" data-concluir aria-pressed="false">✦ concluir sala</button>
     <a class="next" href="{{PROXIMA_URL}}">próxima sala: {{PROXIMA_TITULO}} ›</a>
     <span class="star">✦</span>
   </div>

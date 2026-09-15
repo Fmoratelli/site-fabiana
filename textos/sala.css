@@ -167,6 +167,11 @@ p{margin-bottom:1.1rem}
 /* ---------- fecho ---------- */
 .fecho{border-top:1px solid var(--chumbo-carvao);margin-top:2.6rem;padding-top:1.4rem}
 .fecho .comment{font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--texto-dim);margin-bottom:1.2rem;display:block}
+.concluir{display:block;margin:0 0 1.2rem;background:none;border:1px solid var(--chumbo-carvao);border-radius:3px;color:var(--texto-soft);font-family:'JetBrains Mono',monospace;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;padding:.6rem 1rem;cursor:pointer;transition:color .2s var(--ease),border-color .2s var(--ease)}
+.concluir:hover{color:var(--texto-claro);border-color:var(--amarelo)}
+.concluir:focus-visible{outline:2px solid var(--agua-suave);outline-offset:2px}
+.concluir[aria-pressed="true"]{color:var(--amarelo);border-color:var(--amarelo)}
+.concluir:disabled{opacity:.4;cursor:default}
 .next{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--agua-suave);text-decoration:none;border-bottom:1px solid var(--chumbo-carvao);padding-bottom:.15rem}
 .next:hover{border-color:var(--agua-suave)}
 .star{color:var(--amarelo);text-align:center;display:block;margin-top:2.5rem}
