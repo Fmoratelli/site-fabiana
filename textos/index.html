@@ -136,6 +136,16 @@
   .mark:hover{color:var(--texto-claro)}
   .room.done .mark{color:var(--agua-saturada)}
 
+  /* em breve: a sala está no mapa, mas o arquivo ainda não existe.
+     Vem da classe "soon" no article; some quando a classe sai. */
+  .room.soon .card{pointer-events:none;cursor:default}
+  .room.soon h4{color:var(--texto-soft)}
+  .room.soon .dek{color:var(--texto-dim)}
+  .room.soon .dot{border-style:dashed}
+  .soon-tag{display:none;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--texto-dim);border:1px dashed var(--chumbo-carvao);border-radius:2px;padding:.12rem .45rem}
+  .room.soon .soon-tag{display:inline-block}
+  .room.soon .mark{display:none}
+
   /* grids reflexoes / estudos */
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--chumbo-carvao);border:1px solid var(--chumbo-carvao)}
   @media (max-width:640px){.grid{grid-template-columns:1fr}}
@@ -192,83 +202,97 @@
       <button data-tab="reflexoes">Reflexões</button>
       <button data-tab="estudos">Estudos</button>
     </div>
-    <div class="counter" id="trilhacount">trilha: <b>0</b>/7</div>
+    <div class="counter" id="trilhacount">trilha: <b>0</b>/<span>9</span></div>
   </div>
 
   <!-- ============ TRILHA ============ -->
   <section class="pane" id="pane-trilha">
     <div class="intro">
-      <h2>Segurança digital sem susto</h2>
-      <p>Do zero, na ordem, sem jargão. Pra dono de negócio, autônomo e quem só quer parar de ter medo do próprio celular. Cada etapa pressupõe a anterior.</p>
+      <h2>Entender o terreno</h2>
+      <p>Antes de se proteger ou construir qualquer coisa, dá pra entender o chão que você já pisa todo dia. O que é a internet, um dado, a nuvem, o cadeado dos sites. Sem jargão, uma ideia por vez, na ordem.</p>
     </div>
 
     <div class="didatic">
       <span>nível: <b>começando</b></span>
       <span>pré-requisito: <b>nenhum</b></span>
-      <span>tempo total: <b>~50 min</b></span>
+      <span>tempo total: <b>~45 min</b></span>
       <span>como fazer: <b>na ordem</b></span>
     </div>
 
-    <!-- modulo 1 -->
+    <!-- bloco 1: o terreno.
+         Cada sala é um <article class="room"> com data-id (s1..s9, o mesmo id que a
+         página da sala grava no localStorage) e data-mod (o bloco a que pertence).
+         O href do card já aponta pro arquivo final em /textos/<slug>.html.
+
+         Sala ainda não escrita fica com a classe "soon": o card não abre, o botão
+         de marcar some e aparece "em breve". Pra publicar uma sala, tire a classe
+         "soon" do article. Só isso. -->
     <div class="module" data-mod="1">
-      <div class="mhead"><span class="mn">módulo 01 //</span><h3>Entender o terreno</h3></div>
-      <p class="out">O que você sai sabendo: o que é um dado seu, pra onde ele vai e por que isso vem antes de qualquer senha.</p>
-      <div class="modbar"><i id="mfill1"></i></div>
+      <div class="mhead"><span class="mn">bloco 01 //</span><h3>o terreno</h3></div>
+      <p class="out">O que você sai sabendo: o que é a internet de verdade, o que são seus dados e quanto valem, onde suas coisas ficam guardadas, e como ler um site antes de confiar nele.</p>
+      <div class="modbar"><i></i></div>
 
-      <article class="room" data-id="s1" data-mod="1"><span class="dot"></span>
-        <a class="card" href="#"><div class="top"><span class="rn">01</span><span class="tag">Base</span></div>
-          <h4>O que é um dado seu (e quem quer ele)</h4>
-          <p class="dek">Seu nome, seu clique, sua localização. O que vira "dado", quem coleta e por que alguém paga por isso.</p></a>
-        <div class="meta"><span>6 min</span><span>·</span><button class="mark">[ marcar lido ]</button></div>
+      <article class="room soon" data-id="s1" data-mod="1"><span class="dot"></span>
+        <a class="card" href="/textos/o-que-e-a-internet.html"><div class="top"><span class="rn">01</span><span class="tag">O terreno</span></div>
+          <h4>O que é a internet, versão 2027</h4>
+          <p class="dek">Uma coisa que você usa o tempo todo, e que nunca ninguém te explicou.</p></a>
+        <div class="meta"><span>5 min</span><span>·</span><span class="soon-tag">em breve</span><button class="mark">[ marcar lido ]</button></div>
       </article>
 
-      <article class="room" data-id="s2" data-mod="1"><span class="dot"></span>
-        <a class="card" href="#"><div class="top"><span class="rn">02</span><span class="tag">Base</span></div>
-          <h4>"De graça" quase nunca é de graça</h4>
-          <p class="dek">Quando você não paga com dinheiro, costuma pagar com dado. Como enxergar o preço escondido de app e serviço gratuito.</p></a>
-        <div class="meta"><span>5 min</span><span>·</span><button class="mark">[ marcar lido ]</button></div>
+      <article class="room soon" data-id="s2" data-mod="1"><span class="dot"></span>
+        <a class="card" href="/textos/o-que-e-um-dado.html"><div class="top"><span class="rn">02</span><span class="tag">O terreno</span></div>
+          <h4>O que é um dado, e por que o seu vale tanto</h4>
+          <p class="dek">Você produz muito mais do que digita. E o valor não está onde você imagina.</p></a>
+        <div class="meta"><span>5 min</span><span>·</span><span class="soon-tag">em breve</span><button class="mark">[ marcar lido ]</button></div>
       </article>
 
-      <article class="room" data-id="s3" data-mod="1"><span class="dot"></span>
-        <a class="card" href="#"><div class="top"><span class="rn">03</span><span class="tag">Base</span></div>
-          <h4>Como a IA aprende com o que você joga nela</h4>
-          <p class="dek">O que acontece com aquilo que você digita numa IA. O que fica, o que vaza, e o que nunca colar ali.</p></a>
-        <div class="meta"><span>6 min</span><span>·</span><button class="mark">[ marcar lido ]</button></div>
-      </article>
-    </div>
-
-    <!-- modulo 2 -->
-    <div class="module" data-mod="2">
-      <div class="mhead"><span class="mn">módulo 02 //</span><h3>Se proteger</h3></div>
-      <p class="out">O que você sai sabendo: as defesas que resolvem a maior parte dos perrengues, sem virar refém do medo.</p>
-      <div class="modbar"><i id="mfill2"></i></div>
-
-      <article class="room" data-id="s4" data-mod="2"><span class="dot"></span>
-        <a class="card" href="#"><div class="top"><span class="rn">04</span><span class="tag">Prática</span></div>
-          <h4>Senha e segundo fator sem drama</h4>
-          <p class="dek">Por que senha decorada não segura mais nada, e o passo simples que trava quase todo acesso indevido.</p></a>
-        <div class="meta"><span>7 min</span><span>·</span><button class="mark">[ marcar lido ]</button></div>
+      <article class="room soon" data-id="s3" data-mod="1"><span class="dot"></span>
+        <a class="card" href="/textos/a-nuvem.html"><div class="top"><span class="rn">03</span><span class="tag">O terreno</span></div>
+          <h4>A nuvem não está no céu</h4>
+          <p class="dek">"Está na nuvem" você já ouviu mil vezes. Quase ninguém te disse onde é isso.</p></a>
+        <div class="meta"><span>5 min</span><span>·</span><span class="soon-tag">em breve</span><button class="mark">[ marcar lido ]</button></div>
       </article>
 
-      <article class="room" data-id="s5" data-mod="2"><span class="dot"></span>
-        <a class="card" href="#"><div class="top"><span class="rn">05</span><span class="tag">Prática</span></div>
-          <h4>O golpe de WhatsApp ficou melhor com IA</h4>
-          <p class="dek">A mensagem do "chefe" pedindo boleto, o áudio que parece o filho. Como o golpe evoluiu e onde ele ainda escorrega.</p></a>
-        <div class="meta"><span>6 min</span><span>·</span><button class="mark">[ marcar lido ]</button></div>
+      <article class="room soon" data-id="s4" data-mod="1"><span class="dot"></span>
+        <a class="card" href="/textos/criptografia.html"><div class="top"><span class="rn">04</span><span class="tag">O cadeado</span></div>
+          <h4>Criptografia, o cadeado da mensagem</h4>
+          <p class="dek">A palavra que mais assusta nesta trilha guarda a ideia mais simples: um cadeado.</p></a>
+        <div class="meta"><span>5 min</span><span>·</span><span class="soon-tag">em breve</span><button class="mark">[ marcar lido ]</button></div>
       </article>
 
-      <article class="room" data-id="s6" data-mod="2"><span class="dot"></span>
-        <a class="card" href="#"><div class="top"><span class="rn">06</span><span class="tag">Prática</span></div>
-          <h4>Voz clonada e vídeo falso: como duvidar na hora certa</h4>
-          <p class="dek">Deepfake não é ficção distante. Os sinais que ainda entregam, e o combinado simples de família que derruba o golpe.</p></a>
-        <div class="meta"><span>6 min</span><span>·</span><button class="mark">[ marcar lido ]</button></div>
+      <article class="room soon" data-id="s5" data-mod="1"><span class="dot"></span>
+        <a class="card" href="/textos/aparelhos-que-escutam.html"><div class="top"><span class="rn">05</span><span class="tag">O terreno</span></div>
+          <h4>A sua TV também te assiste</h4>
+          <p class="dek">A internet saiu do computador e entrou na TV, na campainha, no relógio. E cada um tem um sensor.</p></a>
+        <div class="meta"><span>5 min</span><span>·</span><span class="soon-tag">em breve</span><button class="mark">[ marcar lido ]</button></div>
       </article>
 
-      <article class="room" data-id="s7" data-mod="2"><span class="dot"></span>
-        <a class="card" href="#"><div class="top"><span class="rn">07</span><span class="tag">Prática</span></div>
-          <h4>Vazou. E agora?</h4>
-          <p class="dek">O que fazer nas primeiras horas, o que a LGPD te garante como direito, e como a clínica ou o comércio se protege de responsabilidade.</p></a>
-        <div class="meta"><span>8 min</span><span>·</span><button class="mark">[ marcar lido ]</button></div>
+      <article class="room soon" data-id="s6" data-mod="1"><span class="dot"></span>
+        <a class="card" href="/textos/link-e-url.html"><div class="top"><span class="rn">06</span><span class="tag">O cadeado</span></div>
+          <h4>O endereço que você não lê</h4>
+          <p class="dek">Todo dia você clica em links sem olhar pra onde vão. Ler um endereço é o que separa quem cai de quem desvia.</p></a>
+        <div class="meta"><span>5 min</span><span>·</span><span class="soon-tag">em breve</span><button class="mark">[ marcar lido ]</button></div>
+      </article>
+
+      <article class="room soon" data-id="s7" data-mod="1"><span class="dot"></span>
+        <a class="card" href="/textos/https-cadeado.html"><div class="top"><span class="rn">07</span><span class="tag">O cadeado</span></div>
+          <h4>O cadeado promete menos do que você pensa</h4>
+          <p class="dek">Aquele cadeadinho do lado do endereço. Quase todo mundo confia, e quase ninguém sabe o que ele garante.</p></a>
+        <div class="meta"><span>5 min</span><span>·</span><span class="soon-tag">em breve</span><button class="mark">[ marcar lido ]</button></div>
+      </article>
+
+      <article class="room soon" data-id="s8" data-mod="1"><span class="dot"></span>
+        <a class="card" href="/textos/wifi-casa-e-publico.html"><div class="top"><span class="rn">08</span><span class="tag">O terreno</span></div>
+          <h4>Wifi de casa e wifi da praça</h4>
+          <p class="dek">O wifi de graça do café parece só uma conveniência. Ele é também o lugar mais fácil pra alguém te observar.</p></a>
+        <div class="meta"><span>5 min</span><span>·</span><span class="soon-tag">em breve</span><button class="mark">[ marcar lido ]</button></div>
+      </article>
+
+      <article class="room soon" data-id="s9" data-mod="1"><span class="dot"></span>
+        <a class="card" href="/textos/vpn.html"><div class="top"><span class="rn">09</span><span class="tag">O cadeado</span></div>
+          <h4>O que a VPN esconde, e o que ela não esconde</h4>
+          <p class="dek">A ferramenta mais vendida no susto do wifi público. Ela ajuda de verdade, e promete bem mais do que cumpre.</p></a>
+        <div class="meta"><span>5 min</span><span>·</span><span class="soon-tag">em breve</span><button class="mark">[ marcar lido ]</button></div>
       </article>
     </div>
   </section>
@@ -364,25 +388,42 @@
     scrollTo({top:0,behavior:'smooth'});
   }));
 
+  /* progresso da trilha. A chave e o formato ({s1:true,...}) são os mesmos
+     que a página da sala usa pra se marcar concluída: um booleano por data-id. */
   const KEY='textos.trilha.v1';
   let lidos={};try{lidos=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){lidos={}}
   const rooms=[...document.querySelectorAll('.room')];
+  const modules=[...document.querySelectorAll('.module[data-mod]')];
   function render(){
-    let tot=0,m={1:0,2:0},mn={1:0,2:0};
+    let tot=0;const m={},mn={};
     rooms.forEach(r=>{
-      const id=r.dataset.id,mod=r.dataset.mod,on=!!lidos[id];
+      const id=r.dataset.id,mod=r.dataset.mod,on=!!lidos[id],soon=r.classList.contains('soon');
       r.classList.toggle('done',on);
+      /* sala em breve: o link existe no HTML (pra publicar é só tirar a classe),
+         mas não abre nem entra no tab */
+      const card=r.querySelector('.card');
+      if(soon){card.setAttribute('aria-disabled','true');card.tabIndex=-1}
       r.querySelector('.mark').textContent=on?'[ lido ✓ ]':'[ marcar lido ]';
-      mn[mod]++;if(on){tot++;m[mod]++}
+      mn[mod]=(mn[mod]||0)+1;if(on){tot++;m[mod]=(m[mod]||0)+1}
     });
-    document.getElementById('mfill1').style.width=(m[1]/mn[1]*100)+'%';
-    document.getElementById('mfill2').style.width=(m[2]/mn[2]*100)+'%';
-    document.querySelector('#trilhacount b').textContent=tot;
+    /* uma barra por módulo, quantos existirem na página */
+    modules.forEach(md=>{
+      const k=md.dataset.mod,fill=md.querySelector('.modbar i');
+      if(fill)fill.style.width=((m[k]||0)/(mn[k]||1)*100)+'%';
+    });
+    const c=document.getElementById('trilhacount');
+    c.querySelector('b').textContent=tot;
+    c.querySelector('span').textContent=rooms.length;
   }
-  rooms.forEach(r=>r.querySelector('.mark').addEventListener('click',ev=>{
-    ev.preventDefault();const id=r.dataset.id;lidos[id]=!lidos[id];
-    try{localStorage.setItem(KEY,JSON.stringify(lidos))}catch(e){}render();
-  }));
+  rooms.forEach(r=>{
+    r.querySelector('.mark').addEventListener('click',ev=>{
+      ev.preventDefault();const id=r.dataset.id;lidos[id]=!lidos[id];
+      try{localStorage.setItem(KEY,JSON.stringify(lidos))}catch(e){}render();
+    });
+    r.querySelector('.card').addEventListener('click',ev=>{
+      if(r.classList.contains('soon'))ev.preventDefault();
+    });
+  });
   render();
 </script>
 <script>
