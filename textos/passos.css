@@ -27,8 +27,11 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{height:100%}
+/* a tela é travada na altura da janela: topo e rodapé ficam sempre à
+   vista, e só o palco rola por dentro quando um passo é mais alto que
+   o espaço. Sem isso, o body crescia e empurrava o avançar pra fora. */
 body{
-  min-height:100vh;min-height:100dvh;
+  height:100vh;height:100dvh;overflow:hidden;
   display:flex;flex-direction:column;
   background:var(--chumbo-profundo);color:var(--texto-claro);
   font-family:'Inter',sans-serif;font-size:1.1rem;line-height:1.6;
@@ -55,7 +58,8 @@ button{font:inherit;color:inherit}
 .contagem{flex:none;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--texto-dim);letter-spacing:.04em;min-width:3.4em;text-align:right}
 
 /* ---------- palco: o passo ativo ---------- */
-.palco{flex:1 1 auto;display:flex;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch}
+/* min-height:0 deixa o palco encolher dentro do flex e rolar de verdade */
+.palco{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch}
 /* sem JS, os passos aparecem todos empilhados: a sala ainda se lê */
 .passo{padding:1.4rem 1.2rem}
 .js .passo{display:none}
@@ -191,9 +195,11 @@ body.concluida .estrela{opacity:1;text-shadow:0 0 14px rgba(244,213,74,.75),0 0 
 @media (min-width:720px){
   body{font-size:1.125rem}
   .topo{padding:1rem 1.6rem 1rem 1rem}
-  .palco{justify-content:center;align-items:center;padding:2rem 1.5rem}
+  .palco{align-items:center;padding:2rem 1.5rem}
+  /* margin:auto centraliza o cartão quando cabe e deixa rolar quando não cabe
+     (justify-content:center cortaria o topo de um cartão mais alto que o palco) */
   .js .passo.ativo{
-    flex:none;max-width:var(--leitura);
+    flex:none;margin:auto 0;max-width:var(--leitura);
     background:var(--chumbo-elevado);border:1px solid var(--chumbo-carvao);border-radius:14px;
     padding:2.6rem 2.8rem;
   }
