@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Criptografia, o cadeado da mensagem | fab[IA]na</title>
+<meta name="description" content="A palavra que mais assusta nesta trilha guarda a ideia mais simples: um cadeado.">
+<link rel="canonical" href="https://www.fabianamoratelli.com.br/textos/criptografia.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Criptografia, o cadeado da mensagem">
+<meta property="og:description" content="A palavra que mais assusta nesta trilha guarda a ideia mais simples: um cadeado.">
+<meta property="og:url" content="https://www.fabianamoratelli.com.br/textos/criptografia.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,0..100;1,9..144,300..600,0..100&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/textos/passos.css">
+<script src="/textos/passos.js" defer></script>
+</head>
+<!--
+  SALA 4 DA TRILHA. Bloco 1, o terreno. 13 passos.
+  Montada a partir do _passos.html. Usa entrada, texto, pergunta, revelar, tarefa, vitória.
+  data-sala="s4" casa com o data-id da sala na HUB (/textos/index.html).
+-->
+<body data-sala="s4">
+
+<header class="topo">
+  <a class="sair" href="/textos/" aria-label="sair da sala e voltar pra trilha">×</a>
+  <div class="barra" role="progressbar" aria-label="progresso da sala" aria-valuemin="1" aria-valuemax="13" aria-valuenow="1"><i></i></div>
+  <span class="contagem" aria-hidden="true"></span>
+</header>
+
+<main class="palco">
+
+  <!-- 1 -->
+  <section class="passo" data-tipo="entrada">
+    <div class="mono">// trilha · bloco 1 · sala 4</div>
+    <h1>Criptografia, o cadeado da mensagem</h1>
+    <p class="dek">A palavra que mais assusta nesta trilha guarda a ideia mais simples: um cadeado.</p>
+    <div class="meta">5 min · nível começando · o terreno</div>
+  </section>
+
+  <!-- 2 -->
+  <section class="passo" data-tipo="texto">
+    <p>Nas salas anteriores, você viu que as suas coisas viajam por computadores dos outros e ficam guardadas no computador dos outros. Aí bate a pergunta certa: se está tudo passando pela mão de estranhos, o que impede um deles de simplesmente ler tudo pelo caminho?</p>
+  </section>
+
+  <!-- 3 -->
+  <section class="passo" data-tipo="texto">
+    <p>A resposta é uma palavra que assusta à toa: criptografia. É uma palavra grande e esquisita, e por baixo dela tem um cadeado. Só isso.</p>
+  </section>
+
+  <!-- 4 -->
+  <section class="passo" data-tipo="texto">
+    <p>Criptografia é embaralhar. Você escreve "oi, tudo bem?", e antes de a mensagem sair ela vira uma sopa de letra sem sentido, tipo "x9#kzP2". Só quem tem a chave certa consegue desembaralhar de volta. Pra qualquer outro, é um amontoado ilegível.</p>
+  </section>
+
+  <!-- 5 -->
+  <section class="passo" data-tipo="texto">
+    <p>É por isso que o WhatsApp mostra que as conversas têm "criptografia de ponta a ponta": a sua mensagem viaja embaralhada, e só desembaralha na ponta, no telefone de quem recebe.</p>
+  </section>
+
+  <!-- 6 -->
+  <section class="passo" data-tipo="pergunta">
+    <p class="q">Criptografar uma mensagem é...</p>
+    <div class="opts">
+      <button class="opt" data-correct="0"><span class="k">A</span>Apagar ela depois de enviada.</button>
+      <button class="opt" data-correct="1"><span class="k">B</span>Embaralhar ela pra que só quem tem a chave leia.</button>
+    </div>
+    <div class="exp" data-quando="certo">Isso. É um cadeado: embaralha, e só a chave certa abre.</div>
+    <div class="exp" data-quando="errado">Não é apagar. É embaralhar, pra que estranho no caminho não consiga ler.</div>
+  </section>
+
+  <!-- 7 -->
+  <section class="passo" data-tipo="texto">
+    <p>E aqui está a parte que quase todo mundo entende errado. Esse cadeado protege a sua mensagem enquanto ela viaja pela estrada, passando pelos computadores dos outros. Ele não protege quando ela chega. No telefone de quem recebe, a mensagem abre, fica ali legível, e essa pessoa pode ler, tirar print, encaminhar. A criptografia tranca a estrada. Ela não tranca o destino.</p>
+  </section>
+
+  <!-- 8 -->
+  <section class="passo" data-tipo="texto">
+    <p>E tem um limite honesto que vale saber: nem a criptografia é um cofre absoluto. Em investigação criminal, a polícia pode conseguir uma ordem da Justiça e obrigar a empresa a entregar o que ela tem.</p>
+  </section>
+
+  <!-- 9 -->
+  <section class="passo" data-tipo="texto">
+    <p>Em ataques mais sofisticados, o criminoso não tenta quebrar o cadeado, que é durão. Ele contorna: invade o celular já aberto, engana você pra entregar a senha, ou pega a mensagem depois que ela chegou. Na prática, quase todo vazamento acontece por uma porta lateral destrancada, não pelo cadeado sendo arrombado.</p>
+  </section>
+
+  <!-- 10 -->
+  <section class="passo" data-tipo="revelar">
+    <p class="q">Abra uma conversa no WhatsApp e procure o aviso, lá no começo dela, dizendo que as mensagens são protegidas com criptografia de ponta a ponta. Protegidas de quem, exatamente?</p>
+    <button class="btn secundario" data-reveal>ver a resposta ›</button>
+    <div class="body"><p>De estranhos no meio do caminho. O WhatsApp, e as empresas e computadores por onde a mensagem passa, não conseguem ler, porque pra eles é sopa de letra. O que esse aviso não diz é que a pessoa pra quem você mandou recebe a mensagem aberta, e pode fazer o que quiser com ela.</p></div>
+  </section>
+
+  <!-- 11 -->
+  <section class="passo" data-tipo="tarefa">
+    <p>Confira se o seu celular tem uma tranca pra abrir: uma senha, um PIN, a digital ou o rosto. (Procure nos ajustes por 'tela de bloqueio' ou 'segurança'.) Toda a proteção que a gente viu, a criptografia da mensagem e a senha da nuvem, só vale se ninguém conseguir pegar o seu telefone já aberto.</p>
+    <button class="btn secundario" data-feito>Meu celular tem tranca pra abrir.</button>
+  </section>
+
+  <!-- 12 -->
+  <section class="passo" data-tipo="pergunta">
+    <p class="q">Você manda uma mensagem no WhatsApp, que tem criptografia de ponta a ponta. Quem consegue ler o que você escreveu?</p>
+    <div class="opts">
+      <button class="opt" data-correct="0">Qualquer empresa por onde a mensagem passa no caminho.</button>
+      <button class="opt" data-correct="1">Só você e a pessoa que recebe, e essa pessoa pode printar e repassar à vontade.</button>
+      <button class="opt" data-correct="0">Ninguém consegue ler, nem quem recebe.</button>
+      <button class="opt" data-correct="0">Só você.</button>
+    </div>
+    <div class="exp">A criptografia esconde a mensagem dos estranhos no meio do caminho. Na ponta, ela abre. E quem recebe fica com uma cópia que você não controla.</div>
+  </section>
+
+  <!-- 13 -->
+  <section class="passo" data-tipo="vitoria">
+    <span class="estrela" aria-hidden="true">✦</span>
+    <h2>Mais uma luz. O cadeado não te assusta mais.</h2>
+    <p class="fica">// criptografia tranca a estrada, não o destino</p>
+  </section>
+
+</main>
+
+<footer class="rodape">
+  <div class="in">
+    <button class="voltar" data-voltar hidden>‹ voltar um passo</button>
+    <button class="btn primario" data-avancar>começar</button>
+    <div class="fim" hidden>
+      <a class="btn primario" data-proxima href="/textos/aparelhos-que-escutam.html"><span>próxima sala: A sua TV também te assiste</span><span class="tag">›</span></a>
+      <a class="btn secundario" href="/textos/">voltar pra trilha</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
