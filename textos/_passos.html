@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>{{TITULO}} | fab[IA]na</title>
+<meta name="description" content="{{DEK}}">
+<link rel="canonical" href="https://www.fabianamoratelli.com.br/textos/{{SLUG}}.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="{{TITULO}}">
+<meta property="og:description" content="{{DEK}}">
+<meta property="og:url" content="https://www.fabianamoratelli.com.br/textos/{{SLUG}}.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,0..100;1,9..144,300..600,0..100&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/textos/passos.css">
+<script src="/textos/passos.js" defer></script>
+</head>
+<!--
+  MOLDE DE SALA EM PASSOS, UM POR TELA.
+
+  Como usar: copie este arquivo pra /textos/<slug>.html, troque os
+  {{MARCADORES}} e escreva os passos. Cada <section class="passo"
+  data-tipo="..."> é uma tela. A ordem no arquivo é a ordem da sala.
+  O motor (passos.js) conta os passos e cuida do resto: barra, botão
+  de avançar, travas, conclusão. Montar sala nova não mexe no motor.
+
+  {{ID}} no <body data-sala> é a identidade da sala: s1, s2, ... s9.
+  Tem que ser o MESMO data-id da sala na HUB (/textos/index.html).
+
+  Tipos de passo (um exemplo de cada abaixo):
+    entrada    título, dek, meta. O botão de baixo vira "começar".
+    texto      só prosa. Uma ideia por tela; dois parágrafos no máximo.
+    pergunta   opções tocáveis, resposta na hora. data-correct="1" na
+               certa. Explicação em .exp: uma só, ou uma por caso com
+               data-quando="certo" / "errado". Trava o avançar até responder.
+    revelar    a dúvida em .q, botão data-reveal, resposta em .body.
+               Trava o avançar até abrir.
+    tarefa     faça agora: prosa + botão data-feito. Não trava.
+    decisao    e aí, o que você faz: .opt[data-opt] casa com .outcome[data-out].
+               Trava até escolher.
+    golpe      ache o golpe: mesma marcação do molde antigo. Trava até
+               achar todos os sinais.
+    vitoria    tela final. Só uma, e por último. Chegar nela grava a
+               conclusão em textos.trilha.v1 e acende a estrela. Os dois
+               botões de saída ficam no rodapé (.fim).
+
+  data-rotulo="..." num passo troca o texto do botão de avançar só ali.
+
+  Os exemplos de decisão e golpe são o rascunho do molde antigo, pra
+  poder abrir e testar. Sala que não usa um tipo simplesmente não tem
+  aquele passo.
+-->
+<body data-sala="{{ID}}">
+
+<header class="topo">
+  <a class="sair" href="/textos/" aria-label="sair da sala e voltar pra trilha">×</a>
+  <div class="barra" role="progressbar" aria-label="progresso da sala" aria-valuemin="1" aria-valuemax="1" aria-valuenow="1"><i></i></div>
+  <span class="contagem" aria-hidden="true"></span>
+</header>
+
+<main class="palco">
+
+  <section class="passo" data-tipo="entrada">
+    <div class="mono">// {{CONTEXTO}}</div>
+    <h1>{{TITULO}}</h1>
+    <p class="dek">{{DEK}}</p>
+    <div class="meta">{{TEMPO}} · nível {{NIVEL}} · {{MODULO}}</div>
+  </section>
+
+  <section class="passo" data-tipo="texto">
+    <p>{{TEXTO}}</p>
+  </section>
+
+  <section class="passo" data-tipo="pergunta">
+    <p class="q">Você usa uma IA gratuita e cola um dado sensível. O que é mais provável?</p>
+    <div class="opts">
+      <button class="opt" data-correct="0">Some quando você fecha a aba.</button>
+      <button class="opt" data-correct="0">Fica só no seu computador.</button>
+      <button class="opt" data-correct="1">Pode ser guardado e usado pela empresa.</button>
+    </div>
+    <div class="exp" data-quando="certo">Isso. O texto viaja pro servidor da empresa no instante em que você envia.</div>
+    <div class="exp" data-quando="errado">Parece que some, mas não. O texto viaja pro servidor da empresa no instante em que você envia.</div>
+  </section>
+
+  <section class="passo" data-tipo="revelar">
+    <p class="q">"Mas eu abri em aba anônima, não conta?"</p>
+    <button class="btn secundario" data-reveal>ver a resposta ›</button>
+    <div class="body"><p>Não. A aba anônima esconde do seu navegador e de quem usa o mesmo computador. Não esconde da empresa que recebe o seu texto do outro lado.</p></div>
+  </section>
+
+  <section class="passo" data-tipo="tarefa">
+    <p>{{CHAMADA_DA_TAREFA}}</p>
+    <button class="btn secundario" data-feito>{{ROTULO_DO_FIZ}}</button>
+  </section>
+
+  <section class="passo" data-tipo="decisao">
+    <p class="q">Você precisa resumir um contrato de um cliente. E aí, o que você faz?</p>
+    <div class="opts">
+      <button class="opt" data-opt="a"><span class="k">A</span>Colo o contrato inteiro, com nome e CPF, e peço o resumo.</button>
+      <button class="opt" data-opt="b"><span class="k">B</span>Tiro nome, CPF e valores, colo só as cláusulas, num chat temporário.</button>
+      <button class="opt" data-opt="c"><span class="k">C</span>Não uso IA pra isso, faço na mão.</button>
+    </div>
+    <div class="outcome bad" data-out="a"><b>Rápido, e arriscado.</b> Você expôs o dado de um terceiro numa base que não é sua.</div>
+    <div class="outcome good" data-out="b"><b>Esse é o caminho.</b> Você tem o resumo e ninguém consegue identificar o cliente.</div>
+    <div class="outcome" data-out="c"><b>Seguro, mas caro.</b> Nada de errado em fazer na mão, mas dá pra usar IA sem ser tudo ou nada.</div>
+  </section>
+
+  <section class="passo" data-tipo="golpe">
+    <p class="q">Toque em cada trecho que parece golpe.</p>
+    <div class="golpe" data-golpe>
+      <div class="phone">
+        <div class="bar">
+          <div class="av"></div>
+          <div>
+            <div class="who">Marcelo (chefe?)</div>
+            <div class="num">+55 41 99xxx-xxxx</div>
+          </div>
+        </div>
+        <div class="chat">
+          <div class="bubble">
+            Oi! Tudo bem? <button class="flag" data-sinal="num">Troquei de celular, salva esse número novo aqui.</button> Estou em reunião e não posso atender agora. <button class="flag" data-sinal="urg">Preciso que você pague um boleto urgente ainda hoje pra fechar um contrato.</button> <button class="flag" data-sinal="sig">Não comenta com ninguém por enquanto, é sigiloso.</button> Faz o pagamento por aqui ó: <button class="flag" data-sinal="link">pix-pagamento-seguro.xyz</button>
+            <div class="time">14:52</div>
+          </div>
+        </div>
+      </div>
+      <div class="counter">sinais encontrados: <b data-golpe-n>0</b> / <span data-golpe-total>0</span></div>
+      <div class="track"><i></i></div>
+      <div class="finds"></div>
+      <div class="sinais">
+        <div data-sinal-id="num" data-sinal-titulo="Número desconhecido">"Troquei de celular" é a desculpa mais usada pra justificar um número que não é o da pessoa.</div>
+        <div data-sinal-id="urg" data-sinal-titulo="Pressa fabricada">"Urgente", "ainda hoje", "agora". A pressa serve pra você agir sem pensar.</div>
+        <div data-sinal-id="sig" data-sinal-titulo="Pedido de sigilo">"Não comenta com ninguém" existe pra te impedir de confirmar com alguém que perceberia o golpe.</div>
+        <div data-sinal-id="link" data-sinal-titulo="Link fora do canal oficial">Domínio estranho que imita pagamento seguro. Pagamento de verdade não chega por link solto no WhatsApp.</div>
+      </div>
+      <div class="done">
+        <div class="mono">// achou todos</div>
+        Nenhum sinal sozinho prova golpe. Juntos, gritam.
+      </div>
+      <button class="reset" data-golpe-reset>recomeçar</button>
+    </div>
+  </section>
+
+  <section class="passo" data-tipo="vitoria">
+    <span class="estrela" aria-hidden="true">✦</span>
+    <h2>{{TITULO_DA_VITORIA}}</h2>
+    <p class="fica">// {{FRASE_QUE_FICA}}</p>
+  </section>
+
+</main>
+
+<footer class="rodape">
+  <div class="in">
+    <button class="voltar" data-voltar hidden>‹ voltar um passo</button>
+    <button class="btn primario" data-avancar>avançar</button>
+    <div class="fim" hidden>
+      <a class="btn primario" data-proxima href="{{PROXIMA_URL}}"><span>próxima sala: {{PROXIMA_TITULO}}</span><span class="tag">›</span></a>
+      <a class="btn secundario" href="/textos/">voltar pra trilha</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

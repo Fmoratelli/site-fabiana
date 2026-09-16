@@ -1,0 +1,209 @@
+/* ============================================================
+   passos.css  ·  sala da trilha em passos, um por tela
+
+   Vanilla, zero dependência. Substitui o sala.css nas salas que
+   usam o molde _passos.html. Mesmos tokens do site.
+
+   Celular primeiro: a tela é topo (barra + sair), palco (o passo
+   ativo, centralizado, sem rolagem interna) e rodapé (o botão de
+   avançar, ao alcance do polegar). No desktop o passo vira um
+   cartão centralizado com largura de leitura; o rodapé continua
+   fixo embaixo, no mesmo lugar de sempre.
+
+   Nada aqui depende de hover. Hover só reforça borda; nunca
+   esconde ou revela informação.
+   ============================================================ */
+
+:root{
+  --chumbo-profundo:#1c1c1f;--chumbo-elevado:#26262a;--chumbo-carvao:#2f2f33;
+  --roxo-profundo:#642ba0;--roxo-vibrante:#ae30f2;
+  --agua-saturada:#49c6bc;--agua-suave:#9bd6d1;--amarelo:#f4d54a;
+  --texto-claro:#f0ede5;--texto-soft:rgba(240,237,229,.55);--texto-dim:rgba(240,237,229,.32);
+  --ease:cubic-bezier(.65,0,.35,1);
+  --erro:#e8734a;--ok:#49c6bc;
+  /* alvo mínimo de dedo */
+  --toque:56px;
+  --leitura:600px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{height:100%}
+body{
+  min-height:100vh;min-height:100dvh;
+  display:flex;flex-direction:column;
+  background:var(--chumbo-profundo);color:var(--texto-claro);
+  font-family:'Inter',sans-serif;font-size:1.1rem;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--roxo-profundo);color:var(--texto-claro)}
+a{color:inherit}
+button{font:inherit;color:inherit}
+.mono{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--texto-dim)}
+
+/* ---------- topo: sair + barra de progresso ---------- */
+.topo{
+  flex:none;display:flex;align-items:center;gap:.6rem;
+  padding:.6rem 1rem .6rem .4rem;
+  padding-top:calc(.6rem + env(safe-area-inset-top));
+}
+.sair{
+  flex:none;width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  color:var(--texto-soft);text-decoration:none;font-size:1.6rem;line-height:1;border-radius:8px;
+}
+.sair:hover,.sair:focus-visible{color:var(--texto-claro);outline:none;background:var(--chumbo-elevado)}
+.barra{flex:1;height:10px;background:var(--chumbo-carvao);border-radius:10px;overflow:hidden}
+.barra i{display:block;height:100%;width:0;border-radius:10px;background:linear-gradient(90deg,var(--roxo-profundo),var(--roxo-vibrante));transition:width .4s var(--ease)}
+.contagem{flex:none;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--texto-dim);letter-spacing:.04em;min-width:3.4em;text-align:right}
+
+/* ---------- palco: o passo ativo ---------- */
+.palco{flex:1 1 auto;display:flex;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch}
+/* sem JS, os passos aparecem todos empilhados: a sala ainda se lê */
+.passo{padding:1.4rem 1.2rem}
+.js .passo{display:none}
+.js .passo.ativo{
+  display:flex;flex-direction:column;justify-content:center;
+  flex:1 0 auto;width:100%;
+}
+.passo:focus{outline:none}
+.passo p{margin-bottom:1rem}
+.passo p:last-child{margin-bottom:0}
+.passo .q{font-weight:500;margin-bottom:1.1rem}
+
+/* entrada */
+.passo[data-tipo="entrada"] h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,7vw,2.8rem);line-height:1.1;font-variation-settings:'opsz' 120,'SOFT' 40;margin:.6rem 0 .9rem}
+.passo[data-tipo="entrada"] .dek{color:var(--texto-soft);font-size:1.15rem;line-height:1.5}
+.passo[data-tipo="entrada"] .meta{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--texto-dim);letter-spacing:.04em;margin-top:1.2rem}
+
+/* texto: só prosa, um pouco maior, respirando */
+.passo[data-tipo="texto"]{font-size:1.2rem;line-height:1.55}
+
+/* ---------- botões: alvo de dedo, sempre ---------- */
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:.4rem;
+  width:100%;min-height:var(--toque);padding:.8rem 1.2rem;
+  border-radius:10px;border:1px solid transparent;
+  font-weight:600;font-size:1.02rem;text-decoration:none;text-align:center;
+  cursor:pointer;transition:background-color .2s var(--ease),border-color .2s var(--ease),color .2s var(--ease),opacity .2s var(--ease);
+}
+.btn:focus-visible{outline:2px solid var(--agua-suave);outline-offset:3px}
+.btn.primario{background:var(--agua-saturada);color:var(--chumbo-profundo)}
+.btn.primario:hover{background:var(--agua-suave)}
+.btn.secundario{background:none;border-color:var(--chumbo-carvao);color:var(--texto-soft)}
+.btn.secundario:hover{border-color:var(--agua-suave);color:var(--texto-claro)}
+/* travado continua visível no mesmo lugar: a pessoa vê que existe, e vê que falta algo */
+.btn:disabled,.btn[aria-disabled="true"]{opacity:.35;cursor:default;pointer-events:none}
+.btn .tag{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;opacity:.75}
+
+/* ---------- pergunta (e o quiz) ---------- */
+.opts{display:flex;flex-direction:column;gap:.7rem}
+.opt{
+  display:block;width:100%;min-height:var(--toque);text-align:left;
+  background:var(--chumbo-elevado);border:1px solid var(--chumbo-carvao);border-radius:10px;
+  padding:.85rem 1rem;font-size:1rem;line-height:1.4;cursor:pointer;
+  transition:border-color .2s var(--ease),background-color .2s var(--ease);
+}
+.opt:hover{border-color:var(--agua-suave)}
+.opt:focus-visible{outline:2px solid var(--agua-suave);outline-offset:2px}
+.opt .k{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--texto-dim);margin-right:.6rem}
+.opt.right{border-color:var(--ok);background:rgba(73,198,188,.12)}
+.opt.wrong{border-color:var(--erro);background:rgba(232,115,74,.12)}
+.opt:disabled{cursor:default}
+.opt:disabled:not(.right):not(.wrong){opacity:.5}
+.exp{display:none;margin-top:1.1rem;padding:.9rem 1rem;border-left:2px solid var(--ok);background:rgba(73,198,188,.06);border-radius:0 8px 8px 0;font-size:.98rem;color:var(--texto-soft)}
+.exp.show{display:block}
+.exp.suave{border-color:var(--erro);background:rgba(232,115,74,.06)}
+.exp b{color:var(--texto-claro)}
+
+/* ---------- revelar ---------- */
+.passo[data-tipo="revelar"] .body{display:none;margin-top:1.1rem;padding:1rem 1.1rem;border-left:2px solid var(--agua-saturada);background:var(--chumbo-elevado);border-radius:0 8px 8px 0;color:var(--texto-soft)}
+.passo[data-tipo="revelar"].open .body{display:block}
+.passo[data-tipo="revelar"].open [data-reveal]{display:none}
+
+/* ---------- tarefa (faça agora) ---------- */
+.passo[data-tipo="tarefa"] [data-feito]{margin-top:1.2rem;border-color:var(--amarelo);color:var(--texto-claro)}
+.passo[data-tipo="tarefa"] [data-feito]:hover{background:rgba(244,213,74,.08)}
+.passo[data-tipo="tarefa"].done [data-feito]{background:var(--amarelo);border-color:var(--amarelo);color:var(--chumbo-profundo)}
+
+/* ---------- decisão (e aí, o que você faz?) ---------- */
+.outcome{font-size:.98rem;color:var(--texto-soft);border-left:2px solid var(--chumbo-carvao);padding:.6rem 0 .6rem 1rem;margin-top:1.1rem;display:none}
+.outcome.show{display:block}
+.outcome.good{border-color:var(--ok)}
+.outcome.bad{border-color:var(--erro)}
+.outcome b{color:var(--texto-claro)}
+.opt.picked{border-color:var(--agua-saturada)}
+
+/* ---------- ache o golpe ---------- */
+.golpe .phone{background:var(--chumbo-elevado);border:1px solid var(--chumbo-carvao);border-radius:14px;overflow:hidden}
+.golpe .bar{display:flex;align-items:center;gap:.7rem;padding:.8rem 1rem;border-bottom:1px solid var(--chumbo-carvao);background:#212125}
+.golpe .av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#642ba0,#49c6bc);flex:none}
+.golpe .who{font-size:.9rem;font-weight:600}
+.golpe .num{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--texto-dim)}
+.golpe .chat{padding:1.2rem 1rem 1.4rem}
+.golpe .bubble{background:#2b2b30;border-radius:2px 12px 12px 12px;padding:.8rem .9rem;font-size:.96rem;max-width:92%;line-height:1.55}
+.golpe .time{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--texto-dim);margin:.4rem 0 0 .3rem}
+/* o trecho suspeito é um botão inline; o pontilhado já diz que é tocável, sem hover */
+.golpe .flag{background:none;border:none;color:inherit;font:inherit;cursor:pointer;border-bottom:1.5px dotted var(--agua-suave);padding:0}
+.golpe .flag:focus-visible{outline:2px solid var(--agua-suave);outline-offset:2px}
+.golpe .flag.got{background:rgba(232,115,74,.16);color:#f2b79a;border-bottom:1.5px solid var(--erro);border-radius:2px;padding:0 2px}
+.golpe .counter{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--texto-dim);margin:1.1rem 0 .5rem;letter-spacing:.05em}
+.golpe .counter b{color:var(--agua-saturada);font-weight:500}
+.golpe .track{height:3px;background:var(--chumbo-carvao);border-radius:3px;overflow:hidden;margin-bottom:1rem}
+.golpe .track i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--agua-saturada),var(--roxo-vibrante));transition:width .4s var(--ease)}
+.golpe .finds{display:flex;flex-direction:column;gap:.6rem}
+.golpe .find{border-left:2px solid var(--erro);background:var(--chumbo-elevado);border-radius:3px;padding:.7rem .9rem;font-size:.9rem}
+.golpe .find b{color:#f2b79a;font-weight:600}
+.golpe .done{margin-top:1.1rem;border:1px solid var(--agua-saturada);border-radius:8px;padding:1rem;background:rgba(73,198,188,.08);font-size:.95rem;display:none}
+.golpe .done.show{display:block}
+.golpe .done .mono{color:var(--agua-saturada)}
+.golpe .reset{margin-top:1rem;min-height:44px;background:none;border:1px solid var(--chumbo-carvao);color:var(--texto-soft);font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.06em;padding:.5rem .9rem;border-radius:6px;cursor:pointer;text-transform:uppercase}
+.golpe .sinais{display:none}
+
+/* ---------- vitória ---------- */
+.passo[data-tipo="vitoria"]{text-align:center;align-items:center}
+.passo[data-tipo="vitoria"] h2{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(1.7rem,6vw,2.3rem);line-height:1.15;font-variation-settings:'opsz' 120,'SOFT' 40;margin:1.2rem 0 1rem}
+.passo[data-tipo="vitoria"] .fica{font-family:'JetBrains Mono',monospace;font-size:.92rem;color:var(--texto-soft);max-width:34ch}
+/* a estrela da Lu: apagada até a sala concluir, dourada e com brilho depois */
+.estrela{display:block;color:var(--amarelo);font-size:4.2rem;line-height:1;opacity:.35;transform-origin:center;transition:opacity .5s var(--ease),text-shadow .5s var(--ease)}
+body.concluida .estrela{opacity:1;text-shadow:0 0 14px rgba(244,213,74,.75),0 0 40px rgba(244,213,74,.4)}
+.estrela.ignite{animation:acende 1.1s var(--ease)}
+@keyframes acende{0%{transform:scale(.6)}45%{transform:scale(1.5)}70%{transform:scale(.95)}100%{transform:scale(1)}}
+
+/* ---------- rodapé: a próxima ação, sempre aqui ---------- */
+.rodape{
+  flex:none;border-top:1px solid rgba(240,237,229,.06);background:var(--chumbo-profundo);
+  padding:.9rem 1.2rem;padding-bottom:calc(.9rem + env(safe-area-inset-bottom));
+}
+.rodape .in{display:flex;flex-direction:column;gap:.6rem}
+.fim{display:flex;flex-direction:column;gap:.6rem}
+.rodape [hidden]{display:none}
+.voltar{
+  align-self:flex-start;min-height:44px;padding:0 .4rem;background:none;border:none;
+  font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.06em;color:var(--texto-dim);cursor:pointer;
+}
+.voltar:hover,.voltar:focus-visible{color:var(--texto-claro);outline:none}
+
+/* ---------- transição entre telas ---------- */
+.passo.entra{animation:entra .32s var(--ease)}
+.passo.entra-volta{animation:entra-volta .32s var(--ease)}
+@keyframes entra{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+@keyframes entra-volta{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
+
+/* ---------- desktop: o passo vira cartão, o rodapé fica onde está ---------- */
+@media (min-width:720px){
+  body{font-size:1.125rem}
+  .topo{padding:1rem 1.6rem 1rem 1rem}
+  .palco{justify-content:center;align-items:center;padding:2rem 1.5rem}
+  .js .passo.ativo{
+    flex:none;max-width:var(--leitura);
+    background:var(--chumbo-elevado);border:1px solid var(--chumbo-carvao);border-radius:14px;
+    padding:2.6rem 2.8rem;
+  }
+  .passo[data-tipo="texto"]{font-size:1.28rem}
+  .opt,.passo[data-tipo="revelar"] .body,.golpe .phone{background:var(--chumbo-profundo)}
+  .rodape .in{max-width:var(--leitura);margin:0 auto;width:100%}
+}
+
+/* ---------- quem prefere menos movimento ---------- */
+@media (prefers-reduced-motion:reduce){
+  .passo.entra,.passo.entra-volta,.estrela.ignite{animation:none}
+  .barra i,.golpe .track i,.estrela{transition:none}
+}
