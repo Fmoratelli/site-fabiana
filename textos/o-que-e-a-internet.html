@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex">
 <title>O que é a internet, versão 2027 | fab[IA]na</title>
 <meta name="description" content="Uma coisa que você usa o tempo todo, e que nunca ninguém te explicou.">
@@ -15,88 +15,113 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,0..100;1,9..144,300..600,0..100&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/textos/sala.css">
-<script src="/textos/sala.js" defer></script>
+<link rel="stylesheet" href="/textos/passos.css">
+<script src="/textos/passos.js" defer></script>
 </head>
 <!--
-  SALA 1 DA TRILHA. Bloco 1, o terreno.
-  Montada a partir do _sala.html. Usa só revelar, faça agora e quiz.
+  SALA 1 DA TRILHA. Bloco 1, o terreno. 11 passos.
+  Montada a partir do _passos.html. Usa entrada, texto, pergunta,
+  revelar, tarefa e vitória.
   data-sala="s1" casa com o data-id da sala na HUB (/textos/index.html).
 -->
 <body data-sala="s1">
-<div id="progress"></div>
 
-<nav aria-label="Navegação principal">
-  <a class="wordmark" href="/"><picture><source srcset="/assets/wordmark.webp" type="image/webp"><img src="/assets/wordmark.png" alt="fab[IA]na" onerror="this.style.display='none';this.parentElement.nextElementSibling.style.display='inline'"></picture><span class="wm-fallback" style="display:none">fab<span>[IA]</span>na</span></a>
-  <ul>
-    <li><a href="/#trabalho">Trabalho</a></li>
-    <li><a href="/#demo">Demo</a></li>
-    <li><a href="/#processo">Processo</a></li>
-    <li><a href="/#sobre">Sobre</a></li>
-    <li><a class="here" href="/textos/">Textos</a></li>
-    <li><a href="/#conversar">Conversar</a></li>
-  </ul>
-  <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
-</nav>
+<header class="topo">
+  <a class="sair" href="/textos/" aria-label="sair da sala e voltar pra trilha">×</a>
+  <div class="barra" role="progressbar" aria-label="progresso da sala" aria-valuemin="1" aria-valuemax="11" aria-valuenow="1"><i></i></div>
+  <span class="contagem" aria-hidden="true"></span>
+</header>
 
-<div class="wrap">
+<main class="palco">
 
-  <a class="back" href="/textos/">‹ voltar pra Textos</a>
-  <div class="mono">// trilha · bloco 1 · sala 1</div>
-  <h1>O que é a internet, versão 2027</h1>
-  <p class="dek">Uma coisa que você usa o tempo todo, e que nunca ninguém te explicou.</p>
-  <div class="meta">5 min · nível começando · o terreno</div>
+  <!-- 1 -->
+  <section class="passo" data-tipo="entrada">
+    <div class="mono">// trilha · bloco 1 · sala 1</div>
+    <h1>O que é a internet, versão 2027</h1>
+    <p class="dek">uma coisa que você usa o tempo todo, e que nunca ninguém te explicou.</p>
+    <div class="meta">5 min · nível começando · o terreno</div>
+  </section>
 
-  <!-- ============ ABERTURA ============ -->
-  <span class="seclabel first">// abertura</span>
-  <p>Você usa a internet todo dia. Manda mensagem, vê vídeo, paga conta, resolve trabalho. Mas provavelmente ninguém nunca sentou pra te explicar o que ela é de fato.</p>
-  <p>Isso não é um buraco seu. Durante anos, quem dominava tecnologia se explicou mal, cheio de jargão e inglês, e boa parte da gente ficou usando sem entender. O que faltou foi tradução.</p>
-  <p>É isso que a gente faz aqui, um assunto por vez, sem palavra difícil e sem mistério. Hoje: o que é, de verdade, essa tal de internet.</p>
+  <!-- 2 -->
+  <section class="passo" data-tipo="texto">
+    <p>Você usa a internet todo dia. Manda mensagem, vê vídeo, paga conta, resolve trabalho. Mas provavelmente ninguém nunca sentou pra te explicar o que ela é.</p>
+  </section>
 
-  <!-- ============ SACADA ============ -->
-  <span class="seclabel">// sacada</span>
-  <p>A internet não é mágica, e não está "no ar". Ela é feita de coisa que dá pra tocar.</p>
-  <p>No fundo, a internet é um monte de computador conversando entre si. Eles se falam por fios e antenas. Boa parte desses fios são cabos grossos que passam no fundo do mar, ligando um país ao outro. É físico e real.</p>
-  <p>Quando você manda um "oi" no WhatsApp, esse "oi" não fica dentro do seu telefone. Ele sai, viaja por esses computadores e cabos, e chega no telefone da outra pessoa.</p>
-  <p>E tem uma parte importante: o seu "oi" não some quando chega. Uma cópia dele pode ficar guardada em algum computador do caminho.</p>
+  <!-- 3 -->
+  <section class="passo" data-tipo="texto">
+    <p>Se você nunca entendeu direito, a culpa não é sua. Durante anos, a tecnologia se explicou mal, cheia de palavra difícil e inglês. O que faltou foi tradução. É isso que a gente faz aqui.</p>
+  </section>
 
-  <!-- PEÇA: revelar. -->
-  <div class="reveal">
-    <button data-reveal>"Mas e a pessoa está bem do meu lado, a mensagem não vai direto?" ›</button>
-    <div class="body"><p>Mesmo com a pessoa do seu lado, a sua mensagem pode viajar centenas de quilômetros. Ela sobe até o computador de uma empresa, às vezes em outra cidade ou outro país, e volta. Tudo isso em menos de um segundo. Ela nunca atravessou a mesa, ela deu a volta.</p></div>
-  </div>
+  <!-- 4 -->
+  <section class="passo" data-tipo="texto">
+    <p>A internet não é mágica, e não está no ar. Ela é feita de coisa que dá pra tocar.</p>
+  </section>
 
-  <!-- ============ FAÇA AGORA ============ -->
-  <span class="seclabel">// faça agora</span>
-  <p>Abra uma conversa de grupo que você tenha, dessas de família ou do trabalho. Olhe quantas pessoas estão ali dentro. Agora pense numa foto que alguém já mandou nesse grupo. Ela não está guardada em um lugar só: está uma vez dentro do telefone de cada pessoa do grupo. Se são doze pessoas, são doze cópias, em doze telefones diferentes. E se alguém repassou pra outro grupo, viram mais, em telefones que você nem conhece. Você mandou uma, viraram muitas, e não dá pra apagar nenhuma delas do telefone dos outros.</p>
+  <!-- 5 -->
+  <section class="passo" data-tipo="texto">
+    <p>No fundo, a internet é um monte de computador conversando entre si, por fios e antenas. Boa parte desses fios são cabos grossos no fundo do mar, ligando um país ao outro.</p>
+  </section>
 
-  <!-- PEÇA: faça agora. -->
-  <div class="task">
-    <button class="box" aria-label="marcar como feito">✓</button>
-    <div class="t">Olhei um grupo meu e contei as cópias.</div>
-  </div>
+  <!-- 6 -->
+  <section class="passo" data-tipo="pergunta">
+    <p class="q">A internet está mais pra qual dos dois?</p>
+    <div class="opts">
+      <button class="opt" data-correct="0"><span class="k">A</span>algo mágico, invisível, no ar</button>
+      <button class="opt" data-correct="1"><span class="k">B</span>computadores de verdade, ligados por cabo</button>
+    </div>
+    <div class="exp" data-quando="certo">Isso. Ela é física e real.</div>
+    <div class="exp" data-quando="errado">É o que parece, mas não. Ela é física.</div>
+  </section>
 
-  <!-- ============ CAI A FICHA ============ -->
-  <span class="seclabel">// cai a ficha</span>
+  <!-- 7 -->
+  <section class="passo" data-tipo="texto">
+    <p>Quando você manda um "oi" no WhatsApp, ele não fica no seu telefone. Ele viaja por esses computadores e cabos até o telefone da outra pessoa. E não some quando chega: uma cópia pode ficar guardada em algum computador do caminho.</p>
+  </section>
 
-  <!-- PEÇA: quiz. -->
-  <div class="quiz">
-    <div class="q">Quando você manda uma foto pela internet, o que mais provavelmente acontece com ela?</div>
-    <button class="opt" data-correct="0">Vai direto do seu telefone pro da pessoa, sem passar por lugar nenhum.</button>
-    <button class="opt" data-correct="0">Fica guardada só dentro do seu telefone.</button>
-    <button class="opt" data-correct="0">Some sozinha depois que a pessoa vê.</button>
-    <button class="opt" data-correct="1">Viaja por vários computadores no caminho, e vira várias cópias que ficam guardadas.</button>
+  <!-- 8 -->
+  <section class="passo" data-tipo="revelar">
+    <p class="q">E se a pessoa está bem do seu lado, a mensagem vai direto?</p>
+    <button class="btn secundario" data-reveal>ver a resposta ›</button>
+    <div class="body"><p>Não. Mesmo do seu lado, ela pode viajar centenas de quilômetros, subir pro computador de uma empresa em outra cidade, e voltar, em menos de um segundo. Ela nunca atravessou a mesa, deu a volta.</p></div>
+  </section>
+
+  <!-- 9 -->
+  <section class="passo" data-tipo="tarefa">
+    <p>Abra um grupo seu, de família ou trabalho. Conte quantas pessoas tem. Aquela foto que alguém mandou ali existe uma vez em cada telefone. Doze pessoas, doze cópias. Alguém repassou, viram mais.</p>
+    <button class="btn secundario" data-feito>fiz, contei as cópias</button>
+  </section>
+
+  <!-- 10 -->
+  <section class="passo" data-tipo="pergunta">
+    <p class="q">Quando você manda uma foto pela internet, o que mais provavelmente acontece com ela?</p>
+    <div class="opts">
+      <button class="opt" data-correct="0">vai direto do seu telefone pro da pessoa, sem passar por lugar nenhum</button>
+      <button class="opt" data-correct="0">fica guardada só dentro do seu telefone</button>
+      <button class="opt" data-correct="0">some sozinha depois que a pessoa vê</button>
+      <button class="opt" data-correct="1">viaja por vários computadores no caminho, e vira várias cópias que ficam guardadas</button>
+    </div>
     <div class="exp">Por isso "mandei e depois apaguei" não quer dizer que sumiu. Não existe uma cópia, existem várias, e você não alcança nenhuma delas. Guarda essa ideia, ela é a base de tudo o que a gente vai ver sobre privacidade e segurança.</div>
-  </div>
+  </section>
 
-  <!-- ============ FECHO ============ -->
-  <div class="fecho">
-    <span class="comment">// a internet é física, e o que você manda vira cópia espalhada</span>
-    <button class="concluir" data-concluir aria-pressed="false">✦ concluir sala</button>
-    <a class="next" href="/textos/o-que-e-um-dado.html">próxima sala: O que é um dado, e por que o seu vale tanto ›</a>
-    <span class="star">✦</span>
-  </div>
+  <!-- 11 -->
+  <section class="passo" data-tipo="vitoria">
+    <span class="estrela" aria-hidden="true">✦</span>
+    <h2>Você acendeu a primeira luz.</h2>
+    <p class="fica">// a internet é física, e o que você manda vira cópia espalhada.</p>
+  </section>
 
-</div>
+</main>
+
+<footer class="rodape">
+  <div class="in">
+    <button class="voltar" data-voltar hidden>‹ voltar um passo</button>
+    <button class="btn primario" data-avancar>começar</button>
+    <div class="fim" hidden>
+      <a class="btn primario" data-proxima href="/textos/o-que-e-um-dado.html"><span>próxima sala: o que é um dado</span><span class="tag">›</span></a>
+      <a class="btn secundario" href="/textos/">voltar pra trilha</a>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
