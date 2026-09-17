@@ -240,7 +240,7 @@
       <button data-tab="reflexoes">Reflexões</button>
       <button data-tab="estudos">Estudos</button>
     </div>
-    <div class="counter" id="trilhacount"><span class="cs" aria-hidden="true">✦</span><b>0</b> de <span>9</span> luzes acesas</div>
+    <div class="counter" id="trilhacount"><span class="cs" aria-hidden="true">✦</span><b>0</b> de <span class="total">9</span> luzes acesas</div>
   </div>
 
   <!-- ============ TRILHA ============ -->
@@ -491,7 +491,7 @@
     });
     const c=document.getElementById('trilhacount');
     c.querySelector('b').textContent=tot;
-    c.querySelector('span').textContent=rooms.length;
+    c.querySelector('.total').textContent=rooms.length; /* .total, não 'span': o primeiro span do contador é a estrela */
     c.classList.toggle('lit',tot>0);
 
     /* continuar ou bloco completo */
