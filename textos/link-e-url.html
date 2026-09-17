@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>O endereço que você não lê | fab[IA]na</title>
+<meta name="description" content="Todo dia você clica em links sem olhar pra onde vão. Ler um endereço é um dos gestos mais simples pra não cair em golpe.">
+<link rel="canonical" href="https://www.fabianamoratelli.com.br/textos/link-e-url.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="O endereço que você não lê">
+<meta property="og:description" content="Todo dia você clica em links sem olhar pra onde vão. Ler um endereço é um dos gestos mais simples pra não cair em golpe.">
+<meta property="og:url" content="https://www.fabianamoratelli.com.br/textos/link-e-url.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,0..100;1,9..144,300..600,0..100&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/textos/passos.css">
+<script src="/textos/passos.js" defer></script>
+<style>
+/* endereço em destaque: peça desta sala, fora do motor. Um bloco por URL,
+   mono, com ar em volta. No celular ele só quebra entre pedaços (nos <wbr>,
+   depois de ponto ou barra): cada pedaço (<i>) fica inteiro na linha.
+   <b> marca o pedaço que a pessoa precisa enxergar (a casa, ou o disfarce). */
+.url{display:block;font-family:'JetBrains Mono',monospace;font-size:1rem;line-height:1.5;letter-spacing:.01em;color:var(--texto-claro);background:var(--chumbo-elevado);border:1px solid var(--chumbo-carvao);border-left:2px solid var(--agua-saturada);border-radius:0 8px 8px 0;padding:.9rem 1rem;margin:1rem 0;overflow-wrap:anywhere}
+.url i,.url b{font-style:normal;white-space:nowrap}
+.url b{color:var(--agua-saturada);font-weight:500}
+.url .n{font-family:'Inter',sans-serif;font-size:.7rem;color:var(--texto-dim);margin-right:.6rem;vertical-align:.1em}
+.url + .url{margin-top:.6rem}
+code{font-family:'JetBrains Mono',monospace;font-size:.92em;color:var(--agua-suave);white-space:nowrap}
+@media (min-width:720px){.url{background:var(--chumbo-profundo)}}
+</style>
+</head>
+<!--
+  SALA 6 DA TRILHA. Bloco 1, o cadeado. 14 passos.
+  Montada a partir do _passos.html. Usa entrada, texto, pergunta, revelar, tarefa, vitória.
+  Os endereços de exemplo ficam cada um em bloco .url, na própria tela.
+  data-sala="s6" casa com o data-id da sala na HUB (/textos/index.html).
+-->
+<body data-sala="s6">
+
+<header class="topo">
+  <a class="sair" href="/textos/" aria-label="sair da sala e voltar pra trilha">×</a>
+  <div class="barra" role="progressbar" aria-label="progresso da sala" aria-valuemin="1" aria-valuemax="14" aria-valuenow="1"><i></i></div>
+  <span class="contagem" aria-hidden="true"></span>
+</header>
+
+<main class="palco">
+
+  <!-- 1 -->
+  <section class="passo" data-tipo="entrada">
+    <div class="mono">// trilha · bloco 1 · sala 6</div>
+    <h1>O endereço que você não lê</h1>
+    <p class="dek">Todo dia você clica em links sem olhar pra onde vão. Ler um endereço é um dos gestos mais simples pra não cair em golpe.</p>
+    <div class="meta">5 min · nível começando · o cadeado</div>
+  </section>
+
+  <!-- 2 -->
+  <section class="passo" data-tipo="texto">
+    <p>Você clica em dezenas de links por dia. Numa mensagem, num e-mail, num resultado de busca. Quase sempre sem olhar pra onde aquele link leva de verdade.</p>
+    <p>O endereço de um site tem um nome: URL. É aquele texto que começa com "www" e tem pontos no meio. Quase ninguém aprendeu a ler esse endereço, e ler ele é uma das coisas mais simples e mais protetoras que existem.</p>
+  </section>
+
+  <!-- 3 -->
+  <section class="passo" data-tipo="texto">
+    <p>Um link é um texto vestido. O que aparece pra você pode ser uma coisa, e o destino real, outra. O nome azul e sublinhado "Banco do Brasil" pode te levar pra qualquer lugar, porque o texto que você vê e o endereço pra onde ele aponta são duas coisas separadas.</p>
+  </section>
+
+  <!-- 4 -->
+  <section class="passo" data-tipo="texto">
+    <p>Por isso a parte que importa é o endereço de verdade, a URL. E dentro dela tem um pedaço que é o que mais interessa: o nome do site, logo antes da primeira barra.</p>
+  </section>
+
+  <!-- 5 -->
+  <section class="passo" data-tipo="texto">
+    <span class="url"><i>www.</i><wbr><b>seubanco.com.br</b><wbr><i>/login</i></span>
+    <p>O nome do site é <code>seubanco.com.br</code> (a casa). O <code>/login</code> depois da barra é só um cômodo dentro dela.</p>
+  </section>
+
+  <!-- 6 -->
+  <section class="passo" data-tipo="texto">
+    <p>Três formas comuns de disfarce. Trocar uma letra:</p>
+    <span class="url"><i>seuba<b>m</b>co.com.br</i></span>
+  </section>
+
+  <!-- 7 -->
+  <section class="passo" data-tipo="texto">
+    <p>Pendurar o nome verdadeiro como isca:</p>
+    <span class="url"><i>seubanco.com.br.</i><wbr><b>acesso-seguro.net</b></span>
+    <p>onde o nome real é <code>acesso-seguro.net</code>.</p>
+  </section>
+
+  <!-- 8 -->
+  <section class="passo" data-tipo="texto">
+    <p>Trocar o final:</p>
+    <span class="url"><i>seubanco<b>.net</b></i></span>
+    <span class="url"><i>seubanco<b>.info</b></i></span>
+  </section>
+
+  <!-- 9 -->
+  <section class="passo" data-tipo="texto">
+    <p>A regra que resolve quase tudo: o nome do site é o pedaço colado logo antes da primeira barra. Lê da barra pra trás e acha o nome verdadeiro.</p>
+  </section>
+
+  <!-- 10 -->
+  <section class="passo" data-tipo="pergunta">
+    <p class="q">No endereço</p>
+    <span class="url"><i>www.</i><wbr><i>lojaboa.com.br</i><wbr><i>/ofertas</i></span>
+    <p class="q">qual é o nome do site, a casa?</p>
+    <div class="opts">
+      <button class="opt" data-correct="0"><span class="k">A</span><code>ofertas</code></button>
+      <button class="opt" data-correct="1"><span class="k">B</span><code>lojaboa.com.br</code></button>
+    </div>
+    <div class="exp" data-quando="certo">Isso. O nome é o pedaço colado antes da primeira barra.</div>
+    <div class="exp" data-quando="errado">Quase. O nome é o que vem antes da primeira barra: <code>lojaboa.com.br</code>.</div>
+  </section>
+
+  <!-- 11 -->
+  <section class="passo" data-tipo="revelar">
+    <p class="q">Qual destes leva pro site verdadeiro do seu banco, e qual é golpe?</p>
+    <span class="url"><span class="n">1</span><i>www.</i><wbr><i>seubanco.com.br</i><wbr><i>/cartoes</i></span>
+    <span class="url"><span class="n">2</span><i>www.</i><wbr><i>seubanco.com.br.</i><wbr><i>premios-cliente.net</i><wbr><i>/resgate</i></span>
+    <button class="btn secundario" data-reveal>ver a resposta ›</button>
+    <div class="body"><p>O primeiro é a casa de verdade: o nome, logo antes da primeira barra, é <code>seubanco.com.br</code>. O <code>/cartoes</code> é só um cômodo lá dentro. No segundo, lê da barra pra trás: o nome colado antes da primeira barra é <code>premios-cliente.net</code>, um site estranho. O <code>seubanco.com.br</code> ali na frente é isca pendurada pra te dar confiança. O segundo é golpe.</p></div>
+  </section>
+
+  <!-- 12 -->
+  <section class="passo" data-tipo="tarefa">
+    <p>No computador, sem clicar, passe o mouse por cima de um link e olhe no cantinho de baixo da tela: aparece o endereço real pra onde ele leva. No celular, segure o dedo no link sem soltar, e uma janelinha mostra o endereço antes de você entrar. Faça isso uma vez, com um link qualquer, e veja se o texto do link e o endereço real são a mesma coisa.</p>
+    <button class="btn secundario" data-feito>Fiz e vi o endereço real.</button>
+  </section>
+
+  <!-- 13 -->
+  <section class="passo" data-tipo="pergunta">
+    <p class="q">Você recebe um link escrito</p>
+    <span class="url"><i>www.</i><wbr><i>seubanco.com.br.</i><wbr><i>acesso-agora.net</i></span>
+    <p class="q">Pra onde ele leva de verdade?</p>
+    <div class="opts">
+      <button class="opt" data-correct="0">Pro site do seu banco, <code>seubanco.com.br</code>.</button>
+      <button class="opt" data-correct="1">Pra um site chamado <code>acesso-agora.net</code>, que só pendurou o nome do banco na frente pra te enganar.</button>
+      <button class="opt" data-correct="0">Pros dois ao mesmo tempo.</button>
+      <button class="opt" data-correct="0">Não dá pra saber.</button>
+    </div>
+    <div class="exp">O nome do site é o pedaço colado antes da primeira barra: <code>acesso-agora.net</code>. Tudo que vem antes disso pode ser isca. Lê da barra pra trás e você acha o dono verdadeiro do endereço.</div>
+  </section>
+
+  <!-- 14 -->
+  <section class="passo" data-tipo="vitoria">
+    <span class="estrela" aria-hidden="true">✦</span>
+    <h2>Mais uma luz. Você aprendeu a ler um endereço.</h2>
+    <p class="fica">// o nome do site é o pedaço colado antes da primeira barra</p>
+  </section>
+
+</main>
+
+<footer class="rodape">
+  <div class="in">
+    <button class="voltar" data-voltar hidden>‹ voltar um passo</button>
+    <button class="btn primario" data-avancar>começar</button>
+    <div class="fim" hidden>
+      <a class="btn primario" data-proxima href="/textos/https-cadeado.html"><span>próxima sala: O cadeado promete menos do que você pensa</span><span class="tag">›</span></a>
+      <a class="btn secundario" href="/textos/">voltar pra trilha</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
