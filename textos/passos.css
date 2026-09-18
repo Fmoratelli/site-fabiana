@@ -161,6 +161,21 @@ button{font:inherit;color:inherit}
 .golpe .reset{margin-top:1rem;min-height:44px;background:none;border:1px solid var(--chumbo-carvao);color:var(--texto-soft);font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.06em;padding:.5rem .9rem;border-radius:6px;cursor:pointer;text-transform:uppercase}
 .golpe .sinais{display:none}
 
+/* ---------- endereço em destaque (.url) e trecho em mono (code) ----------
+   Peça pra salas que mostram URL de exemplo. Um bloco por endereço, mono,
+   com ar em volta, cada um na sua tela. No celular ele só quebra entre
+   pedaços do endereço: marque os pontos de quebra com <wbr> e envolva cada
+   pedaço em <i>, que fica inteiro na linha. <b> destaca o pedaço que a
+   pessoa precisa enxergar (a casa, ou o disfarce). <span class="n"> numera
+   quando há dois endereços pra comparar. code é o mesmo endereço citado no
+   meio da prosa. */
+.url{display:block;font-family:'JetBrains Mono',monospace;font-size:1rem;line-height:1.5;letter-spacing:.01em;color:var(--texto-claro);background:var(--chumbo-elevado);border:1px solid var(--chumbo-carvao);border-left:2px solid var(--agua-saturada);border-radius:0 8px 8px 0;padding:.9rem 1rem;margin:1rem 0;overflow-wrap:anywhere}
+.url i,.url b{font-style:normal;white-space:nowrap}
+.url b{color:var(--agua-saturada);font-weight:500}
+.url .n{font-family:'Inter',sans-serif;font-size:.7rem;color:var(--texto-dim);margin-right:.6rem;vertical-align:.1em}
+.url + .url{margin-top:.6rem}
+code{font-family:'JetBrains Mono',monospace;font-size:.92em;color:var(--agua-suave);white-space:nowrap}
+
 /* ---------- vitória ---------- */
 .passo[data-tipo="vitoria"]{text-align:center;align-items:center}
 .passo[data-tipo="vitoria"] h2{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(1.7rem,6vw,2.3rem);line-height:1.15;font-variation-settings:'opsz' 120,'SOFT' 40;margin:1.2rem 0 1rem}
@@ -204,7 +219,7 @@ body.concluida .estrela{opacity:1;text-shadow:0 0 14px rgba(244,213,74,.75),0 0 
     padding:2.6rem 2.8rem;
   }
   .passo[data-tipo="texto"]{font-size:1.28rem}
-  .opt,.passo[data-tipo="revelar"] .body,.golpe .phone{background:var(--chumbo-profundo)}
+  .opt,.passo[data-tipo="revelar"] .body,.golpe .phone,.url{background:var(--chumbo-profundo)}
   .rodape .in{max-width:var(--leitura);margin:0 auto;width:100%}
 }
 
