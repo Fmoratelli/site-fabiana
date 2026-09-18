@@ -19,7 +19,7 @@
 <script src="/textos/passos.js" defer></script>
 </head>
 <!--
-  SALA 4 DA TRILHA. Bloco 1, o terreno. 12 passos.
+  SALA 4 DA TRILHA. Bloco 1, o terreno. 13 passos.
   Montada a partir do _passos.html. Usa entrada, texto, pergunta, revelar, tarefa, vitória.
   data-sala="s4" casa com o data-id da sala na HUB (/textos/index.html).
 -->
@@ -27,7 +27,7 @@
 
 <header class="topo">
   <a class="sair" href="/textos/" aria-label="sair da sala e voltar pra trilha">×</a>
-  <div class="barra" role="progressbar" aria-label="progresso da sala" aria-valuemin="1" aria-valuemax="12" aria-valuenow="1"><i></i></div>
+  <div class="barra" role="progressbar" aria-label="progresso da sala" aria-valuemin="1" aria-valuemax="13" aria-valuenow="1"><i></i></div>
   <span class="contagem" aria-hidden="true"></span>
 </header>
 
@@ -79,23 +79,28 @@
 
   <!-- 8 -->
   <section class="passo" data-tipo="texto">
-    <p>Uma ressalva honesta: nem a criptografia é um cofre absoluto. Com uma ordem da Justiça, uma empresa pode ser obrigada a entregar o que tem, e ataques mais sofisticados às vezes contornam a proteção. Mas repara no padrão: ninguém 'quebra' o cadeado, que é durão. Contornam por fora, pela empresa, pelo aparelho, ou por você mesmo, quando o celular fica aberto na mão de alguém ou você entrega a senha sem perceber. Na prática, o furo quase sempre está numa porta que a gente deixou aberta: o aparelho, a senha, a distração. A criptografia em si raramente é o ponto fraco, e no dia a dia continua sendo uma das melhores proteções que existem.</p>
+    <p>Uma ressalva honesta: nem a criptografia é um cofre absoluto. Com uma ordem da Justiça, uma empresa pode ser obrigada a entregar o que tem, e ataques mais sofisticados às vezes contornam a proteção.</p>
   </section>
 
   <!-- 9 -->
+  <section class="passo" data-tipo="texto">
+    <p>Mas repara no padrão: ninguém 'quebra' o cadeado, que é durão. Contornam por fora, pela empresa, pelo aparelho, ou por você mesmo, quando o celular fica aberto na mão de alguém ou você entrega a senha sem perceber. O furo quase sempre está numa porta que a gente deixou aberta, não no cadeado. E no dia a dia, a criptografia continua sendo uma das melhores proteções que existem.</p>
+  </section>
+
+  <!-- 10 -->
   <section class="passo" data-tipo="revelar">
     <p class="q">Abra uma conversa no WhatsApp e procure o aviso, lá no começo dela, dizendo que as mensagens são protegidas com criptografia de ponta a ponta. Protegidas de quem, exatamente?</p>
     <button class="btn secundario" data-reveal>ver a resposta ›</button>
     <div class="body"><p>De estranhos no meio do caminho. O WhatsApp, e as empresas e computadores por onde a mensagem passa, não conseguem ler, porque pra eles é sopa de letra. O que esse aviso não diz é que a pessoa pra quem você mandou recebe a mensagem aberta, e pode fazer o que quiser com ela.</p></div>
   </section>
 
-  <!-- 10 -->
+  <!-- 11 -->
   <section class="passo" data-tipo="tarefa">
     <p>Confira se o seu celular tem uma tranca pra abrir: uma senha, um PIN, a digital ou o rosto. (Procure nos ajustes por 'tela de bloqueio' ou 'segurança'.) Toda a proteção que a gente viu, a criptografia da mensagem e a senha da nuvem, só vale se ninguém conseguir pegar o seu telefone já aberto.</p>
     <button class="btn secundario" data-feito>Meu celular tem tranca pra abrir.</button>
   </section>
 
-  <!-- 11 -->
+  <!-- 12 -->
   <section class="passo" data-tipo="pergunta">
     <p class="q">Você manda uma mensagem no WhatsApp, que tem criptografia de ponta a ponta. Quem consegue ler o que você escreveu?</p>
     <div class="opts">
@@ -107,7 +112,7 @@
     <div class="exp">A criptografia esconde a mensagem dos estranhos no meio do caminho. Na ponta, ela abre. E quem recebe fica com uma cópia que você não controla.</div>
   </section>
 
-  <!-- 12 -->
+  <!-- 13 -->
   <section class="passo" data-tipo="vitoria">
     <span class="estrela" aria-hidden="true">✦</span>
     <h2>Mais uma luz. O cadeado não te assusta mais.</h2>
