@@ -213,15 +213,27 @@
   .bv-topo .mono{color:var(--texto-dim)}
   .bv-fechar{flex:none;width:44px;height:44px;background:none;border:0;border-radius:8px;color:var(--texto-soft);font-size:1.6rem;line-height:1;cursor:pointer;transition:color .25s var(--ease),background-color .25s var(--ease)}
   .bv-fechar:hover,.bv-fechar:focus-visible{color:var(--texto-claro);background:var(--chumbo-carvao);outline:none}
-  .bv-corpo{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:1.4rem 1.4rem 1rem}
-  .bv-corpo h2{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(1.4rem,4.8vw,2rem);line-height:1.15;font-variation-settings:'opsz' 120,'SOFT' 40;letter-spacing:-.01em;margin-bottom:1.2rem;text-wrap:balance}
+  .bv-corpo{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:1.7rem 1.5rem 1.4rem}
+  .bv-corpo h2{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(1.4rem,4.8vw,2rem);line-height:1.15;font-variation-settings:'opsz' 120,'SOFT' 40;letter-spacing:-.01em;margin-bottom:1.7rem;text-wrap:balance}
   .bv-corpo h2 em{font-style:italic;color:var(--agua-suave)}
-  .bv-corpo p{color:var(--texto-soft);font-size:.98rem;margin-bottom:1rem}
-  .bv-jeitos{list-style:none;margin:1.4rem 0;display:flex;flex-direction:column;gap:.6rem}
-  .bv-jeitos li{border-left:2px solid var(--chumbo-carvao);padding:.45rem 0 .45rem .9rem;font-size:.95rem;color:var(--texto-soft)}
+  /* corpo: apoio das âncoras, tamanho de leitura, cor discreta, mais ar entre parágrafos */
+  .bv-corpo p{color:var(--texto-soft);font-size:.98rem;line-height:1.65;margin-bottom:1.3rem}
+  /* âncoras: as duas frases-tese saem do parágrafo e saltam, uma em teal, outra em roxo */
+  .bv-corpo .bv-ancora{font-family:'Fraunces',serif;font-size:clamp(1.3rem,4.4vw,1.6rem);line-height:1.25;font-variation-settings:'opsz' 120,'SOFT' 40;letter-spacing:-.005em;margin:1.4rem 0 1.9rem;padding-left:1rem;border-left:2px solid currentColor;text-wrap:balance}
+  .bv-corpo .bv-ancora.teal{color:var(--agua-saturada)}
+  .bv-corpo .bv-ancora.roxo{color:var(--roxo-vibrante)}
+  /* os três jeitos: cartões, o nome em evidência; a trilha com borda teal e um ponto amarelo */
+  .bv-jeitos{list-style:none;margin:2.1rem 0 1.8rem;display:flex;flex-direction:column;gap:.8rem}
+  .bv-jeitos li{background:var(--chumbo-profundo);border:1px solid var(--chumbo-carvao);border-radius:8px;padding:.9rem 1.05rem 1rem}
+  .bv-jeitos li p{margin:0;font-size:.95rem}
   .bv-jeitos li b{color:var(--texto-claro);font-weight:500}
-  .bv-jeitos li.pronta{border-left-color:var(--agua-saturada)}
-  .bv-corpo .bv-fecho{color:var(--texto-claro);font-weight:500;margin-bottom:.2rem}
+  .bv-rotulo{display:flex;align-items:center;gap:.5rem;font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;color:var(--texto-dim);margin-bottom:.55rem}
+  .bv-rotulo em{font-style:normal;border:1px dashed var(--chumbo-carvao);border-radius:2px;padding:.1rem .45rem;letter-spacing:.06em}
+  .bv-jeitos li.pronta{border-color:var(--agua-saturada)}
+  .bv-jeitos li.pronta .bv-rotulo{color:var(--agua-saturada)}
+  .bv-jeitos li.pronta .bv-rotulo em{border:0;background:var(--agua-saturada);color:var(--chumbo-profundo)}
+  .bv-ponto{width:7px;height:7px;border-radius:50%;background:var(--amarelo);box-shadow:0 0 6px rgba(244,213,74,.55);flex:none}
+  .bv-corpo .bv-fecho{color:var(--texto-claro);font-weight:500;font-size:1.02rem;margin-bottom:.3rem}
   .bv-rodape{flex:none;padding:.9rem 1.4rem;border-top:1px solid var(--chumbo-carvao)}
   .bv-cta{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;background:var(--agua-saturada);color:var(--chumbo-profundo);border:0;border-radius:8px;font:inherit;font-weight:600;font-size:1rem;cursor:pointer;transition:background-color .25s var(--ease)}
   .bv-cta:hover{background:var(--agua-suave)}
@@ -232,7 +244,8 @@
   @media (min-width:720px){ .bv-in{max-height:86vh} }
   @media (max-width:520px){
     .bv{padding:.75rem}
-    .bv-corpo{padding:1.2rem 1.1rem .8rem}
+    .bv-corpo{padding:1.4rem 1.15rem 1.1rem}
+    .bv-jeitos li{padding:.8rem .9rem .9rem}
     .bv-topo{padding-left:1.1rem}
     .bv-rodape{padding:.8rem 1.1rem}
   }
@@ -489,13 +502,26 @@
     <div class="bv-corpo">
       <h2 id="bv-titulo">Pode parecer mágica. Não é.<br><em>Parece complicado. Quase nunca é.</em></h2>
       <p>Você tem o seu trabalho, a sua vida, as suas prioridades. Se tecnologia não é a sua área, nunca teve muito tempo, nem motivo, pra parar e entender como essas coisas funcionam. E tá tudo certo. Só que hoje ela está no meio de tudo, e dá pra entender o que importa sem virar especialista, sem virar mais uma tarefa na sua lista, e no seu ritmo.</p>
-      <p>Aqui a gente entende, uma de cada vez, a internet, os seus dados, a nuvem, a IA. A tecnologia sempre pareceu um mundo à parte, falada por poucos numa língua difícil. A gente fura essa bolha e encurta a distância.</p>
-      <p>E entender, aqui, não é saber apertar os botões certos de um programa. É saber o que acontece por trás deles, as estruturas que sustentam tudo. Ferramenta muda toda hora, a base não.</p>
+      <p>Aqui a gente entende, uma de cada vez, a internet, os seus dados, a nuvem, a IA. A tecnologia sempre pareceu um mundo à parte, falada por poucos numa língua difícil.</p>
+      <p class="bv-ancora teal">A gente fura essa bolha e encurta a distância.</p>
+      <p>E entender, aqui, não é saber apertar os botões certos de um programa. É saber o que acontece por trás deles, as estruturas que sustentam tudo.</p>
+      <p class="bv-ancora roxo">Ferramenta muda toda hora, a base não.</p>
       <p>Com isso na mão, você aprende segurança digital pra se proteger de verdade e, quem quiser, potencializar o uso a ponto de criar as próprias soluções.</p>
+      <!-- os três jeitos: cartões. O rótulo de cima é só o nome e o estado;
+           a frase de cada um segue inteira embaixo. -->
       <ul class="bv-jeitos">
-        <li class="pronta"><b>A trilha</b> é por onde começar. Salas curtas, uma ideia de cada vez, cada uma preparando a próxima. É o caminho guiado.</li>
-        <li><b>As reflexões</b> são textos mais soltos, pra pensar sobre o nosso jeito de viver com a tecnologia. Chegando em breve.</li>
-        <li><b>Os estudos</b> vão fundo num assunto, com fonte e detalhe, pra quando a curiosidade apertar. Chegando em breve.</li>
+        <li class="pronta">
+          <span class="bv-rotulo"><i class="bv-ponto" aria-hidden="true"></i>trilha <em>disponível</em></span>
+          <p><b>A trilha</b> é por onde começar. Salas curtas, uma ideia de cada vez, cada uma preparando a próxima. É o caminho guiado.</p>
+        </li>
+        <li>
+          <span class="bv-rotulo">reflexões <em>em breve</em></span>
+          <p><b>As reflexões</b> são textos mais soltos, pra pensar sobre o nosso jeito de viver com a tecnologia. Chegando em breve.</p>
+        </li>
+        <li>
+          <span class="bv-rotulo">estudos <em>em breve</em></span>
+          <p><b>Os estudos</b> vão fundo num assunto, com fonte e detalhe, pra quando a curiosidade apertar. Chegando em breve.</p>
+        </li>
       </ul>
       <p class="bv-fecho">A trilha já está pronta e te esperando.</p>
     </div>
