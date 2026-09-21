@@ -89,7 +89,6 @@
   @keyframes blink{50%{opacity:0}}
   header h1{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2.2rem,5.5vw,3.3rem);line-height:1.08;font-variation-settings:'opsz' 120,'SOFT' 40;letter-spacing:-.01em;margin:.6rem 0 1.2rem}
   header h1 em{font-style:italic;color:var(--agua-suave)}
-  header .lede{color:var(--texto-soft);font-size:1.1rem;max-width:60ch}
 
   .controls{display:flex;align-items:center;justify-content:space-between;gap:1rem;border-top:1px solid var(--chumbo-carvao);border-bottom:1px solid var(--chumbo-carvao);padding:.9rem 0;flex-wrap:wrap;position:sticky;top:0;background:var(--chumbo-profundo);z-index:40}
   .tabs{display:flex;gap:1.6rem}
@@ -199,8 +198,48 @@
   footer .star{color:var(--amarelo);font-size:1.1rem;display:block;margin-bottom:.8rem}
   footer .comment{max-width:48ch;margin:0 auto}
 
+  /* ---------- boas-vindas ----------
+     <dialog> nativo: vem com foco preso, Esc e camada de topo. O dialog em si
+     ocupa a tela inteira (é ele que recebe o clique fora); a caixa .bv-in fica
+     centralizada dentro. Topo e rodapé da caixa são fixos; só o corpo rola. */
+  .marker-row{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+  .bv-abrir{background:none;border:1px solid var(--chumbo-carvao);border-radius:3px;color:var(--texto-dim);font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;padding:.35rem .7rem;min-height:32px;cursor:pointer;transition:color .25s var(--ease),border-color .25s var(--ease)}
+  .bv-abrir:hover,.bv-abrir:focus-visible{color:var(--texto-claro);border-color:var(--agua-suave);outline:none}
+  .bv{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:1rem;border:0;background:transparent;color:inherit}
+  .bv[open]{display:flex;align-items:center;justify-content:center}
+  .bv::backdrop{background:rgba(28,28,31,.8)}
+  .bv-in{width:100%;max-width:600px;max-height:100%;display:flex;flex-direction:column;background:var(--chumbo-elevado);border:1px solid var(--chumbo-carvao);border-top:2px solid var(--roxo-vibrante);border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.55);animation:bv-entra .3s var(--ease)}
+  .bv-topo{flex:none;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.55rem .5rem .55rem 1.4rem;border-bottom:1px solid var(--chumbo-carvao)}
+  .bv-topo .mono{color:var(--texto-dim)}
+  .bv-fechar{flex:none;width:44px;height:44px;background:none;border:0;border-radius:8px;color:var(--texto-soft);font-size:1.6rem;line-height:1;cursor:pointer;transition:color .25s var(--ease),background-color .25s var(--ease)}
+  .bv-fechar:hover,.bv-fechar:focus-visible{color:var(--texto-claro);background:var(--chumbo-carvao);outline:none}
+  .bv-corpo{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:1.4rem 1.4rem 1rem}
+  .bv-corpo h2{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(1.4rem,4.8vw,2rem);line-height:1.15;font-variation-settings:'opsz' 120,'SOFT' 40;letter-spacing:-.01em;margin-bottom:1.2rem;text-wrap:balance}
+  .bv-corpo h2 em{font-style:italic;color:var(--agua-suave)}
+  .bv-corpo p{color:var(--texto-soft);font-size:.98rem;margin-bottom:1rem}
+  .bv-jeitos{list-style:none;margin:1.4rem 0;display:flex;flex-direction:column;gap:.6rem}
+  .bv-jeitos li{border-left:2px solid var(--chumbo-carvao);padding:.45rem 0 .45rem .9rem;font-size:.95rem;color:var(--texto-soft)}
+  .bv-jeitos li b{color:var(--texto-claro);font-weight:500}
+  .bv-jeitos li.pronta{border-left-color:var(--agua-saturada)}
+  .bv-corpo .bv-fecho{color:var(--texto-claro);font-weight:500;margin-bottom:.2rem}
+  .bv-rodape{flex:none;padding:.9rem 1.4rem;border-top:1px solid var(--chumbo-carvao)}
+  .bv-cta{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;background:var(--agua-saturada);color:var(--chumbo-profundo);border:0;border-radius:8px;font:inherit;font-weight:600;font-size:1rem;cursor:pointer;transition:background-color .25s var(--ease)}
+  .bv-cta:hover{background:var(--agua-suave)}
+  .bv-cta:focus-visible{outline:2px solid var(--agua-suave);outline-offset:3px}
+  /* a página de trás não rola enquanto o pop-up está aberto */
+  html.bv-aberto{overflow:hidden}
+  @keyframes bv-entra{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  @media (min-width:720px){ .bv-in{max-height:86vh} }
+  @media (max-width:520px){
+    .bv{padding:.75rem}
+    .bv-corpo{padding:1.2rem 1.1rem .8rem}
+    .bv-topo{padding-left:1.1rem}
+    .bv-rodape{padding:.8rem 1.1rem}
+  }
+
   /* quem prefere menos movimento: tudo aparece, nada anima */
   @media (prefers-reduced-motion:reduce){
+    .bv-in{animation:none}
     html{scroll-behavior:auto}
     .room .dot.ignite{animation:none}
     .constel .cs{animation:none;opacity:1}
@@ -229,9 +268,12 @@
 <div class="wrap">
   <header>
     <div class="term-line"><span class="p">fabiana@serra</span>:~/textos$ ls<span class="cursor"></span></div>
-    <div class="marker mono">// textos</div>
-    <h1>Uma trilha pra entender.<br><em>Reflexões pra pensar. Estudos pra ir fundo.</em></h1>
-    <p class="lede">Três formas de ler o mesmo assunto: tecnologia, dados e segurança pra quem não é da área. Comece pela trilha se está começando. Desça pra estudos se quer o material com fonte.</p>
+    <div class="marker-row">
+      <span class="marker mono">// textos</span>
+      <!-- reabre as boas-vindas pra quem quer reler; não mexe no localStorage -->
+      <button class="bv-abrir" type="button" data-bv-abrir>sobre a trilha ›</button>
+    </div>
+    <h1>Uma trilha pra entender.</h1>
   </header>
 
   <div class="controls">
@@ -436,6 +478,33 @@
   </footer>
 </div>
 
+<!-- boas-vindas: aparece sozinha na primeira visita (chave textos.boasvindas.v1),
+     depois só pelo botão "sobre a trilha" no cabeçalho. -->
+<dialog class="bv" id="boasvindas" aria-labelledby="bv-titulo">
+  <div class="bv-in">
+    <div class="bv-topo">
+      <span class="mono">// boas-vindas</span>
+      <button class="bv-fechar" type="button" data-bv-fechar aria-label="fechar">×</button>
+    </div>
+    <div class="bv-corpo">
+      <h2 id="bv-titulo">Pode parecer mágica. Não é.<br><em>Parece complicado. Quase nunca é.</em></h2>
+      <p>Você tem o seu trabalho, a sua vida, as suas prioridades. Se tecnologia não é a sua área, nunca teve muito tempo, nem motivo, pra parar e entender como essas coisas funcionam. E tá tudo certo. Só que hoje ela está no meio de tudo, e dá pra entender o que importa sem virar especialista, sem virar mais uma tarefa na sua lista, e no seu ritmo.</p>
+      <p>Aqui a gente entende, uma de cada vez, a internet, os seus dados, a nuvem, a IA. A tecnologia sempre pareceu um mundo à parte, falada por poucos numa língua difícil. A gente fura essa bolha e encurta a distância.</p>
+      <p>E entender, aqui, não é saber apertar os botões certos de um programa. É saber o que acontece por trás deles, as estruturas que sustentam tudo. Ferramenta muda toda hora, a base não.</p>
+      <p>Com isso na mão, você aprende segurança digital pra se proteger de verdade e, quem quiser, potencializar o uso a ponto de criar as próprias soluções.</p>
+      <ul class="bv-jeitos">
+        <li class="pronta"><b>A trilha</b> é por onde começar. Salas curtas, uma ideia de cada vez, cada uma preparando a próxima. É o caminho guiado.</li>
+        <li><b>As reflexões</b> são textos mais soltos, pra pensar sobre o nosso jeito de viver com a tecnologia. Chegando em breve.</li>
+        <li><b>Os estudos</b> vão fundo num assunto, com fonte e detalhe, pra quando a curiosidade apertar. Chegando em breve.</li>
+      </ul>
+      <p class="bv-fecho">A trilha já está pronta e te esperando.</p>
+    </div>
+    <div class="bv-rodape">
+      <button class="bv-cta" type="button" data-bv-fechar>começar a trilha →</button>
+    </div>
+  </div>
+</dialog>
+
 <script>
   const bar=document.getElementById('progress');
   addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
@@ -535,6 +604,43 @@
     if(btn.classList.contains('open')) close(); else open();
   });
   list.querySelectorAll('a').forEach(a=>a.addEventListener('click', close));
+})();
+</script>
+
+<script>
+/* boas-vindas.
+   Abre sozinha na primeira visita e grava que foi vista; qualquer jeito de
+   fechar (×, botão, clique fora, Esc) grava. Reabrir pelo botão do cabeçalho
+   não grava nada. */
+(function(){
+  const KEY='textos.boasvindas.v1';
+  const dlg=document.getElementById('boasvindas');
+  if(!dlg || typeof dlg.showModal!=='function') return;
+  let manual=false;
+
+  function abre(porBotao){
+    manual=!!porBotao;
+    document.documentElement.classList.add('bv-aberto');
+    dlg.querySelector('.bv-corpo').scrollTop=0;
+    dlg.showModal();
+  }
+  function vista(){ try{localStorage.setItem(KEY,'1')}catch(e){} }
+  function jaViu(){ try{return !!localStorage.getItem(KEY)}catch(e){return false} }
+
+  /* fechar por × ou pelo "começar a trilha" */
+  dlg.querySelectorAll('[data-bv-fechar]').forEach(b=>b.addEventListener('click',()=>dlg.close()));
+  /* clique fora: o dialog cobre a tela, a caixa é filha dele */
+  dlg.addEventListener('click',e=>{ if(e.target===dlg) dlg.close(); });
+  /* qualquer fechamento (inclui Esc) passa por aqui */
+  dlg.addEventListener('close',()=>{
+    document.documentElement.classList.remove('bv-aberto');
+    if(!manual) vista();
+    manual=false;
+  });
+
+  document.querySelectorAll('[data-bv-abrir]').forEach(b=>b.addEventListener('click',()=>abre(true)));
+
+  if(!jaViu()) abre(false);
 })();
 </script>
 </body>
