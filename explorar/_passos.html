@@ -6,29 +6,29 @@
 <meta name="robots" content="noindex">
 <title>{{TITULO}} | fab[IA]na</title>
 <meta name="description" content="{{DEK}}">
-<link rel="canonical" href="https://www.fabianamoratelli.com.br/textos/{{SLUG}}.html">
+<link rel="canonical" href="https://www.fabianamoratelli.com.br/explorar/{{SLUG}}.html">
 <meta property="og:type" content="article">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="{{TITULO}}">
 <meta property="og:description" content="{{DEK}}">
-<meta property="og:url" content="https://www.fabianamoratelli.com.br/textos/{{SLUG}}.html">
+<meta property="og:url" content="https://www.fabianamoratelli.com.br/explorar/{{SLUG}}.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,0..100;1,9..144,300..600,0..100&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/textos/passos.css">
-<script src="/textos/passos.js" defer></script>
+<link rel="stylesheet" href="/explorar/passos.css">
+<script src="/explorar/passos.js" defer></script>
 </head>
 <!--
   MOLDE DE SALA EM PASSOS, UM POR TELA.
 
-  Como usar: copie este arquivo pra /textos/<slug>.html, troque os
+  Como usar: copie este arquivo pra /explorar/<slug>.html, troque os
   {{MARCADORES}} e escreva os passos. Cada <section class="passo"
   data-tipo="..."> é uma tela. A ordem no arquivo é a ordem da sala.
   O motor (passos.js) conta os passos e cuida do resto: barra, botão
   de avançar, travas, conclusão. Montar sala nova não mexe no motor.
 
   {{ID}} no <body data-sala> é a identidade da sala: s1, s2, ... s9.
-  Tem que ser o MESMO data-id da sala na HUB (/textos/index.html).
+  Tem que ser o MESMO data-id da sala na HUB (/explorar/index.html).
 
   Tipos de passo (um exemplo de cada abaixo):
     entrada    título, dek, meta. O botão de baixo vira "começar".
@@ -56,7 +56,7 @@
 <body data-sala="{{ID}}">
 
 <header class="topo">
-  <a class="sair" href="/textos/" aria-label="sair da sala e voltar pra trilha">×</a>
+  <a class="sair" href="/explorar/" aria-label="sair da sala e voltar pra trilha">×</a>
   <div class="barra" role="progressbar" aria-label="progresso da sala" aria-valuemin="1" aria-valuemax="1" aria-valuenow="1"><i></i></div>
   <span class="contagem" aria-hidden="true"></span>
 </header>
@@ -157,7 +157,7 @@
     <button class="btn primario" data-avancar>avançar</button>
     <div class="fim" hidden>
       <a class="btn primario" data-proxima href="{{PROXIMA_URL}}"><span>próxima sala: {{PROXIMA_TITULO}}</span><span class="tag">›</span></a>
-      <a class="btn secundario" href="/textos/">voltar pra trilha</a>
+      <a class="btn secundario" href="/explorar/">voltar pra trilha</a>
     </div>
   </div>
 </footer>

@@ -6,26 +6,26 @@
 <meta name="robots" content="noindex">
 <title>{{TITULO}} | fab[IA]na</title>
 <meta name="description" content="{{DEK}}">
-<link rel="canonical" href="https://www.fabianamoratelli.com.br/textos/{{SLUG}}.html">
+<link rel="canonical" href="https://www.fabianamoratelli.com.br/explorar/{{SLUG}}.html">
 <meta property="og:type" content="article">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="{{TITULO}}">
 <meta property="og:description" content="{{DEK}}">
-<meta property="og:url" content="https://www.fabianamoratelli.com.br/textos/{{SLUG}}.html">
+<meta property="og:url" content="https://www.fabianamoratelli.com.br/explorar/{{SLUG}}.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,0..100;1,9..144,300..600,0..100&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/textos/sala.css">
-<script src="/textos/sala.js" defer></script>
+<link rel="stylesheet" href="/explorar/sala.css">
+<script src="/explorar/sala.js" defer></script>
 </head>
 <!--
   ESQUELETO DE SALA DA TRILHA.
 
-  Como usar: copie este arquivo pra /textos/<slug>.html, troque os {{MARCADORES}}
+  Como usar: copie este arquivo pra /explorar/<slug>.html, troque os {{MARCADORES}}
   pelo texto real e ajuste as peças interativas.
 
   {{ID}} no <body data-sala> é a identidade da sala: s1, s2, ... s9. Tem que ser
-  o MESMO data-id que a sala tem na HUB (/textos/index.html). É por ele que o
+  o MESMO data-id que a sala tem na HUB (/explorar/index.html). É por ele que o
   botão "concluir sala" grava o progresso na mesma chave que a HUB lê. Se ficar
   como {{ID}}, o sala.js ignora e avisa no console.
 
@@ -46,7 +46,7 @@
     <li><a href="/#demo">Demo</a></li>
     <li><a href="/#processo">Processo</a></li>
     <li><a href="/#sobre">Sobre</a></li>
-    <li><a class="here" href="/textos/">Textos</a></li>
+    <li><a class="here" href="/explorar/">Explorar</a></li>
     <li><a href="/#conversar">Conversar</a></li>
   </ul>
   <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
@@ -54,7 +54,7 @@
 
 <div class="wrap">
 
-  <a class="back" href="/textos/">‹ voltar pra Textos</a>
+  <a class="back" href="/explorar/">‹ voltar pra Explorar</a>
   <div class="mono">// {{CONTEXTO}}</div>
   <h1>{{TITULO}}</h1>
   <p class="dek">{{DEK}}</p>
