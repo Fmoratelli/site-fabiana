@@ -190,6 +190,17 @@
   .cell .meta{font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--texto-dim);letter-spacing:.04em;margin-top:auto}
   .tag.src{color:var(--amarelo);opacity:.8;border-color:rgba(244,213,74,.3)}
   .tag.news{color:var(--roxo-vibrante);border-color:rgba(174,48,242,.3)}
+  /* prévia "em breve": o card mostra o que vem, mas não é link. Sem hover,
+     tudo um tom mais apagado, e o mesmo selo tracejado que as salas usavam. */
+  .cell.soon{cursor:default}
+  .cell.soon:hover{background:var(--chumbo-profundo)}
+  .cell.soon h4{color:var(--texto-soft)}
+  .cell.soon:hover h4{color:var(--texto-soft)}
+  .cell.soon .dek{color:var(--texto-dim)}
+  .cell.soon .tag{opacity:.55}
+  .cell.soon .soon-tag{display:inline-block}
+  .breve{display:flex;align-items:center;gap:.55rem;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--texto-dim);margin:-.4rem 0 1.1rem}
+  .breve i{width:6px;height:6px;border-radius:50%;background:var(--agua-saturada);opacity:.75;flex:none}
 
   /* farol pra pares */
   .beacon{margin-top:1.6rem;border:1px solid var(--chumbo-carvao);border-left:2px solid var(--agua-saturada);border-radius:3px;padding:1.4rem 1.5rem;background:var(--chumbo-elevado)}
@@ -422,31 +433,32 @@
       <h2>Pensando em voz alta</h2>
       <p>Texto sem tese fechada. Reação a notícia, ideia que ainda tá cozinhando, bastidor do trabalho. Quando o assunto é quente, aponto pra trilha.</p>
     </div>
+    <div class="breve"><i aria-hidden="true"></i>em breve · quatro textos em preparação</div>
     <div class="grid">
-      <a class="cell" href="#">
+      <div class="cell soon">
         <div class="top"><span class="tag news">Notícia</span></div>
         <h4>Cem empresas avisaram, mas escreveram difícil</h4>
         <p class="dek">A carta da OpenAI e mais de 100 empresas diz que vem uma onda de ataque com IA. Foi escrita pra governo e infraestrutura. Traduzi pra quem não é da área, e mostro por onde começar a se proteger.</p>
-        <div class="meta">4 min · 28 ago 2026 · leva pra trilha</div>
-      </a>
-      <a class="cell" href="#">
+        <div class="meta">4 min · 28 ago 2026 · leva pra trilha · <span class="soon-tag">em breve</span></div>
+      </div>
+      <div class="cell soon">
         <div class="top"><span class="tag">Bastidor</span></div>
         <h4>A câmera não faz a foto, quem faz é o olhar</h4>
         <p class="dek">Ferramenta boa não substitui critério. Vale pra lente, vale pra prompt.</p>
-        <div class="meta">5 min · 09 jul 2026</div>
-      </a>
-      <a class="cell" href="#">
+        <div class="meta">5 min · 09 jul 2026 · <span class="soon-tag">em breve</span></div>
+      </div>
+      <div class="cell soon">
         <div class="top"><span class="tag">Tech Talk</span></div>
         <h4>IA barata virou commodity</h4>
         <p class="dek">Quando o modelo custa quase nada, o valor migra pra quem sabe o que perguntar.</p>
-        <div class="meta">4 min · rascunho</div>
-      </a>
-      <a class="cell" href="#">
+        <div class="meta">4 min · <span class="soon-tag">em breve</span></div>
+      </div>
+      <div class="cell soon">
         <div class="top"><span class="tag">Bastidor</span></div>
         <h4>Ganhar tempo pra quê?</h4>
         <p class="dek">Automatizar sobra tempo. A pergunta que quase ninguém faz é o que fazer com ele.</p>
-        <div class="meta">5 min · rascunho</div>
-      </a>
+        <div class="meta">5 min · <span class="soon-tag">em breve</span></div>
+      </div>
     </div>
   </section>
 
@@ -456,31 +468,32 @@
       <h2>Indo fundo, com fonte</h2>
       <p>Aqui é o material mais técnico: paper revisado por par, relatório de instituto, documento primário lido por inteiro. Nível de leitura maior, e fonte sempre à mostra.</p>
     </div>
+    <div class="breve"><i aria-hidden="true"></i>em breve · quatro estudos em preparação</div>
     <div class="grid">
-      <a class="cell" href="#">
+      <div class="cell soon">
         <div class="top"><span class="tag src">Revisado por par</span><span class="tag">Técnico</span></div>
         <h4>Descarga cognitiva: o que a pesquisa mostra</h4>
         <p class="dek">Gerlich 2025, Hong 2025, Carnegie Mellon com Microsoft Research. O que acontece com o pensar quando a gente terceiriza demais pra máquina.</p>
-        <div class="meta">10 min · com DOI</div>
-      </a>
-      <a class="cell" href="#">
+        <div class="meta">10 min · com DOI · <span class="soon-tag">em breve</span></div>
+      </div>
+      <div class="cell soon">
         <div class="top"><span class="tag src">Instituto</span><span class="tag">Técnico</span></div>
         <h4>Dados como base de tudo</h4>
         <p class="dek">Gartner, MIT, IBM, S&amp;P, Informatica. Por que projeto de IA quebra na base de dados antes de quebrar no modelo.</p>
-        <div class="meta">9 min · rascunho</div>
-      </a>
-      <a class="cell" href="#">
+        <div class="meta">9 min · <span class="soon-tag">em breve</span></div>
+      </div>
+      <div class="cell soon">
         <div class="top"><span class="tag src">Doc primário</span><span class="tag news">Notícia</span></div>
         <h4>A carta da OpenAI, lida por inteiro</h4>
         <p class="dek">116 empresas, 27 de agosto de 2026. O que o documento pede de fato, o que ele evita dizer, e o que muda pra quem opera infraestrutura no Brasil.</p>
-        <div class="meta">8 min · link pro original</div>
-      </a>
-      <a class="cell" href="#">
+        <div class="meta">8 min · link pro original · <span class="soon-tag">em breve</span></div>
+      </div>
+      <div class="cell soon">
         <div class="top"><span class="tag src">Instituto</span><span class="tag">Técnico</span></div>
         <h4>LGPD na prática, sem advogado do lado</h4>
         <p class="dek">O que a lei brasileira exige de quem guarda dado de cliente, traduzido pra decisão de PME.</p>
-        <div class="meta">7 min · rascunho</div>
-      </a>
+        <div class="meta">7 min · <span class="soon-tag">em breve</span></div>
+      </div>
     </div>
 
     <div class="beacon">
