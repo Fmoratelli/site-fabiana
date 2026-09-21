@@ -182,6 +182,9 @@
   nav ul{display:flex;gap:2rem;list-style:none}
   nav ul a{color:var(--texto-soft);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .3s var(--ease)}
   nav ul a:hover{color:var(--texto-claro)}
+  /* "Explorar": o único item em mono e verde-água, pra puxar o olho sem virar botão */
+  nav ul a.explorar{font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--agua-saturada)}
+  nav ul a.explorar:hover{color:var(--agua-suave)}
   /* botão flutuante de WhatsApp */
   .wa-float{
     position:fixed;bottom:1.5rem;right:1.5rem;z-index:75;
@@ -231,6 +234,7 @@
       gap:2.5rem;z-index:99;
     }
     nav ul.mobile-open a{font-family:'Fraunces',serif;font-size:1.8rem;color:var(--texto-claro);text-decoration:none}
+    nav ul.mobile-open a.explorar{font-family:'JetBrains Mono',monospace;font-size:1.25rem;color:var(--agua-saturada)}
     /* botão hambúrguer precisa ficar por cima do próprio menu quando aberto */
     .menu-btn{z-index:100}
   }
@@ -797,6 +801,7 @@
   <a class="wordmark" href="#hero"><picture><source srcset="assets/wordmark.webp" type="image/webp"><img src="assets/wordmark.png" alt="fab[IA]na" onerror="this.style.display='none';this.parentElement.nextElementSibling.style.display='inline'"></picture><span class="wm-fallback" style="display:none">fab<span>[IA]</span>na</span></a>
   <ul>
     <li><a href="#trabalho">Trabalho</a></li>
+    <li><a class="explorar" href="/textos/">Explorar</a></li>
     <li><a href="#demo">Demo</a></li>
     <li><a href="#processo">Processo</a></li>
     <li><a href="#sobre">Sobre</a></li>
