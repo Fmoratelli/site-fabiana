@@ -50,7 +50,8 @@
     --roxo-vibrante:#ae30f2;
     --agua-saturada:#49c6bc;
     --agua-suave:#9bd6d1;
-    --amarelo:#f4d54a;
+    --amarelo:#f4d54a; /* dourado: exclusivo da estrela ✦ */
+    --amarelo-suave:#f4ee7c; /* segunda linha do H1 do hero */
     --texto-claro:#f0ede5;
     --texto-soft:rgba(240,237,229,.55);
     --texto-dim:rgba(240,237,229,.32);
@@ -179,9 +180,26 @@
   footer .wordmark{display:flex;align-items:center;gap:.6rem}
   footer .wordmark img{height:42px;display:block}
   nav .wordmark span{color:var(--agua-saturada)}
-  /* a assinatura que ficava ao lado do logo saiu na home v3: o eyebrow do
-     hero (segurança · organização · automação) faz esse papel em todas as larguras */
+  /* marca = logo + assinatura. A assinatura é legenda, não item de menu:
+     mono, miúda, cor apagada. Duas versões, conforme o espaço que sobra ao
+     lado do menu (medido no navegador):
+     - longa a partir de 1200px;
+     - curta ("tecnologia não é mágica") de 880 a 1199px e no celular, onde
+       só tem o logo e o hambúrguer;
+     - nenhuma de 721 a 879px, onde o menu de sete itens ocupa a barra toda.
+     Onde a longa não aparece, o eyebrow do hero mostra a frase inteira. */
   nav .marca{display:flex;align-items:center;gap:1rem;min-width:0}
+  nav .assinatura{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--texto-dim);white-space:nowrap;padding-top:.15em}
+  nav .assinatura .curta{display:none;text-transform:none;letter-spacing:.06em}
+  @media (max-width:1199px){
+    nav .assinatura .longa{display:none}
+    nav .assinatura .curta{display:inline}
+  }
+  @media (min-width:721px) and (max-width:879px){ nav .assinatura{display:none} }
+  @media (max-width:720px){
+    nav .marca{gap:.75rem}
+    nav .assinatura{font-size:.6rem}
+  }
   nav ul{display:flex;gap:2rem;list-style:none}
   /* sete itens no menu: entre o celular e o desktop largo o espaço aperta */
   @media (max-width:1060px){ nav ul{gap:1.15rem} nav ul a{font-size:.85rem} }
@@ -285,7 +303,7 @@
   h1 em{
     font-style:italic;
     font-variation-settings:'opsz' 120,'SOFT' 90;
-    color:var(--roxo-vibrante);
+    color:var(--amarelo-suave);
   }
   /* letras do H1 entram uma a uma, agrupadas por palavra pra não quebrar no meio */
   h1 .word{display:inline-block;white-space:nowrap}
@@ -311,15 +329,16 @@
   .cta.verde:hover{background:#5ad4c9;border-color:#5ad4c9;color:#1c1c1f}
   .cta.ghost{background:transparent;border:1px solid var(--roxo-vibrante);margin-left:1rem;color:var(--texto-claro)}
   .cta.ghost:hover{background:var(--roxo-vibrante);color:var(--texto-claro)}
-  /* eyebrow do hero: os três verbos da marca, em verde-água, com a ✦ dourada
-     antes. Aparece em todas as larguras (a assinatura antiga da barra saiu pra
-     não repetir a mesma linha duas vezes no desktop) */
+  /* eyebrow do hero: a assinatura inteira, em verde-água, com a ✦ dourada
+     antes. Só aparece onde a versão longa não está na barra (abaixo de 1200px);
+     no desktop largo a barra já cumpre esse papel */
   .hero-eyebrow{
-    font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.14em;
+    font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.14em;line-height:1.7;
     text-transform:uppercase;color:var(--agua-saturada);
-    margin-bottom:1.6rem;display:inline-block;
+    margin-bottom:1.6rem;display:block;max-width:36rem;
   }
   .hero-eyebrow .estrela{color:var(--amarelo);margin-right:.55em}
+  @media (min-width:1200px){ .hero-eyebrow{display:none} }
   @media (max-width:720px){
     .hero-eyebrow{font-size:.62rem;letter-spacing:.1em;margin-bottom:1.3rem}
   }
@@ -766,6 +785,7 @@
 <nav aria-label="Navegação principal">
   <div class="marca">
     <a class="wordmark" href="#hero"><picture><source srcset="assets/wordmark.webp" type="image/webp"><img src="assets/wordmark.png" alt="fab[IA]na" onerror="this.style.display='none';this.parentElement.nextElementSibling.style.display='inline'"></picture><span class="wm-fallback" style="display:none">fab<span>[IA]</span>na</span></a>
+    <span class="assinatura" aria-hidden="true"><span class="longa">design thinking · automação · segurança e letramento digital</span><span class="curta">tecnologia não é mágica</span></span>
   </div>
   <ul>
     <li><a href="#trilha">Trilha</a></li>
@@ -796,7 +816,7 @@
 <section id="hero">
   <div class="mono marker hero-marker">001 // INÍCIO</div>
   <div class="wrap">
-    <p class="hero-eyebrow reveal-blur"><span class="estrela" aria-hidden="true">✦</span>Segurança · organização · automação</p>
+    <p class="hero-eyebrow reveal-blur"><span class="estrela" aria-hidden="true">✦</span>Design thinking · automação · segurança e letramento digital</p>
     <h1 id="heroTitle">Entender antes de usar.<br><em>Proteger antes de automatizar.</em></h1>
     <p class="hero-frase reveal-blur" style="animation-delay:.8s">Entregar ao robô o que é do robô. Devolver ao humano o tempo de pensar.</p>
     <p class="comment reveal-blur" style="animation-delay:1s">// 8 anos olhando negócio com olho de fotógrafa.</p>
