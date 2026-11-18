@@ -205,9 +205,9 @@
   @media (max-width:1060px){ nav ul{gap:1.15rem} nav ul a{font-size:.85rem} }
   nav ul a{color:var(--texto-soft);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .3s var(--ease)}
   nav ul a:hover{color:var(--texto-claro)}
-  /* "Explorar": o único item em mono, que leva pra fora da home. Mesma cor dos
-     outros itens: o dourado da marca é exclusivo da estrela ✦ */
-  nav ul a.explorar{font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.07em;text-transform:uppercase}
+  /* "Explorar": o único item em mono e dourado, o acento do menu (o amarelo é raro na marca, e aqui é de propósito) */
+  nav ul a.explorar{font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--amarelo)}
+  nav ul a.explorar:hover{color:#f8e27a}
   /* botão flutuante de WhatsApp */
   .wa-float{
     position:fixed;bottom:1.5rem;right:1.5rem;z-index:75;
@@ -257,7 +257,7 @@
       gap:2.5rem;z-index:99;
     }
     nav ul.mobile-open a{font-family:'Fraunces',serif;font-size:1.8rem;color:var(--texto-claro);text-decoration:none}
-    nav ul.mobile-open a.explorar{font-family:'JetBrains Mono',monospace;font-size:1.25rem}
+    nav ul.mobile-open a.explorar{font-family:'JetBrains Mono',monospace;font-size:1.25rem;color:var(--amarelo)}
     /* botão hambúrguer precisa ficar por cima do próprio menu quando aberto */
     .menu-btn{z-index:100}
   }

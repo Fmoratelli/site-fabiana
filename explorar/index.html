@@ -51,10 +51,9 @@
   nav ul{display:flex;gap:2rem;list-style:none}
   nav ul a{color:var(--texto-soft);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .3s var(--ease)}
   nav ul a:hover,nav ul a.here{color:var(--texto-claro)}
-  /* "Explorar": o único item em mono. O dourado da marca é exclusivo da estrela ✦;
-     aqui, onde ele é a página atual, se marca em verde-água */
-  nav ul a.explorar{font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.07em;text-transform:uppercase}
-  nav ul a.explorar[aria-current]{color:#49c6bc}
+  /* "Explorar": o único item em mono e dourado, o acento do menu (o amarelo é raro na marca, e aqui é de propósito) */
+  nav ul a.explorar{font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--amarelo)}
+  nav ul a.explorar:hover{color:#f8e27a}
   .menu-btn{
     display:none;background:none;border:none;cursor:pointer;padding:.4rem;
     width:38px;height:38px;position:relative;z-index:82;
@@ -80,8 +79,7 @@
       gap:2.5rem;z-index:99;
     }
     nav ul.mobile-open a{font-family:'Fraunces',serif;font-size:1.8rem;color:var(--texto-claro);text-decoration:none}
-    nav ul.mobile-open a.explorar{font-family:'JetBrains Mono',monospace;font-size:1.25rem}
-    nav ul.mobile-open a.explorar[aria-current]{color:#49c6bc}
+    nav ul.mobile-open a.explorar{font-family:'JetBrains Mono',monospace;font-size:1.25rem;color:var(--amarelo)}
     /* botao hamburguer precisa ficar por cima do proprio menu quando aberto */
     .menu-btn{z-index:100}
   }
